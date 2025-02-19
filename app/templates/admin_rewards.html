@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #007BFF;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        select, input[type="text"], input[type="number"], button {
+            padding: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .reward-card {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .reward-card h3 {
+            margin-top: 0;
+        }
+        .reward-card button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .reward-card button:hover {
+            background-color: #e60000;
+        }
+        .sidebar span {
+            text-decoration: overline;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/admin/users">Пользователи</a>
+        <a href="/admin/orders">Заказы</a>
+        <a href="/admin/payments">Платежи</a>
+        <a href="/admin/rewards">Создание бандлов</a>
+        <a href="/admin/promo">Промокоды</a>
+        <span>Affilate Panel</span>
+        <a href="/aff/users">Пользователи</a>
+        <a href="/aff/finance">Финансы</a>
+        <a href="/aff/newpartners">Запросы (Join US)</a>
+        <a href="/aff/ref">Реф-код</a>
+        <a href="/">Выйти</a>
+    </div>
+    <div class="content">
+        <h1>Админ-панель</h1>
+
+        <!-- Форма для добавления карточки -->
+        <form action="/admin/rewards" method="POST">
+            <input type="text" name="title" placeholder="Название" required />
+            <input type="text" name="description" placeholder="Описание" required />
+            <div class="price">
+                <input type="number" name="priceRed" placeholder="Красная часть" required />
+                <input type="number" name="priceGreen" placeholder="Зеленая часть" required />
+            </div>
+            <button type="submit">Добавить</button>
+        </form>
+
+        <h2>Созданные карточки</h2>
+        <!-- Отображаем все карточки -->
+        <div class="reward-list">
+            {% for reward in rewards %}
+                <div class="reward-card">
+                    <h3>{{ reward.title }}</h3>
+                    <p>{{ reward.description }}</p>
+                    <p><span class="old_price">${{ reward.priceRed }}</span> → <span class="new_price">${{ reward.priceGreen }}</span></p>
+                    <a href="{{ url_for('delete_reward', index=loop.index0) }}">
+                        <button>Удалить</button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировние заказов</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        select, input[type="number"], input[type="text"], input[type="date"], button {
+            padding: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .logout {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .logout:hover {
+            text-decoration: underline;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #007BFF;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .sidebar span {
+            text-decoration: overline;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/admin/users">Пользователи</a>
+        <a href="/admin/orders">Заказы</a>
+        <a href="/admin/payments">Платежи</a>
+        <a href="/admin/rewards">Создание бандлов</a>
+        <a href="/admin/promo">Промокоды</a>
+        <span>Affilate Panel</span>
+        <a href="/aff/users">Пользователи</a>
+        <a href="/aff/finance">Финансы</a>
+        <a href="/aff/newpartners">Запросы (Join US)</a>
+        <a href="/aff/ref">Реф-код</a>
+        <a href="/">Выйти</a>
+    </div>
+    <div class="content">
+        <h1>Редактирование заказов</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Категория</th>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form method="POST">
+            <tr>
+                <td>
+                    <select name="target_user">
+                        {% for user, info in users.items() %}
+                            <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="category">
+                        <option value="Apex Coins">Apex Coins</option>
+                        <option value="Apple Gift Card">Apple Gift Card</option>
+                        <option value="Blizzard Gift Card">Blizzard Gift Card</option>
+                        <option value="EA Gift Card">EA Gift Card</option>
+                        <option value="Google Play Gift Card">Google Play Gift Card</option>
+                        <option value="Netflix & Spotifty">Netflix & Spotifty</option>
+                        <option value="Nintendo Gift Card">Nintendo Gift Card</option>
+                        <option value="Playstation Gift Card">Playstation Gift Card</option>
+                        <option value="Pubg">Pubg</option>
+                        <option value="Roblox">Roblox</option>
+                        <option value="Razer Gold">Razer Gold</option>
+                        <option value="Steam">Steam</option>
+                        <option value="Valorant">Valorant</option>
+                        <option value="World of Warcraft">World of Warcraft</option>
+                        <option value="Xbox Gift Card">Xbox Gift Card</option>
+                        <option value="Xbox Subscriptions">Xbox Subscriptions</option>
+                        <option value="UPLAY">UPLAY</option>
+                    </select>
+                </td>
+                <td><input type="text" name="product" placeholder="Введите товар"></td>
+                <td><input type="number" name="price" placeholder="Цена"></td>
+                <td><input type="number" name="amount" placeholder="Количество"></td>
+                <td><input type="date" name="date"></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button type="submit">Сохранить данные</button>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
+<a href="/logout" class="logout">Выйти</a>
+
+    </div>
+    
+</body>
+</html>

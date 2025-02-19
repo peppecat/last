@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameKeys — Оптовые поставки игровых ключей</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
+
+
+    <style>
+        /* Существующие стили */
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(30, 30, 30, 0.863); /* Полупрозрачный фон */
+            backdrop-filter: blur(10px); /* Размытие заднего фона */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s, backdrop-filter 0.3s;
+        }
+        .scrolled {
+            background: rgba(30, 30, 30, 0.6); /* Уменьшение прозрачности при скролле */
+            backdrop-filter: blur(15px);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00bfff;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        nav ul li a:hover {
+            color: #00bfff;
+        }
+        .hero {
+    text-align: center;
+    padding: 120px 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('/static/images/Home_page.jpg') 
+                no-repeat center center;
+    background-size: cover;
+}
+
+
+        .hero h1{
+            font-size: 33px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #00bfff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: bold;
+            margin-top: 30px;
+            border: 2px solid transparent;
+        }
+        .btn:hover {
+            background-color: #008cba;
+            transform: translateY(-2px);
+        }
+
+        /* Новые секции */
+        .section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .section-dark {
+            background: #1a1a1a;
+        }
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #00bfff;
+        }
+        
+        /* Преимущества */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .advantage-card {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #00bfff;
+            transition: transform 0.3s;
+        }
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+        .advantage-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        /* Как это работает */
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .step-card {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            width: 280px;
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00bfff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Таблица цен */
+        .price-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .price-table th, 
+        .price-table td {
+            padding: 15px;
+            border: 1px solid #2e2e2e;
+        }
+        .price-table th {
+            background: #00bfff;
+            color: #121212;
+        }
+
+        /* Гарантии */
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .guarantee-item {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .guarantee-item img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Финальный CTA */
+        .urgent-cta {
+            background: linear-gradient(135deg, #00bfff 0%, #0066cc 100%);
+            padding: 60px 20px;
+            border-radius: 12px;
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        /* Статистика */
+        .statistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #00bfff;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 1.6em;
+            color: #00bfff;
+        }
+
+        .stat-card p {
+            font-size: 2.5em;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .button-88 {
+        display: flex;
+        align-items: center;
+        font-family: inherit;
+        font-size: 16px;
+        padding: 0.7em 1.4em 0.7em 1.1em;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        background: #ad5389;
+        background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+        border: none;
+        box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+        letter-spacing: 0.05em;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        }
+
+        .button-88:hover {
+        box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+        color: rgb(221, 221, 221);
+        background: linear-gradient(0deg, rgb(19, 196, 69) 0%, rgba(102,247,113,1) 100%);
+        }
+
+        .button-88:active {
+        box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+        }
+        .button-87 {
+        display: flex;
+        align-items: center;
+        font-family: inherit;
+        font-size: 16px;
+        padding: 0.7em 1.4em 0.7em 1.1em;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        background: #ad5389;
+        background: linear-gradient(0deg, rgba(20,167,62,1) 0%, rgba(102,247,113,1) 100%);
+        border: none;
+        box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+        letter-spacing: 0.05em;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        }
+
+        .button-87:hover {
+        box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+        color: rgb(221, 221, 221);
+        background: linear-gradient(0deg, rgb(19, 196, 69) 0%, rgba(102,247,113,1) 100%);
+        }
+
+        .button-87:active {
+        box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+        }
+
+        footer {
+        background: #000000;
+        padding: 40px 20px;
+        text-align: center;
+        color: #fff;
+    }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        footer nav ul {
+            list-style: none;
+            margin: 20px 0 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer nav ul li {
+            display: inline;
+        }
+
+        footer nav ul li a {
+            color: #00bfff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        footer nav ul li a:hover {
+            color: #008cba;
+        }
+
+        footer nav ul li a:active {
+            color: #006f8f;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">KEYZPANEL.SHOP</div>
+        <nav>
+            <ul>
+                <li><a class="button-87" href="/login">Sign in</a></li>
+                <li><a class="button-88" href="/register">Try for free</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>🔥THE CHEAPEST CD-KEYS PANEL FOR RESELLING</h1>
+        <p>Instant delivery + simple activation</p>
+        <a href="/login" class="btn">Explore Games</a>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="section section-dark" id="advantages">
+        <h2 class="section-title">KEYZPANEL.SHOP benefits</h2>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <h3>Wholesale Prices</h3>
+                <p>Discounts up to 45% on orders of 100+ keys</p>
+            </div>
+            <div class="advantage-card">
+                <h3>API Integration</h3>
+                <p>Connect your platform in minutes</p>
+            </div>
+            <div class="advantage-card">
+                <h3>Legit & Instant</h3>
+                <p>Fully licensed, no gray markets</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Как это работает -->
+    <section class="section" id="workflow">
+        <h2 class="section-title">3 Steps to Profit</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Game Selection</h3>
+                <p>Trending games for resale</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Instant delivery</h3>
+                <p>Keys in CSV/TXT format immediately after payment</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Your markup</h3>
+                <p>Average partner margin — 14-22%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="section section-dark" id="statistics">
+        <h2 class="section-title">Our statistics</h2>
+        <div class="statistics-grid">
+            <div class="stat-card">
+                <h3>Total orders</h3>
+                <p>20.000+</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total users</h3>
+                <p>5000+</p>
+            </div>
+            <div class="stat-card">
+                <h3>Game keys delivered</h3>
+                <p>25.000+</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 KEYZPANEL.SHOP. All rights reserved.</p>
+        <nav>
+            <ul>
+                <li><a href="/terms_of_use">Terms of Use</a></li>
+                <li><a href="/user_agreement">User Agreement</a></li>
+                <li><a href="/join_us">Join Us</a></li>
+            </ul>
+        </nav>
+    </footer>
+    
+
+
+
+    <script defer src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+    });
+    </script>
+</body>
+</html>
+

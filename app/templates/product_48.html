@@ -1,0 +1,1240 @@
+<html lang="en" data-theme="light" data-sidebar-behaviour="fixed" data-navigation-color="inverted" data-is-fluid="true"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Webinning" name="author">
+    <meta name="cryptomus" content="98abd6f1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://dashly-theme.com/assets/css/theme.bundle.css" id="stylesheetLTR">
+    <link rel="stylesheet" href="https://dashly-theme.com/assets/css/theme.rtl.bundle.css" id="stylesheetRTL" disabled="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&amp;display=swap">
+    <link rel="stylesheet" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&amp;display=swap">
+    <link rel="stylesheet" href="/main_style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_style.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
+
+    <!-- no-JS fallback -->
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap">
+    </noscript>
+
+    <!-- Theme switcher script -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        // Принудительное установление светлого режима
+        const setLightTheme = () => {
+            document.documentElement.dataset.theme = 'light';
+            localStorage.setItem('theme', 'light');
+        };
+
+        setLightTheme();
+
+        const showActiveTheme = theme => {
+            const activeBtn = document.querySelector(`[data-theme-value="${theme}"]`);
+
+            document.querySelectorAll('[data-theme-value]').forEach(element => {
+                element.classList.remove('active');
+            });
+
+            activeBtn && activeBtn.classList.add('active');
+
+            // Set button if demo mode is enabled
+            document.querySelectorAll('[data-theme-control="theme"]').forEach(element => {
+                if (element.value == theme) {
+                    element.checked = true;
+                }
+            });
+        };
+
+        window.addEventListener('load', () => {
+            showActiveTheme('light');
+
+            document.querySelectorAll('[data-theme-value]').forEach(element => {
+                element.addEventListener('click', () => {
+                    const theme = 'light'; // Всегда светлая тема
+                    setLightTheme();
+                    window.location.reload();
+                });
+            });
+        });
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/ns.png" sizes="any">
+
+    <!-- Мобильное устройство -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const toggler = document.querySelector(".navbar-toggler");
+        const collapse = document.querySelector("#sidenavCollapse");
+
+        toggler.addEventListener("click", function() {
+            collapse.classList.toggle("show");
+        });
+    });
+    </script>
+    <style>
+        @media (max-width: 768px) {
+        .navbar-toggler {
+            display: block;
+        }
+
+        .navbar-collapse {
+            display: none; /* Скрывать по умолчанию */
+        }
+
+        .navbar-collapse.show {
+            display: block; /* Отображать при активации Collapse */
+        }
+    }
+    </style>
+
+    <!-- Page Title -->
+    <title>Dashboard | Dashly</title>
+</head>
+<body>
+    
+<nav id="mainNavbar" class="navbar navbar-vertical navbar-expand-lg scrollbar bg-dark navbar-dark">
+            <!-- Theme configuration (navbar) -->
+            <script>
+                let navigationColor = localStorage.getItem('navigationColor')
+                  , navbar = document.getElementById('mainNavbar');
+
+                if (navigationColor != null && navbar != null) {
+                    if (navigationColor == 'inverted') {
+                        navbar.classList.add('bg-dark', 'navbar-dark');
+                        navbar.classList.remove('bg-white', 'navbar-light');
+                    } else {
+                        navbar.classList.add('bg-white', 'navbar-light');
+                        navbar.classList.remove('bg-dark', 'navbar-dark');
+                    }
+                }
+            </script>
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="navbar-brand" href="/">
+                    <div class="logo">KEYZPANEL.SHOP</div>
+                </a>
+                <!-- Navbar toggler -->
+                <a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </a>
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="sidenavCollapse">
+                    <!-- Navigation -->
+                    <ul class="navbar-nav mb-lg-7">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <span>Dashboard</span>
+                            </a> 
+                            <a class="nav-link" href="/orders">
+                                <span>Order History</span>
+                            </a>
+                            <a class="nav-link" href="/rewards_hub">
+                                <span>Rewards</span>
+                            </a>   
+                            <a class="nav-link" href="/profile">
+                                <span>Profile</span>
+                            </a> 
+                            <a class="nav-link" href="/logout">
+                                <span>Logout</span>
+                            </a>                            
+                        </li>
+                    </ul>
+                </div>
+                <!-- End of Collapse -->
+            </div>
+        </nav>
+<main>
+    
+<div class="container-fluid d-flex py-6 mb-4">
+    <form method="GET" action="/" class="d-none d-md-inline-block me-auto">
+        <div class="input-group input-group-merge">
+            <!-- Input -->
+            <input type="text" name="q" class="form-control bg-light-green border-light-green w-250px" placeholder="Search products" aria-label="Search for any term">
+
+            <!-- Button -->
+            <span class="input-group-text bg-light-green border-light-green p-0">
+                <!-- Button -->
+                <button class="btn btn-primary rounded-2 w-30px h-30px p-0 mx-1" type="submit" aria-label="Search button">
+                    <svg viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.750 9.812 A9.063 9.063 0 1 0 18.876 9.812 A9.063 9.063 0 1 0 0.750 9.812 Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" transform="translate(-3.056 4.62) rotate(-23.025)"></path>
+                        <path d="M16.221 16.22L23.25 23.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </button>
+            </span>
+        </div>
+    </form>
+    <div class="d-flex align-items-center ms-auto me-n1 me-lg-n2">
+
+        <!-- Dropdown -->
+        <span class="btn btn-primary">
+            {{ balances['bep20'] }} USD
+        </span>
+                <!-- Separator -->
+        <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
+
+
+        <button type="button" class="btn btn-dark">{{ username }}</button>
+
+        <!-- Separator -->
+
+        <!-- Dropdown -->
+
+
+        <!-- Button -->
+
+        <!-- Notifications offcanvas --><!-- Dropdown -->
+        <!-- Button -->
+
+        <!-- Custmization offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCustomize" aria-labelledby="offcanvasCustomizeTitle">
+            <div class="offcanvas-body pt-7 pb-5 position-relative">
+
+                <button type="button" class="btn-close position-absolute top-0 end-0 mt-5 me-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+                <div class="text-center">
+                    <img src="https://d33wubrfki0l68.cloudfront.net/0e108d71de2aec22aae71d891ecabd0ec28dc2bb/8484b/assets/images/illustrations/customization-illustration.svg" alt="..." class="img-fluid w-50 mb-5" width="170" height="170">
+                    <h3 class="mb-2" id="offcanvasCustomizeTitle">Make Dashly Your Own</h3>
+                    <p class="mb-0">Set preferences that will be cookied for your live preview demonstration</p>
+                </div>
+
+                <hr>
+
+                <h4 class="mb-0">Color Scheme</h4>
+                <p class="text-secondary fs-5 mb-4">Overall light or dark presentation.</p>
+                <div class="btn-group w-100 mb-7" role="group" aria-label="Light/dark switcher">
+                    <input type="radio" class="btn-check" name="theme" id="lightMode" value="light" data-theme-control="theme">
+                    <label class="btn btn-outline-primary px-3 w-100 d-flex align-items-center justify-content-center" for="lightMode">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18" width="18"><g><path d="M12,4.64A7.36,7.36,0,1,0,19.36,12,7.37,7.37,0,0,0,12,4.64Zm0,12.72A5.36,5.36,0,1,1,17.36,12,5.37,5.37,0,0,1,12,17.36Z" style="fill: currentColor"></path><path d="M12,3.47a1,1,0,0,0,1-1V1a1,1,0,0,0-2,0V2.47A1,1,0,0,0,12,3.47Z" style="fill: currentColor"></path><path d="M4.55,6a1,1,0,0,0,.71.29A1,1,0,0,0,6,6,1,1,0,0,0,6,4.55l-1-1A1,1,0,0,0,3.51,4.93Z" style="fill: currentColor"></path><path d="M2.47,11H1a1,1,0,0,0,0,2H2.47a1,1,0,1,0,0-2Z" style="fill: currentColor"></path><path d="M4.55,18l-1,1a1,1,0,0,0,0,1.42,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l1-1A1,1,0,0,0,4.55,18Z" style="fill: currentColor"></path><path d="M12,20.53a1,1,0,0,0-1,1V23a1,1,0,0,0,2,0V21.53A1,1,0,0,0,12,20.53Z" style="fill: currentColor"></path><path d="M19.45,18A1,1,0,0,0,18,19.45l1,1a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z" style="fill: currentColor"></path><path d="M23,11H21.53a1,1,0,0,0,0,2H23a1,1,0,0,0,0-2Z" style="fill: currentColor"></path><path d="M18.74,6.26A1,1,0,0,0,19.45,6l1-1a1,1,0,1,0-1.42-1.42l-1,1A1,1,0,0,0,18,6,1,1,0,0,0,18.74,6.26Z" style="fill: currentColor"></path></g></svg>
+                        Light
+                    </label>
+
+                    <input type="radio" class="btn-check" name="theme" id="darkMode" value="dark" data-theme-control="theme">
+                    <label class="btn btn-outline-primary px-3 w-100 d-flex align-items-center justify-content-center" for="darkMode">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18" width="18"><path d="M19.57,23.34a1,1,0,0,0,0-1.9,9.94,9.94,0,0,1,0-18.88,1,1,0,0,0,.68-.94,1,1,0,0,0-.68-.95A11.58,11.58,0,0,0,8.88,2.18,12.33,12.33,0,0,0,3.75,12a12.31,12.31,0,0,0,5.11,9.79A11.49,11.49,0,0,0,15.61,24,12.55,12.55,0,0,0,19.57,23.34ZM10,20.17A10.29,10.29,0,0,1,5.75,12a10.32,10.32,0,0,1,4.3-8.19A9.34,9.34,0,0,1,15.59,2a.17.17,0,0,1,.17.13.18.18,0,0,1-.07.2,11.94,11.94,0,0,0-.18,19.21.25.25,0,0,1-.16.45A9.5,9.5,0,0,1,10,20.17Z" style="fill: currentColor"></path></svg>
+                        Dark
+                    </label>
+
+                    <input type="radio" class="btn-check" name="theme" id="autoMode" value="auto" data-theme-control="theme">
+                    <label class="btn btn-outline-primary px-3 w-100 d-flex align-items-center justify-content-center" for="autoMode">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18" width="18"><path d="M24,12a1,1,0,0,0-1-1H19.09a.51.51,0,0,1-.49-.4,6.83,6.83,0,0,0-.94-2.28.5.5,0,0,1,.06-.63l2.77-2.76a1,1,0,1,0-1.42-1.42L16.31,6.28a.5.5,0,0,1-.63.06A6.83,6.83,0,0,0,13.4,5.4a.5.5,0,0,1-.4-.49V1a1,1,0,0,0-2,0V4.91a.51.51,0,0,1-.4.49,6.83,6.83,0,0,0-2.28.94.5.5,0,0,1-.63-.06L4.93,3.51A1,1,0,0,0,3.51,4.93L6.28,7.69a.5.5,0,0,1,.06.63A6.83,6.83,0,0,0,5.4,10.6a.5.5,0,0,1-.49.4H1a1,1,0,0,0,0,2H4.91a.51.51,0,0,1,.49.4,6.83,6.83,0,0,0,.94,2.28.5.5,0,0,1-.06.63L3.51,19.07a1,1,0,1,0,1.42,1.42l2.76-2.77a.5.5,0,0,1,.63-.06,6.83,6.83,0,0,0,2.28.94.5.5,0,0,1,.4.49V23a1,1,0,0,0,2,0V19.09a.51.51,0,0,1,.4-.49,6.83,6.83,0,0,0,2.28-.94.5.5,0,0,1,.63.06l2.76,2.77a1,1,0,1,0,1.42-1.42l-2.77-2.76a.5.5,0,0,1-.06-.63,6.83,6.83,0,0,0,.94-2.28.5.5,0,0,1,.49-.4H23A1,1,0,0,0,24,12Zm-8.74,2.5A5.76,5.76,0,0,1,9.5,8.74a5.66,5.66,0,0,1,.16-1.31A.49.49,0,0,1,10,7.07a5.36,5.36,0,0,1,1.8-.31,5.47,5.47,0,0,1,5.46,5.46,5.36,5.36,0,0,1-.31,1.8.49.49,0,0,1-.35.32A5.53,5.53,0,0,1,15.26,14.5Z" style="fill: currentColor"></path></svg>
+                        Auto
+                    </label>
+                </div>
+
+                <h4 class="mb-0">Navigation Color</h4>
+                <p class="text-secondary fs-5 mb-4">Usually dictated by the color scheme, but can be overriden.</p>
+                <div class="btn-group w-100 mb-7" role="group" aria-label="Navigation color switcher">
+                    <input type="radio" class="btn-check" name="navigationColor" id="defaultColor" value="default" data-theme-control="navigationColor">
+                    <label class="btn btn-outline-primary w-50" for="defaultColor">
+                        Default
+                    </label>
+
+                    <input type="radio" class="btn-check" name="navigationColor" id="invertedColor" value="inverted" data-theme-control="navigationColor">
+                    <label class="btn btn-outline-primary w-50" for="invertedColor">
+                        Inverted
+                    </label>
+                </div>
+
+                <h4 class="mb-0">Sidebar behaviour</h4>
+                <p class="text-secondary fs-5 mb-4">Standard navigation sizing or minified icons with dropdowns.</p>
+                <div class="btn-group w-100 mb-7" role="group" aria-label="Sidebar layout switcher">
+                    <input type="radio" class="btn-check" name="sidebarSizing" id="fixed" value="fixed" data-theme-control="sidebarBehaviour">
+                    <label class="btn btn-outline-primary px-3 w-100" for="fixed">
+                        Fixed
+                    </label>
+
+                    <input type="radio" class="btn-check" name="sidebarSizing" id="condensed" value="condensed" data-theme-control="sidebarBehaviour">
+                    <label class="btn btn-outline-primary px-3 w-100" for="condensed">
+                        Condensed
+                    </label>
+
+                    <input type="radio" class="btn-check" name="sidebarSizing" id="scrollable" value="scrollable" data-theme-control="sidebarBehaviour">
+                    <label class="btn btn-outline-primary px-3 w-100" for="scrollable">
+                        Scrollable
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-6">
+                    <div class="d-flex flex-column">
+                        <label class="h4 mb-0 d-flex align-items-center" for="isFluid">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="16" width="16"><path d="M4.79,17.21a1,1,0,0,0,.71.29.84.84,0,0,0,.38-.08,1,1,0,0,0,.62-.92v-3a.25.25,0,0,1,.25-.25h10.5a.25.25,0,0,1,.25.25v3a1,1,0,0,0,.62.92.84.84,0,0,0,.38.08,1,1,0,0,0,.71-.29l4.5-4.5a1,1,0,0,0,0-1.42l-4.5-4.5a1,1,0,0,0-1.09-.21,1,1,0,0,0-.62.92v3a.25.25,0,0,1-.25.25H6.75a.25.25,0,0,1-.25-.25v-3a1,1,0,0,0-.62-.92,1,1,0,0,0-1.09.21l-4.5,4.5a1,1,0,0,0,0,1.42Z" style="fill: currentColor"></path></svg>
+                            Fluid layout
+                        </label>
+                        <p class="text-secondary fs-5 mb-0">Toggle container layout system</p>
+                    </div>
+
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" role="switch" data-theme-control="isFluid" id="isFluid" aria-label="Fluid layout switcher" checked="">
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-between align-items-center mb-5">
+                    <div class="d-flex flex-column">
+                        <label class="h4 mb-0 d-flex align-items-center" for="isRTL">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="16" width="16"><g><path d="M4.15,15.85A.47.47,0,0,0,4.5,16a.43.43,0,0,0,.19,0A.5.5,0,0,0,5,15.5V13a.25.25,0,0,1,.25-.25H11.5a1.25,1.25,0,0,0,0-2.5H5.25A.25.25,0,0,1,5,10V7.5A.49.49,0,0,0,4.69,7a.47.47,0,0,0-.54.11l-4,4a.48.48,0,0,0,0,.7Z" style="fill: currentColor"></path><rect x="15.5" width="8.5" height="24" rx="2" style="fill: currentColor"></rect></g></svg>
+                            RTL Mode
+                        </label>
+                        <p class="text-secondary fs-5 mb-0">Switch your language direction</p>
+                    </div>
+
+                    <div class="form-check form-switch mb-0">
+                        <input class="form-check-input" type="checkbox" role="switch" data-theme-control="isRTL" id="isRTL" aria-label="RTL switcher">
+                    </div>
+                </div>
+
+                <div class="row gx-4 mt-auto">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <div class="col-lg mb-3">
+                        <button class="btn btn-light w-100 d-flex align-items-center justify-content-center" id="resetThemeConfig">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="16" width="16"><path d="M12.57,1.26A10.81,10.81,0,0,0,2.82,8.4a.25.25,0,0,1-.27.16L.86,8.31a.52.52,0,0,0-.49.21.51.51,0,0,0,0,.53L3,13.75a.51.51,0,0,0,.43.25.52.52,0,0,0,.36-.14l3.77-3.75a.5.5,0,0,0-.28-.85L5.59,9a.26.26,0,0,1-.18-.13.24.24,0,0,1,0-.22,8.26,8.26,0,1,1,7.87,11.59,1.25,1.25,0,1,0,.09,2.5,10.75,10.75,0,0,0-.79-21.49Z" style="fill: currentColor"></path></svg>
+                            Reset
+                        </button>
+                    </div>
+                    <div class="col-lg mb-3">
+                        <button class="btn btn-dark w-100 d-flex align-items-center justify-content-center" id="previewThemeConfig">
+                            Preview
+                        </button>
+                    </div>
+                </div> <!-- / .row -->
+            </div>
+        </div>
+        <!-- Separator -->
+
+        <!-- Dropdown -->
+    </div>
+</div>
+        
+    
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <div class="container">
+    <input type="hidden" id="csrf_token" value="kh7Lqfd64HvDTgKkwmQVQMsrAZDn4mMB6Y2W4VFhgOAKI908QDpc9Ee6OWQgWBwN">
+    <h1 class="h2">Uplay CD-Keys</h1>
+    <div class="row">
+    <div class="col">
+    <div class="card border-0 card-h-100">
+    
+        <script src="/static/scripts/pin_products.js"></script>
+        <div class="table-responsive">
+        <input type="hidden" name="csrfmiddlewaretoken" value="kh7Lqfd64HvDTgKkwmQVQMsrAZDn4mMB6Y2W4VFhgOAKI908QDpc9Ee6OWQgWBwN">
+            <table id="projectsTable" class="table align-middle table-edge table-nowrap mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>No.</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>In Stock</th>
+                        <th>Amount</th>
+                        <th>Final Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-498">522</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin’s Creed Origins</div></td>
+                        <td><div class="a" id="product-price-498">4.80</div></td>
+                        <td><div class="a" id="in_stock-498">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-498', 498)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-498" value="0" oninput="validateInput(this, 498)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-498', 498)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-498"></div>
+                                <button type="button" id="success-498" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-498" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-498" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-499">523</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin’s Creed Origins Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-499">14.95</div></td>
+                        <td><div class="a" id="in_stock-499">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-499', 499)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-499" value="0" oninput="validateInput(this, 499)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-499', 499)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-499"></div>
+                                <button type="button" id="success-499" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-499" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-499" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-500">524</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin’s Creed Origins Gold Edition</div></td>
+                        <td><div class="a" id="product-price-500">18.95</div></td>
+                        <td><div class="a" id="in_stock-500">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-500', 500)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-500" value="0" oninput="validateInput(this, 500)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-500', 500)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-500"></div>
+                                <button type="button" id="success-500" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-500" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-500" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-501">525</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Odyssey</div></td>
+                        <td><div class="a" id="product-price-501">4.80</div></td>
+                        <td><div class="a" id="in_stock-501">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-501', 501)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-501" value="0" oninput="validateInput(this, 501)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-501', 501)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-501"></div>
+                                <button type="button" id="success-501" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-501" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-501" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-502">526</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Odyssey Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-502">14.50</div></td>
+                        <td><div class="a" id="in_stock-502">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-502', 502)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-502" value="0" oninput="validateInput(this, 502)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-502', 502)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-502"></div>
+                                <button type="button" id="success-502" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-502" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-502" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-503">527</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Odyssey Gold Edition</div></td>
+                        <td><div class="a" id="product-price-503">17.66</div></td>
+                        <td><div class="a" id="in_stock-503">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-503', 503)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-503" value="0" oninput="validateInput(this, 503)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-503', 503)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-503"></div>
+                                <button type="button" id="success-503" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-503" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-503" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-504">528</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Odyssey Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-504">27.44</div></td>
+                        <td><div class="a" id="in_stock-504">❌</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-504', 504)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-504" value="0" oninput="validateInput(this, 504)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-504', 504)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-504"></div>
+                                <button type="button" id="success-504" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-504" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-504" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-505">529</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin’s Creed Mirage</div></td>
+                        <td><div class="a" id="product-price-505">23.87</div></td>
+                        <td><div class="a" id="in_stock-505">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-505', 505)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-505" value="0" oninput="validateInput(this, 505)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-505', 505)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-505"></div>
+                                <button type="button" id="success-505" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-505" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-505" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-506">530</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Valhalla</div></td>
+                        <td><div class="a" id="product-price-506">10.28</div></td>
+                        <td><div class="a" id="in_stock-506">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-506', 506)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-506" value="0" oninput="validateInput(this, 506)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-506', 506)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-506"></div>
+                                <button type="button" id="success-506" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-506" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-506" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-507">531</div></td>
+                        <td><div class="a">UPLAY CD-Key | Assassin's Creed Valhalla Ragnarok Edition</div></td>
+                        <td><div class="a" id="product-price-507">23.50</div></td>
+                        <td><div class="a" id="in_stock-507">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-507', 507)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-507" value="0" oninput="validateInput(this, 507)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-507', 507)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-507"></div>
+                                <button type="button" id="success-507" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-507" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-507" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-508">532</div></td>
+                        <td><div class="a">UPLAY CD-Key | Avatar: Frontiers of Pandora</div></td>
+                        <td><div class="a" id="product-price-508">31.14</div></td>
+                        <td><div class="a" id="in_stock-508">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-508', 508)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-508" value="0" oninput="validateInput(this, 508)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-508', 508)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-508"></div>
+                                <button type="button" id="success-508" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-508" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-508" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-509">533</div></td>
+                        <td><div class="a">UPLAY CD-Key | Avatar: Frontiers of Pandora Gold Edition</div></td>
+                        <td><div class="a" id="product-price-509">44.78</div></td>
+                        <td><div class="a" id="in_stock-509">❌</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-509', 509)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-509" value="0" oninput="validateInput(this, 509)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-509', 509)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-509"></div>
+                                <button type="button" id="success-509" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-509" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-509" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-510">534</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 4</div></td>
+                        <td><div class="a" id="product-price-510">3.65</div></td>
+                        <td><div class="a" id="in_stock-510">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-510', 510)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-510" value="0" oninput="validateInput(this, 510)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-510', 510)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-510"></div>
+                                <button type="button" id="success-510" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-510" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-510" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-511">535</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 4 Gold Edition</div></td>
+                        <td><div class="a" id="product-price-511">14.50</div></td>
+                        <td><div class="a" id="in_stock-511">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-511', 511)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-511" value="0" oninput="validateInput(this, 511)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-511', 511)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-511"></div>
+                                <button type="button" id="success-511" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-511" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-511" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-512">536</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 5</div></td>
+                        <td><div class="a" id="product-price-512">5.22</div></td>
+                        <td><div class="a" id="in_stock-512">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-512', 512)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-512" value="0" oninput="validateInput(this, 512)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-512', 512)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-512"></div>
+                                <button type="button" id="success-512" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-512" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-512" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-513">537</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 5 Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-513">28.71</div></td>
+                        <td><div class="a" id="in_stock-513">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-513', 513)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-513" value="0" oninput="validateInput(this, 513)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-513', 513)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-513"></div>
+                                <button type="button" id="success-513" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-513" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-513" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-514">538</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 5 Gold Edition</div></td>
+                        <td><div class="a" id="product-price-514">14.30</div></td>
+                        <td><div class="a" id="in_stock-514">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-514', 514)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-514" value="0" oninput="validateInput(this, 514)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-514', 514)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-514"></div>
+                                <button type="button" id="success-514" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-514" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-514" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-515">539</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 6</div></td>
+                        <td><div class="a" id="product-price-515">6.28</div></td>
+                        <td><div class="a" id="in_stock-515">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-515', 515)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-515" value="0" oninput="validateInput(this, 515)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-515', 515)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-515"></div>
+                                <button type="button" id="success-515" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-515" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-515" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-516">540</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 6 Gold Edition</div></td>
+                        <td><div class="a" id="product-price-516">18.53</div></td>
+                        <td><div class="a" id="in_stock-516">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-516', 516)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-516" value="0" oninput="validateInput(this, 516)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-516', 516)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-516"></div>
+                                <button type="button" id="success-516" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-516" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-516" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-517">541</div></td>
+                        <td><div class="a">UPLAY CD-Key | Far Cry 6 Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-517">25.66</div></td>
+                        <td><div class="a" id="in_stock-517">❌</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-517', 517)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-517" value="0" oninput="validateInput(this, 517)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-517', 517)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-517"></div>
+                                <button type="button" id="success-517" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-517" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-517" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-518">542</div></td>
+                        <td><div class="a">UPLAY CD-Key | For Honor</div></td>
+                        <td><div class="a" id="product-price-518">4.67</div></td>
+                        <td><div class="a" id="in_stock-518">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-518', 518)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-518" value="0" oninput="validateInput(this, 518)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-518', 518)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-518"></div>
+                                <button type="button" id="success-518" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-518" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-518" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-519">543</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy's Rainbow Six Siege</div></td>
+                        <td><div class="a" id="product-price-519">7.35</div></td>
+                        <td><div class="a" id="in_stock-519">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-519', 519)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-519" value="0" oninput="validateInput(this, 519)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-519', 519)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-519"></div>
+                                <button type="button" id="success-519" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-519" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-519" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-520">544</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy's Rainbow Six Siege Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-520">9.17</div></td>
+                        <td><div class="a" id="in_stock-520">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-520', 520)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-520" value="0" oninput="validateInput(this, 520)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-520', 520)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-520"></div>
+                                <button type="button" id="success-520" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-520" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-520" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-521">545</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon Breakpoint</div></td>
+                        <td><div class="a" id="product-price-521">5.40</div></td>
+                        <td><div class="a" id="in_stock-521">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-521', 521)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-521" value="0" oninput="validateInput(this, 521)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-521', 521)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-521"></div>
+                                <button type="button" id="success-521" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-521" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-521" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-522">546</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon Breakpoint Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-522">20.20</div></td>
+                        <td><div class="a" id="in_stock-522">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-522', 522)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-522" value="0" oninput="validateInput(this, 522)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-522', 522)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-522"></div>
+                                <button type="button" id="success-522" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-522" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-522" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-523">547</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon Wildlands</div></td>
+                        <td><div class="a" id="product-price-523">7.19</div></td>
+                        <td><div class="a" id="in_stock-523">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-523', 523)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-523" value="0" oninput="validateInput(this, 523)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-523', 523)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-523"></div>
+                                <button type="button" id="success-523" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-523" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-523" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-524">548</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon Wildlands Gold Edition</div></td>
+                        <td><div class="a" id="product-price-524">13.20</div></td>
+                        <td><div class="a" id="in_stock-524">❌</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-524', 524)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-524" value="0" oninput="validateInput(this, 524)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-524', 524)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-524"></div>
+                                <button type="button" id="success-524" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-524" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-524" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-525">549</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon The Division</div></td>
+                        <td><div class="a" id="product-price-525">3.45</div></td>
+                        <td><div class="a" id="in_stock-525">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-525', 525)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-525" value="0" oninput="validateInput(this, 525)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-525', 525)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-525"></div>
+                                <button type="button" id="success-525" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-525" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-525" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-526">550</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon The Division Gold Edition</div></td>
+                        <td><div class="a" id="product-price-526">10.32</div></td>
+                        <td><div class="a" id="in_stock-526">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-526', 526)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-526" value="0" oninput="validateInput(this, 526)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-526', 526)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-526"></div>
+                                <button type="button" id="success-526" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-526" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-526" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-527">551</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon The Division 2</div></td>
+                        <td><div class="a" id="product-price-527">5.54</div></td>
+                        <td><div class="a" id="in_stock-527">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-527', 527)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-527" value="0" oninput="validateInput(this, 527)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-527', 527)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-527"></div>
+                                <button type="button" id="success-527" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-527" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-527" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-528">552</div></td>
+                        <td><div class="a">UPLAY CD-Key | Tom Clancy’s Ghost Recon The Division 2 Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-528">16.12</div></td>
+                        <td><div class="a" id="in_stock-528">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-528', 528)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-528" value="0" oninput="validateInput(this, 528)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-528', 528)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-528"></div>
+                                <button type="button" id="success-528" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-528" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-528" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-529">553</div></td>
+                        <td><div class="a">UPLAY CD-Key | Watch Dogs 2</div></td>
+                        <td><div class="a" id="product-price-529">7.14</div></td>
+                        <td><div class="a" id="in_stock-529">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-529', 529)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-529" value="0" oninput="validateInput(this, 529)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-529', 529)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-529"></div>
+                                <button type="button" id="success-529" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-529" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-529" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-530">554</div></td>
+                        <td><div class="a">UPLAY CD-Key | Watch Dogs 2 Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-530">6.95</div></td>
+                        <td><div class="a" id="in_stock-530">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-530', 530)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-530" value="0" oninput="validateInput(this, 530)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-530', 530)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-530"></div>
+                                <button type="button" id="success-530" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-530" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-530" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-531">555</div></td>
+                        <td><div class="a">UPLAY CD-Key | Watch Dogs Legion</div></td>
+                        <td><div class="a" id="product-price-531">5.60</div></td>
+                        <td><div class="a" id="in_stock-531">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-531', 531)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-531" value="0" oninput="validateInput(this, 531)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-531', 531)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-531"></div>
+                                <button type="button" id="success-531" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-531" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-531" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-532">556</div></td>
+                        <td><div class="a">UPLAY CD-Key | Watch Dogs Legion Gold Edition</div></td>
+                        <td><div class="a" id="product-price-532">19.36</div></td>
+                        <td><div class="a" id="in_stock-532">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-532', 532)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-532" value="0" oninput="validateInput(this, 532)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-532', 532)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-532"></div>
+                                <button type="button" id="success-532" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-532" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-532" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-533">557</div></td>
+                        <td><div class="a">UPLAY CD-Key | Watch Dogs Legion Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-533">16.25</div></td>
+                        <td><div class="a" id="in_stock-533">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-533', 533)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-533" value="0" oninput="validateInput(this, 533)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-533', 533)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-533"></div>
+                                <button type="button" id="success-533" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-533" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-533" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    
+            </tbody>
+            </table>
+            </div>
+    
+    </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/counter.js"></script>
+<script src="{{ url_for('static', filename='counter.js') }}"></script>
+
+
+    <div>
+        
+    </div>
+</div></main>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+</body></html>

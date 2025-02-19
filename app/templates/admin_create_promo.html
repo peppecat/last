@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Promo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='promo.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/admin/users">Пользователи</a>
+        <a href="/admin/orders">Заказы</a>
+        <a href="/admin/payments">Платежи</a>
+        <a href="/admin/rewards">Создание бандлов</a>
+        <a href="/admin/promo">Промокоды</a>
+        <span>Affilate Panel</span>
+        <a href="/aff/users">Пользователи</a>
+        <a href="/aff/finance">Финансы</a>
+        <a href="/aff/newpartners">Запросы (Join US)</a>
+        <a href="/aff/ref">Реф-код</a>
+        <a href="/">Выйти</a>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <h2>Create New Promo Code</h2>
+            <form action="{{ url_for('create_promo') }}" method="POST" class="promo-form">
+                <input type="text" name="key" class="input-field" placeholder="Enter promo code" required>
+                <input type="text" name="title" class="input-field" placeholder="Enter title" required>
+                <input type="text" name="promo_code" class="input-field" placeholder="Enter key" required>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="hidden"> Hidden
+                </label>
+                <button type="submit" class="create-button">Create</button>
+            </form>
+        
+            <h2>Existing Promo Codes</h2>
+            <table class="promo-table">
+                <thead>
+                    <tr>
+                        <th>Promo Code</th>
+                        <th>Title</th>
+                        <th>Key</th>
+                        <th>Hidden</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, promo in promocodes.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ promo['title'] }}</td>
+                        <td>{{ promo['key'] }}</td>
+                        <td>{{ "Yes" if promo['hidden'] else "No" }}</td>
+                        <td class="status {{ 'used' if promo['used'] else 'not-used' }}">
+                            {{ "Used" if promo['used'] else "Not Used" }}
+                        </td>
+                        <td>
+                            <form action="{{ url_for('delete_promo', key=key) }}" method="POST">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
