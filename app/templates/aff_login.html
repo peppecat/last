@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в партнерскую программу</title>
+    <title>Partner Program Login</title>
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}"> <!-- FAVICON -->
     <style>
         * {
@@ -54,10 +54,10 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Вход в партнерскую программу</h2>
+        <h2>Affilate Program Login</h2>
         <form action="/aff_login" method="post">
             <input type="text" name="partner_id" placeholder="Введите ваш ID" required>
-            <button type="submit">Войти</button>
+            <button type="submit">Log In</button>
         </form>
         
         {% if error %}

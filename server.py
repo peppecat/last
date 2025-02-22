@@ -151,7 +151,8 @@ def login():
         if username in users and users[username]['password'] == password:
             session['username'] = username
             return redirect(url_for('dashboard'))
-        return "Incorrect username or password!"
+        flash("Incorrect username or password!", 'error')  # Добавляем сообщение об ошибке
+        return redirect(url_for('login'))  # Перенаправляем обратно на страницу входа
     return render_template('login.html')
 
 # Загрузка данных при старте приложения
@@ -398,7 +399,7 @@ def aff_login():
             session['partner_id'] = partner_id  # Сохраняем ID в сессии
             return redirect(url_for('aff_home'))
         else:
-            return render_template('aff_login.html', error="Неверный ID. Попробуйте снова.")
+            return render_template('aff_login.html', error="Incorrect ID. Please try again.")
 
     return render_template('aff_login.html')
 

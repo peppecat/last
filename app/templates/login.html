@@ -39,7 +39,7 @@
                 <!-- Demo script -->
     
             <!-- Page Title -->
-            <title>Sign In | Dashly</title>
+            <title>Sign In</title>
         </head>
         
         <body class="d-flex align-items-center bg-light-green">
@@ -47,7 +47,7 @@
             <main class="container">
                 <div class="row align-items-center justify-content-center vh-100">
                     <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-4 col-xxl-3 py-6">
-    
+        
                         <!-- Title -->
                         <h1 class="mb-2 text-center">
                             Sign In
@@ -55,16 +55,16 @@
                         <!-- Form -->
                         <form method="POST" action="">
                             {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+        
                             <input type="hidden" name="csrfmiddlewaretoken" value="9tBRLMjdMSuYNdMhauEcwLZydHuF25Cg2MKVxe6uWBFf5mFiKkEsUnZq3yd9izlw">
                             <div class="row">
                                 <div class="col-12">
@@ -95,8 +95,7 @@
                                     </div>
                                 </div>
                             </div> <!-- / .row -->
-    
-    
+        
                             <div class="row align-items-center text-center">
                                 <div class="col-12">
                                     <!-- Button -->
@@ -113,7 +112,7 @@
                     </div>
                 </div> <!-- / .row -->
             </main> <!-- / main -->
-    
+        
             <!-- JAVASCRIPT-->
             <!-- Theme JS -->
             <script src="./assets/js/theme.bundle.js"></script>  
@@ -128,8 +127,7 @@
                     }
                 });
             </script>
-                  
-    
-    </body>
+        
+        </body>
     
 </html>
