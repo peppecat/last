@@ -1,17 +1,84 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
-import uuid
+import json
+import uuid  # импортируем отдельно
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort
+
 
 app = Flask(__name__, template_folder='app/templates', static_folder='app/static')
 app.secret_key = 'supersecretkey'
 
-# Список для хранения пользователей
-users = {}
-affiliate_users = []
-affiliate_payments = []  # Храним выплаты
-promocodes = {}
-active_bonuses = []
-referrals = {}
-partners_data = [] #почты по запросу
+# Пути к файлам для хранения данных
+# Пути к файлам для хранения данных
+USERS_FILE = 'users.json'
+REFERRALS_FILE = 'referrals.json'
+PROMOCODES_FILE = 'promocodes.json'
+REWARDS_FILE = 'rewards.json'
+AFFILIATES_FILE = 'affiliates.json'
+PARTNERS_FILE = 'partners.json'
+PAYMENTS_FILE = 'payments.json'
+
+# Загрузка данных из файлов
+def load_data():
+    global users, referrals, promocodes, rewards, active_bonuses, affiliate_users, partners_data, affiliate_payments
+    try:
+        with open(USERS_FILE, 'r') as f:
+            users = json.load(f)
+    except FileNotFoundError:
+        users = {}
+
+    try:
+        with open(REFERRALS_FILE, 'r') as f:
+            referrals = json.load(f)
+    except FileNotFoundError:
+        referrals = {}
+
+    try:
+        with open(PROMOCODES_FILE, 'r') as f:
+            promocodes = json.load(f)
+    except FileNotFoundError:
+        promocodes = {}
+
+    try:
+        with open(REWARDS_FILE, 'r') as f:
+            rewards = json.load(f)
+    except FileNotFoundError:
+        rewards = []
+
+    try:
+        with open(AFFILIATES_FILE, 'r') as f:
+            affiliate_users = json.load(f)
+    except FileNotFoundError:
+        affiliate_users = []
+
+    try:
+        with open(PARTNERS_FILE, 'r') as f:
+            partners_data = json.load(f)
+    except FileNotFoundError:
+        partners_data = []
+
+    try:
+        with open(PAYMENTS_FILE, 'r') as f:
+            affiliate_payments = json.load(f)
+    except FileNotFoundError:
+        affiliate_payments = []
+
+    active_bonuses = []  # Список активных бонусов
+
+# Сохранение данных в файлы
+def save_data():
+    with open(USERS_FILE, 'w') as f:
+        json.dump(users, f, indent=4)
+    with open(REFERRALS_FILE, 'w') as f:
+        json.dump(referrals, f, indent=4)
+    with open(PROMOCODES_FILE, 'w') as f:
+        json.dump(promocodes, f, indent=4)
+    with open(REWARDS_FILE, 'w') as f:
+        json.dump(rewards, f, indent=4)
+    with open(AFFILIATES_FILE, 'w') as f:
+        json.dump(affiliate_users, f, indent=4)
+    with open(PARTNERS_FILE, 'w') as f:
+        json.dump(partners_data, f, indent=4)
+    with open(PAYMENTS_FILE, 'w') as f:
+        json.dump(affiliate_payments, f, indent=4)
 
 # Главная страница регистрации
 @app.route('/register', methods=['GET', 'POST'])
@@ -31,7 +98,8 @@ def register():
                             'expenses': 0,
                             'userorders': [],
                             'topups': []
-                          } #по такому же принцпипу добавить статистику
+                          }
+        save_data()  # Сохраняем данные в файл
         return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -69,10 +137,10 @@ def register_ref(ref_code):
                 'payout': 0
             })
 
+        save_data()  # Сохраняем данные в файл
         return redirect(url_for('login'))
 
     return render_template('register.html', ref_code=ref_code)
-
 
 # Страница входа
 @app.route('/login', methods=['GET', 'POST'])
@@ -83,75 +151,241 @@ def login():
         if username in users and users[username]['password'] == password:
             session['username'] = username
             return redirect(url_for('dashboard'))
-        return "Неверное имя пользователя или пароль!"
+        return "Incorrect username or password!"
     return render_template('login.html')
 
+# Загрузка данных при старте приложения
+load_data()
 
-# Страница главная
-@app.route('/dashboard')
-def dashboard():
+# Страница для отображения наград
+@app.route('/rewards_hub')
+def rewardshub():
     if 'username' not in session:
-        flash('Please login to access the dashboard', 'error')
         return redirect(url_for('login'))
+    
     username = session['username']
     balances = users[username]['balance']
-    return render_template('dashboard.html', username=username, balances=balances)
+    return render_template('rewardshub.html', username=username, balances=balances, rewards=rewards, active_bonuses=active_bonuses)
 
-@app.route('/')
-def main():
-    return render_template('index.html')
-
-# Обработчик для страницы join_us
-@app.route('/join_us', methods=['GET', 'POST'])
-def join_us():
+# Страница создания промокодов
+@app.route('/admin/promo', methods=['GET', 'POST'])
+def create_promo():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
     if request.method == 'POST':
-        email = request.form.get('email')
-        traffic_source = request.form.get('traffic-source')
-        geo = request.form.get('geo')
-
-        # Проверяем, что все данные присутствуют
-        if email and traffic_source and geo:
-            # Сохраняем данные в виде словаря
-            partners_data.append({
-                'email': email,
-                'traffic_source': traffic_source,
-                'geo': geo
-            })
-
-            # Добавляем уведомление об успешной отправке
-            flash('Form successfully submitted!', 'success')
-
-    return render_template('join_us.html')
-
-@app.route('/user_agreement')
-def terms_use():
-    return render_template('user_agreement.html')
-
-@app.route('/terms_of_use')
-def user_agreement():
-    return render_template('terms_use.html')
-
+        key = request.form['key']
+        title = request.form['title']
+        promo_code = request.form['promo_code']
+        hidden = 'hidden' in request.form  # Проверяем, установлен ли чекбокс
+        
+        # Сохраняем промокод в словарь
+        promocodes[key] = {
+            'key': promo_code,  # Это будет сам ключ
+            'title': title,
+            'hidden': hidden,
+            'used': False  # Новый флаг, который показывает, активирован ли промокод
+        }
+        save_data()  # Сохраняем данные в файл
+        return redirect(url_for('create_promo'))
     
+    return render_template('admin_create_promo.html', promocodes=promocodes)
 
-# Страница заказов
-@app.route('/orders')
-def orders():
+# Удаление промокода
+@app.route('/delete_promo/<key>', methods=['POST'])
+def delete_promo(key):
+    if key in promocodes:
+        del promocodes[key]
+        save_data()  # Сохраняем данные в файл
+    return redirect(url_for('create_promo'))
+
+# API для проверки, скрытый ли промокод
+@app.route('/check_promo/<key>', methods=['GET'])
+def check_promo(key):
+    if key in promocodes:
+        return jsonify({'hidden': promocodes[key]['hidden']})
+    return jsonify({'error': 'Promo code not found'}), 404
+
+# Страница активации промокода
+@app.route('/activate', methods=['POST'])
+def activate():
+    promocode = request.form['promoCode']
+    
+    # Проверка на существование промокода в базе
+    if promocode in promocodes:
+        bonus = promocodes[promocode]
+        
+        if not bonus['used']:  # Если промокод еще не был использован
+            active_bonuses.append(bonus)
+            promocodes[promocode]['used'] = True  # Помечаем как использованный
+            save_data()  # Сохраняем данные в файл
+        return redirect(url_for('rewardshub'))
+    else:
+        return "Invalid promo code!", 404
+
+# Страница Admin
+@app.route('/admin/users', methods=['GET', 'POST'])
+def admin():
     if 'username' not in session:
-        flash('Please login to access the dashboard', 'error')
         return redirect(url_for('login'))
-    
-    username = session['username']
-    balances = users[username]['balance']
-    
-    # Проверяем, что у пользователя есть список заказов, если его нет — создаём пустой список
-    userorders = users[username].get('userorders', [])
-    
-    # Реверсируем список заказов
-    userorders = userorders[::-1]
-    
-    return render_template('orders.html', username=username, balances=balances, userorders=userorders)
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
+
+    if request.method == 'POST':
+        action = request.form.get('action')
+        target_user = request.form.get('target_user')
+
+        if target_user in users:
+            if action == 'edit_balance':
+                balance_type = request.form.get('balance_type')
+                new_value = int(request.form.get('new_balance'))
+                if balance_type in users[target_user]['balance']:
+                    users[target_user]['balance'][balance_type] = new_value
+                elif balance_type in ['orders', 'expenses']:
+                    users[target_user][balance_type] = new_value
+
+            elif action == 'edit_topup':
+                date = request.form.get('date')
+                network = request.form.get('network')
+                amount = float(request.form.get('amount'))
+                status = request.form.get('status')
+
+                topup_found = False
+                for topup in users[target_user]['topups']:
+                    if topup['date'] == date and topup['network'] == network:
+                        topup['amount'] = amount
+                        topup['status'] = status
+                        topup_found = True
+                        break
+
+                if not topup_found:
+                    users[target_user]['topups'].append({
+                        'date': date,
+                        'network': network,
+                        'amount': amount,
+                        'status': status
+                    })
+
+            elif action == 'delete_user':  # Удаление пользователя
+                del users[target_user]
+
+            save_data()
+
+    return render_template('admin_users.html', users=users)
 
 
+
+@app.route('/admin/orders', methods=['GET', 'POST'])
+def admin2():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
+    
+    if request.method == 'POST':
+        # Получаем данные из формы
+        target_user = request.form.get('target_user')  # Имя пользователя, для которого редактируем заказ
+        category = request.form.get('category')
+        product = request.form.get('product')
+        price = request.form.get('price')
+        amount = request.form.get('amount')
+        date = request.form.get('date')
+
+        # Если пользователь существует, обновляем его заказы
+        if target_user in users:
+            # Добавляем новый заказ в список заказов пользователя
+            new_order = {
+                'category': category,
+                'product': product,
+                'price': price,
+                'amount': amount,
+                'date': date
+            }
+            # Если заказы еще не существуют у пользователя, создаем пустой список
+            if 'userorders' not in users[target_user]:
+                users[target_user]['userorders'] = []
+            users[target_user]['userorders'].append(new_order)
+
+            save_data()  # Сохраняем данные после изменений
+
+    return render_template('admin_orders.html', users=users)
+
+
+@app.route('/admin/payments', methods=['GET', 'POST'])
+def admin3():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
+    if 'payments' not in users:
+        users['payments'] = {"bep20": "", "erc20": "", "trc20": "", "sol": "", "near": ""}
+
+    if request.method == 'POST':
+        if 'delete' in request.form:
+            # Удаление адреса
+            currency = request.form['delete']
+            users['payments'][currency] = ""
+        else:
+            # Сохранение введенных адресов
+            for currency in users['payments'].keys():
+                users['payments'][currency] = request.form.get(currency, "")
+        
+        save_data()  # Сохраняем данные после изменений
+
+    return render_template('admin_payments.html', users=users, payments=users['payments'])
+
+
+@app.route('/admin/rewards', methods=['GET', 'POST'])
+def adminrewards():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
+
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        priceRed = request.form['priceRed']
+        priceGreen = request.form['priceGreen']
+        
+        # Логика для сохранения карточки в базе данных или session
+        if 'rewards' not in session:
+            session['rewards'] = []
+        
+        session['rewards'].append({
+            'title': title,
+            'description': description,
+            'priceRed': priceRed,
+            'priceGreen': priceGreen
+        })
+        session.modified = True
+        
+        return redirect(url_for('adminrewards'))  # Перезагружаем страницу для отображения новых карточек
+
+    # Отображаем страницу с уже добавленными карточками
+    rewards = session.get('rewards', [])
+    return render_template('admin_rewards.html', rewards=rewards)
+
+@app.route('/admin/delete_reward/<int:index>', methods=['GET'])
+def delete_reward(index):
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if session['username'] != 'Nike4bike101$':
+        return "Доступ запрещён: только для администратора!", 403
+
+    # Удаляем карточку по индексу
+    if 'rewards' in session and 0 <= index < len(session['rewards']):
+        del session['rewards'][index]
+        session.modified = True
+
+    return redirect(url_for('adminrewards'))  # Перезагружаем страницу с обновленным списком карточек
+
+
+
+
+
+# Переход на страницу входа партнера
 @app.route('/aff_login', methods=['GET', 'POST'])
 def aff_login():
     if request.method == 'POST':
@@ -168,12 +402,10 @@ def aff_login():
 
     return render_template('aff_login.html')
 
-
 @app.route('/aff_logout')
 def aff_logout():
     session.pop('partner_id', None)  # Удаляем ID из сессии
     return redirect(url_for('aff_login'))
-
 
 @app.route('/aff_home')
 def aff_home():
@@ -197,8 +429,6 @@ def aff_home():
 
     return render_template('aff_home.html', partner_id=partner_id, users=users)
 
-
-
 @app.route('/aff_profile')
 def aff_profile():
     if 'partner_id' not in session:
@@ -211,8 +441,6 @@ def aff_profile():
     user_payments = [p for p in affiliate_payments if p['user_id'] == user['id']]
 
     return render_template('aff_profile.html', user=user, payments=user_payments)
-
-
 
 @app.route('/aff/users', methods=['GET', 'POST'])
 def aff_users():
@@ -255,8 +483,9 @@ def aff_users():
             custom_id = request.form.get('customID')
             affiliate_users[:] = [user for user in affiliate_users if user['id'] != custom_id]
 
-    return render_template('aff_users.html', users=affiliate_users, referrals=referrals)
+        save_data()  # Сохраняем данные после изменений
 
+    return render_template('aff_users.html', users=affiliate_users, referrals=referrals)
 
 @app.route('/aff/newpartners', methods=['GET', 'POST'])
 def aff_partners():
@@ -264,11 +493,16 @@ def aff_partners():
         return redirect(url_for('login'))
     if session['username'] != 'Nike4bike101$':
         return "Доступ запрещён: только для администратора!", 403
-    
-    # Печатаем содержимое partners_data в консоль для отладки
-    print(partners_data)
+
+    # Загружаем актуальные данные перед рендерингом страницы
+    try:
+        with open(PARTNERS_FILE, 'r') as f:
+            partners_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        partners_data = []
 
     return render_template('aff_partners.html', partners=partners_data)
+
 
 @app.route('/aff/delete_partner/<email>', methods=['POST'])
 def delete_partner(email):
@@ -281,9 +515,9 @@ def delete_partner(email):
     global partners_data
     partners_data = [partner for partner in partners_data if partner['email'] != email]
 
-    # Перенаправляем обратно на страницу партнёров после удаления
-    return redirect(url_for('aff_partners'))
+    save_data()  # Сохраняем изменения
 
+    return redirect(url_for('aff_partners'))
 
 @app.route('/aff/finance', methods=['GET', 'POST'])
 def aff_finance():
@@ -308,8 +542,9 @@ def aff_finance():
                 'status': status
             })
 
-    return render_template('aff_finance.html', users=affiliate_users, payments=affiliate_payments)
+        save_data()  # Сохраняем данные после изменений
 
+    return render_template('aff_finance.html', users=affiliate_users, payments=affiliate_payments)
 
 @app.route('/aff/ref', methods=['GET', 'POST'])
 def aff_ref():
@@ -325,8 +560,9 @@ def aff_ref():
             ref_code = "ref" + str(uuid.uuid4())[:8]
             referrals[ref_code] = []
 
-    return render_template('aff_ref.html', referrals=referrals)
+        save_data()  # Сохраняем данные после изменений
 
+    return render_template('aff_ref.html', referrals=referrals)
 
 @app.route("/aff/stats/<ref_code>", methods=["GET", "POST"])
 def stats(ref_code):
@@ -351,10 +587,13 @@ def stats(ref_code):
                 user["payout"] = float(request.form[payout_key])
 
         flash("Данные обновлены!", "success")
+        save_data()  # Сохраняем данные после изменений
         return redirect(url_for("stats", ref_code=ref_code))
 
     return render_template("aff_stats.html", ref_code=ref_code, users=users)
 
+# Загрузка данных при старте приложения
+load_data()
 
 
 
@@ -372,16 +611,77 @@ def profile():
     topups = users[username]['topups']
     return render_template('profile.html', username=username, balances=balances, orders=orders, expenses=expenses, topups=topups)
 
-@app.route('/rewards_hub')
-def rewardshub():
+# Страница главная
+@app.route('/dashboard')
+def dashboard():
     if 'username' not in session:
+        flash('Please login to access the dashboard', 'error')
+        return redirect(url_for('login'))
+    username = session['username']
+    balances = users[username]['balance']
+    return render_template('dashboard.html', username=username, balances=balances)
+
+
+
+# Обработчик для страницы join_us
+@app.route('/join_us', methods=['GET', 'POST'])
+def join_us():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        traffic_source = request.form.get('traffic-source')
+        geo = request.form.get('geo')
+
+        if email and traffic_source and geo:
+            # Загружаем актуальные данные перед изменением
+            try:
+                with open(PARTNERS_FILE, 'r') as f:
+                    partners_data = json.load(f)
+            except (FileNotFoundError, json.JSONDecodeError):
+                partners_data = []
+
+            # Добавляем нового партнера
+            new_partner = {
+                'email': email,
+                'traffic_source': traffic_source,
+                'geo': geo
+            }
+            partners_data.append(new_partner)
+
+            # Сохраняем изменения
+            try:
+                with open(PARTNERS_FILE, 'w') as f:
+                    json.dump(partners_data, f, indent=4)
+            except Exception as e:
+                flash(f'Ошибка при сохранении данных: {e}', 'error')
+                return redirect(url_for('join_us'))
+
+            flash('Form successfully submitted!', 'success')
+
+            # Обновляем переменную partners_data
+            load_data()  # Подгружаем актуальные данные в глобальную переменную
+
+    return render_template('join_us.html')
+
+
+# Страница заказов
+@app.route('/orders')
+def orders():
+    if 'username' not in session:
+        flash('Please login to access the dashboard', 'error')
         return redirect(url_for('login'))
     
     username = session['username']
     balances = users[username]['balance']
-    rewards = session.get('rewards', [])  # Получаем карточки из session
     
-    return render_template('rewardshub.html', username=username, balances=balances, rewards=rewards, active_bonuses=active_bonuses)
+    # Проверяем, что у пользователя есть список заказов, если его нет — создаём пустой список
+    userorders = users[username].get('userorders', [])
+    
+    # Реверсируем список заказов
+    userorders = userorders[::-1]
+    
+    return render_template('orders.html', username=username, balances=balances, userorders=userorders)
+
+
 
 
 @app.route('/bep20/pay/qN7679-3c7cef-47929b-5de3d5-711wet')
@@ -506,209 +806,9 @@ def neardone():
 
 
 
-# Страница Admin
-@app.route('/admin/users', methods=['GET', 'POST'])
-def admin():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-
-    if request.method == 'POST':
-        action = request.form.get('action')  # Определяем, что нужно сделать
-        target_user = request.form.get('target_user')
-
-        if target_user in users:
-            # Обработка изменений баланса, заказов и расходов
-            if action == 'edit_balance':
-                balance_type = request.form.get('balance_type')
-                new_value = int(request.form.get('new_balance'))
-                if balance_type in users[target_user]['balance']:
-                    users[target_user]['balance'][balance_type] = new_value
-                elif balance_type in ['orders', 'expenses']:
-                    users[target_user][balance_type] = new_value
-
-            # Обработка редактирования истории пополнений
-            elif action == 'edit_topup':
-                # Получение данных из формы
-                date = request.form.get('date')
-                network = request.form.get('network')
-                amount = float(request.form.get('amount'))
-                status = request.form.get('status')
-
-                # Добавление или обновление пополнения
-                topup_found = False
-                for topup in users[target_user]['topups']:
-                    if topup['date'] == date and topup['network'] == network:
-                        topup['amount'] = amount
-                        topup['status'] = status
-                        topup_found = True
-                        break
-
-                if not topup_found:
-                    users[target_user]['topups'].append({
-                        'date': date,
-                        'network': network,
-                        'amount': amount,
-                        'status': status
-                    })
-
-    return render_template('admin_users.html', users=users)
-
-
-@app.route('/admin/orders', methods=['GET', 'POST'])
-def admin2():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-    
-    if request.method == 'POST':
-        # Получаем данные из формы
-        target_user = request.form.get('target_user')  # Имя пользователя, для которого редактируем заказ
-        category = request.form.get('category')
-        product = request.form.get('product')
-        price = request.form.get('price')
-        amount = request.form.get('amount')
-        date = request.form.get('date')
-
-        # Если пользователь существует, обновляем его заказы
-        if target_user in users:
-            # Добавляем новый заказ в список заказов пользователя
-            new_order = {
-                'category': category,
-                'product': product,
-                'price': price,
-                'amount': amount,
-                'date': date
-            }
-            # Если заказы еще не существуют у пользователя, создаем пустой список
-            if 'userorders' not in users[target_user]:
-                users[target_user]['userorders'] = []
-            users[target_user]['userorders'].append(new_order)
-
-    return render_template('admin_orders.html', users=users)
-
-@app.route('/admin/payments', methods=['GET', 'POST'])
-def admin3():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-    if 'payments' not in users:
-        users['payments'] = {"bep20": "", "erc20": "", "trc20": "", "sol": "", "near": ""}
-
-    if request.method == 'POST':
-        if 'delete' in request.form:
-            # Удаление адреса
-            currency = request.form['delete']
-            users['payments'][currency] = ""
-        else:
-            # Сохранение введенных адресов
-            for currency in users['payments'].keys():
-                users['payments'][currency] = request.form.get(currency, "")
-    
-    return render_template('admin_payments.html', users=users, payments=users['payments'])
-
-@app.route('/admin/rewards', methods=['GET', 'POST'])
-def adminrewards():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        priceRed = request.form['priceRed']
-        priceGreen = request.form['priceGreen']
-        
-        # Логика для сохранения карточки в базе данных или session
-        if 'rewards' not in session:
-            session['rewards'] = []
-        
-        session['rewards'].append({
-            'title': title,
-            'description': description,
-            'priceRed': priceRed,
-            'priceGreen': priceGreen
-        })
-        session.modified = True
-        
-        return redirect(url_for('adminrewards'))  # Перезагружаем страницу для отображения новых карточек
-
-    # Отображаем страницу с уже добавленными карточками
-    rewards = session.get('rewards', [])
-    return render_template('admin_rewards.html', rewards=rewards)
-
-@app.route('/admin/delete_reward/<int:index>', methods=['GET'])
-def delete_reward(index):
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-
-    # Удаляем карточку по индексу
-    if 'rewards' in session and 0 <= index < len(session['rewards']):
-        del session['rewards'][index]
-        session.modified = True
-
-    return redirect(url_for('adminrewards'))  # Перезагружаем страницу с обновленным списком карточек
 
 
 
-@app.route('/admin/promo', methods=['GET', 'POST'])
-def create_promo():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    if session['username'] != 'Nike4bike101$':
-        return "Доступ запрещён: только для администратора!", 403
-    if request.method == 'POST':
-        key = request.form['key']
-        title = request.form['title']
-        promo_code = request.form['promo_code']
-        hidden = 'hidden' in request.form  # Проверяем, установлен ли чекбокс
-        
-        # Сохраняем промокод в словарь
-        promocodes[key] = {
-            'key': promo_code,  # Это будет сам ключ
-            'title': title,
-            'hidden': hidden,
-            'used': False  # Новый флаг, который показывает, активирован ли промокод
-        }
-        return redirect(url_for('create_promo'))
-    
-    return render_template('admin_create_promo.html', promocodes=promocodes)
-
-# Удаление промокода
-@app.route('/delete_promo/<key>', methods=['POST'])
-def delete_promo(key):
-    if key in promocodes:
-        del promocodes[key]
-    return redirect(url_for('create_promo'))
-
-# API для проверки, скрытый ли промокод
-@app.route('/check_promo/<key>', methods=['GET'])
-def check_promo(key):
-    if key in promocodes:
-        return jsonify({'hidden': promocodes[key]['hidden']})
-    return jsonify({'error': 'Promo code not found'}), 404
-
-# Страница активации промокода
-@app.route('/activate', methods=['POST'])
-def activate():
-    promocode = request.form['promoCode']
-    
-    # Проверка на существование промокода в базе
-    if promocode in promocodes:
-        bonus = promocodes[promocode]
-        
-        if not bonus['used']:  # Если промокод еще не был использован
-            active_bonuses.append(bonus)
-            promocodes[promocode]['used'] = True  # Помечаем как использованный
-        return redirect(url_for('rewardshub'))
-    else:
-        return "Invalid promo code!", 404
 
 
 
@@ -1190,7 +1290,27 @@ def product48():
     balances = users[username]['balance']
     return render_template('product_48.html', username=username, balances=balances)
 
+@app.route('/user_agreement')
+def terms_use():
+    return render_template('user_agreement.html')
 
+@app.route('/terms_of_use')
+def user_agreement():
+    return render_template('terms_use.html')
+
+@app.route('/')
+def main():
+    return render_template('index.html')
+
+
+# БЛОКИРОВЩИК ЗАПРОСОВ
+@app.route('/wp-admin/setup-config.php')
+def block_wp_scan():
+    abort(404)  # Возвращаем ошибку 404 для этого пути
+
+@app.route('/wordpress/wp-admin/setup-config.php')
+def block_wp_scan2():
+    abort(404)  # Возвращаем ошибку 404 для этого пути
 
 
 # Выход из профиля
@@ -1200,4 +1320,11 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(
+        host='0.0.0.0',
+        port=443,
+        ssl_context=('/etc/letsencrypt/live/keyzpanel.shop/fullchain.pem', 
+                     '/etc/letsencrypt/live/keyzpanel.shop/privkey.pem')
+    )
+
+
