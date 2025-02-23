@@ -1321,11 +1321,5 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=443,
-        ssl_context=('/etc/letsencrypt/live/keyzpanel.shop/fullchain.pem', 
-                     '/etc/letsencrypt/live/keyzpanel.shop/privkey.pem')
-    )
-
+    app.run(debug=True)
 
