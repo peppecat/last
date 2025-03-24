@@ -1,36 +1,29 @@
 {
-    "Nike4bike101$": {
-        "password": "Nike4bike101$",
-        "balance": {
-            "trc20": 0,
-            "erc20": 50,
-            "bep20": 0
-        },
-        "orders": 0,
-        "expenses": 50,
-        "userorders": [
-            {
-                "category": "Razer Gold",
-                "product": "566456",
-                "price": "5464",
-                "amount": "45654",
-                "date": "2025-02-12"
-            }
-        ],
-        "topups": [
-            {
-                "date": "2025-02-15",
-                "network": "ghfh",
-                "amount": 56456.0,
-                "status": "Success"
-            }
-        ]
-    },
     "payments": {
         "bep20": "",
         "erc20": "",
         "trc20": "",
         "sol": "",
         "near": ""
+    },
+    "Dim4ikgoo$e101$": {
+        "password": "Dim4ikgoo$e101$",
+        "balance": {
+            "trc20": 0,
+            "erc20": 0,
+            "bep20": 0.0,
+            "card": 0.0
+        },
+        "orders": 0,
+        "expenses": 0.0,
+        "userorders": [],
+        "topups": [
+            {
+                "date": "2025-03-24 10:55:19",
+                "network": "Card",
+                "amount": 66.0,
+                "status": "Success"
+            }
+        ]
     }
 }

@@ -178,7 +178,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -375,7 +375,7 @@
                     <tr>
                         <td><div class="a" id="product-id-156">179</div></td>
                         <td><div class="a">Roblox | Global | 200 Robux</div></td>
-                        <td><div class="a" id="product-price-156">3.50</div></td>
+                        <td><div class="a" id="product-price-156">3.20</div></td>
                         <td><div class="a" id="in_stock-156">✅</div></td>
                         <td>
                             <div class="counter">
@@ -399,7 +399,7 @@
                     <tr>
                         <td><div class="a" id="product-id-157">180</div></td>
                         <td><div class="a">Roblox | Global | 400 Robux</div></td>
-                        <td><div class="a" id="product-price-157">6.90</div></td>
+                        <td><div class="a" id="product-price-157">4.25</div></td>
                         <td><div class="a" id="in_stock-157">✅</div></td>
                         <td>
                             <div class="counter">
@@ -423,7 +423,7 @@
                     <tr>
                         <td><div class="a" id="product-id-158">181</div></td>
                         <td><div class="a">Roblox | Global | 800 Robux</div></td>
-                        <td><div class="a" id="product-price-158">10.30</div></td>
+                        <td><div class="a" id="product-price-158">7.30</div></td>
                         <td><div class="a" id="in_stock-158">✅</div></td>
                         <td>
                             <div class="counter">
@@ -447,7 +447,7 @@
                     <tr>
                         <td><div class="a" id="product-id-159">182</div></td>
                         <td><div class="a">Roblox | Global | 2200 Robux</div></td>
-                        <td><div class="a" id="product-price-159">25.66</div></td>
+                        <td><div class="a" id="product-price-159">19.00</div></td>
                         <td><div class="a" id="in_stock-159">✅</div></td>
                         <td>
                             <div class="counter">
@@ -471,7 +471,7 @@
                     <tr>
                         <td><div class="a" id="product-id-160">183</div></td>
                         <td><div class="a">Roblox | Global | 2700 Robux</div></td>
-                        <td><div class="a" id="product-price-160">29.56</div></td>
+                        <td><div class="a" id="product-price-160">22.56</div></td>
                         <td><div class="a" id="in_stock-160">✅</div></td>
                         <td>
                             <div class="counter">
@@ -494,8 +494,8 @@
 
                     <tr>
                         <td><div class="a" id="product-id-161">184</div></td>
-                        <td><div class="a">Roblox | Global | 4500 Robux</div></td>
-                        <td><div class="a" id="product-price-161">49.91</div></td>
+                        <td><div class="a">Roblox | Global | 3200 Robux</div></td>
+                        <td><div class="a" id="product-price-161">35.15</div></td>
                         <td><div class="a" id="in_stock-161">✅</div></td>
                         <td>
                             <div class="counter">
@@ -516,16 +516,255 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <td><div class="a" id="product-id-344">184</div></td>
+                        <td><div class="a">Roblox | Global | 3600 Robux</div></td>
+                        <td><div class="a" id="product-price-344">36.44</div></td>
+                        <td><div class="a" id="in_stock-344">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-344', 344)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-344" value="0" oninput="validateInput(this, 344)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-344', 344)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-344"></div>
+                                <button type="button" id="success-344" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-344" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-344" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><div class="a" id="product-id-345">184</div></td>
+                        <td><div class="a">Roblox | Global | 4000 Robux</div></td>
+                        <td><div class="a" id="product-price-345">36.44</div></td>
+                        <td><div class="a" id="in_stock-345">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-345', 345)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-345" value="0" oninput="validateInput(this, 345)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-345', 345)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-345"></div>
+                                <button type="button" id="success-345" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-345" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-345" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
                     
+                    <tr>
+                        <td><div class="a" id="product-id-346">184</div></td>
+                        <td><div class="a">Roblox | Global | 4500 Robux</div></td>
+                        <td><div class="a" id="product-price-346">44.29</div></td>
+                        <td><div class="a" id="in_stock-346">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-346', 346)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-346" value="0" oninput="validateInput(this, 346)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-346', 346)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-346"></div>
+                                <button type="button" id="success-346" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-346" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-346" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-347">184</div></td>
+                        <td><div class="a">Roblox | Global | 5000 Robux</div></td>
+                        <td><div class="a" id="product-price-347">46.00</div></td>
+                        <td><div class="a" id="in_stock-347">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-347', 347)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-347" value="0" oninput="validateInput(this, 347)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-347', 347)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-347"></div>
+                                <button type="button" id="success-347" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-347" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-347" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-348">184</div></td>
+                        <td><div class="a">Roblox | Global | 6000 Robux</div></td>
+                        <td><div class="a" id="product-price-348">50.21</div></td>
+                        <td><div class="a" id="in_stock-348">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-348', 348)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-348" value="0" oninput="validateInput(this, 348)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-348', 348)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-348"></div>
+                                <button type="button" id="success-348" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-348" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-348" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>                    
+
+                    <tr>
+                        <td><div class="a" id="product-id-349">184</div></td>
+                        <td><div class="a">Roblox | Global | 7000 Robux</div></td>
+                        <td><div class="a" id="product-price-349">71.91</div></td>
+                        <td><div class="a" id="in_stock-349">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-349', 349)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-349" value="0" oninput="validateInput(this, 349)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-349', 349)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-349"></div>
+                                <button type="button" id="success-349" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-349" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-349" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-350">184</div></td>
+                        <td><div class="a">Roblox | Global | 10000 Robux</div></td>
+                        <td><div class="a" id="product-price-350">91.47</div></td>
+                        <td><div class="a" id="in_stock-350">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-350', 350)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-350" value="0" oninput="validateInput(this, 350)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-350', 350)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-350"></div>
+                                <button type="button" id="success-350" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-350" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-350" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-351">184</div></td>
+                        <td><div class="a">Roblox | Global | 13000 Robux</div></td>
+                        <td><div class="a" id="product-price-351">120.19</div></td>
+                        <td><div class="a" id="in_stock-351">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-351', 351)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-351" value="0" oninput="validateInput(this, 351)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-351', 351)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-351"></div>
+                                <button type="button" id="success-351" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-351" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-351" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><div class="a" id="product-id-352">184</div></td>
+                        <td><div class="a">Roblox | Global | 22500 Robux</div></td>
+                        <td><div class="a" id="product-price-352">202.00</div></td>
+                        <td><div class="a" id="in_stock-352">✅</div></td>
+                        <td>
+                            <div class="counter">
+                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-352', 352)">-</button>
+                                <span class="space"></span>
+                                <input type="text" id="counter-value-352" value="0" oninput="validateInput(this, 352)">
+                                <span class="space"></span>
+                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-352', 352)">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="b">
+                                <div class="loader" id="loader-352"></div>
+                                <button type="button" id="success-352" class="btn btn-success" disabled="" hidden="">Success</button>
+                                <button type="button" id="fail-352" class="btn btn-danger" disabled="" hidden="">FAIL</button>
+                                <button value="Submit" id="button-352" type="button" class="btn btn-outline-success" disabled="">BUY</button>
+                            </div>
+                        </td>
+                    </tr>                    
             </tbody>
             </table>
-            </div>
-    
+
+        </div>
     </div>
     </div>
 </div>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='button-']").forEach(button => {
+            button.addEventListener("click", function() {
+                let productId = this.id.split("-")[1];
+                let amount = document.getElementById(`counter-value-${productId}`).value;
+                let price = document.getElementById(`product-price-${productId}`).textContent;
+                
+                fetch("/product/28", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        product_id: productId,
+                        amount: amount,
+                        price: price
+                    })
+                }).then(response => response.text())
+                  .then(data => {
+                      location.reload();
+                  }).catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/counter.js"></script>
 <script src="{{ url_for('static', filename='counter.js') }}"></script>

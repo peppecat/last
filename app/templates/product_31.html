@@ -83,6 +83,85 @@
     });
     </script>
     <style>
+        /* Стили для модального окна */
+        #errorModal.modal {
+            display: block !important;  /* Окно будет отображаться */
+            opacity: 0;  /* Начальная прозрачность для анимации */
+            visibility: hidden;  /* Модальное окно будет скрыто по умолчанию */
+            transition: opacity 0.3s ease, visibility 0.3s ease !important;  /* Плавное изменение прозрачности и видимости */
+        }
+
+        #errorModal.show {
+            opacity: 1 !important;  /* Окно становится видимым */
+            visibility: visible !important;  /* Модальное окно становится видимым */
+        }
+
+        /* Центрируем модальное окно */
+        #errorModal .modal-dialog {
+            max-width: 600px !important;  /* Устанавливаем максимальную ширину окна */
+            margin: 30vh auto !important;  /* Центрируем окно по вертикали */
+        }
+
+        /* Стиль для содержания модального окна */
+        #errorModal .modal-content {
+            border-radius: 10px !important;  /* Скругляем углы окна */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;  /* Легкая тень для глубины */
+            background-color: #ffffff !important;  /* Белый фон */
+            padding: 20px !important;  /* Отступы вокруг содержимого */
+        }
+
+        /* Стиль для заголовка модального окна */
+        #errorModal .modal-header {
+            border-bottom: 1px solid #ddd !important;  /* Легкая граница снизу */
+            padding-bottom: 15px !important;  /* Отступ снизу */
+            color: #333 !important;  /* Цвет текста */
+        }
+
+        /* Стиль для заголовка */
+        #errorModal .modal-title {
+            font-size: 1.5rem !important;  /* Увеличиваем размер шрифта заголовка */
+            font-weight: 600 !important;  /* Полужирный шрифт */
+        }
+
+        /* Стили для кнопки закрытия */
+        #errorModal .close {
+            font-size: 1.5rem !important;  /* Увеличиваем размер крестика */
+            color: #aaa !important;  /* Цвет крестика */
+        }
+
+        #errorModal .close:hover {
+            color: #333 !important;  /* Цвет крестика при наведении */
+        }
+
+        /* Стили для текста в теле модального окна */
+        #errorModal .modal-body p {
+            font-size: 1.2rem !important;  /* Размер шрифта */
+            color: #444 !important;  /* Цвет текста */
+            font-weight: 500 !important;  /* Полужирный текст */
+            text-align: center !important;  /* Центрируем текст */
+            padding: 20px 0 !important;  /* Отступы вокруг текста */
+        }
+
+        /* Стили для футера модального окна */
+        #errorModal .modal-footer {
+            border-top: 1px solid #ddd !important;  /* Легкая граница сверху */
+            padding-top: 15px !important;  /* Отступ сверху */
+            text-align: center !important;  /* Центрируем элементы в футере */
+        }
+
+        /* Стили для кнопки в футере */
+        #errorModal .btn-secondary {
+            background-color: #007bff !important;  /* Цвет фона кнопки */
+            color: #fff !important;  /* Цвет текста кнопки */
+            border-radius: 5px !important;  /* Скругляем углы кнопки */
+            padding: 10px 20px !important;  /* Увеличиваем размеры кнопки */
+            font-size: 1rem !important;  /* Размер шрифта */
+        }
+
+        #errorModal .btn-secondary:hover {
+            background-color: #0056b3 !important;  /* Цвет при наведении */
+            border-color: #004085 !important;  /* Цвет границы при наведении */
+        }
         @media (max-width: 768px) {
         .navbar-toggler {
             display: block;
@@ -178,7 +257,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -327,625 +406,143 @@
     <link rel="stylesheet" href="/static/styles/main.css">
     <div class="container">
     <input type="hidden" id="csrf_token" value="kh7Lqfd64HvDTgKkwmQVQMsrAZDn4mMB6Y2W4VFhgOAKI908QDpc9Ee6OWQgWBwN">
-    <h1 class="h2">Steam TopUp Gifts</h1>
+    <h1 class="h2">Steam TopUp</h1>
     <div class="row">
-    <div class="col">
-    <div class="card border-0 card-h-100">
+        <div class="col">
+            <div class="card border-0 card-h-100">
+                <form method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="0qKwK9eT1KHhkgjMi1aNPpYmTq9f2GgJgswQ5zt7gcxyZLcQxU8BuuPc0U79eNEf">
+                    <script src="/static/scripts/steam_rub.js"></script>
     
-        <script src="/static/scripts/pin_products.js"></script>
-        <div class="table-responsive">
-        <input type="hidden" name="csrfmiddlewaretoken" value="kh7Lqfd64HvDTgKkwmQVQMsrAZDn4mMB6Y2W4VFhgOAKI908QDpc9Ee6OWQgWBwN">
-            <table id="projectsTable" class="table align-middle table-edge table-nowrap mb-0">
-                <thead class="thead-light">
-                    <tr>
-                        <th>No.</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>In Stock</th>
-                        <th>Amount</th>
-                        <th>Final Price</th>
-                    </tr>
-                </thead>
-                <tbody>
+                    <div class="row">
+                        <div class="col" style="text-align: center; max-width: 300px; margin: 0 auto;">
+                            <div class="mb-3">
+                                <label class="form-label" for="steamLogin" style="font-size: 16px">Steam Login</label>
+                                <input type="text" name="steamLogin" id="steamLogin" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="amount" style="font-size: 16px">Amount</label>
+                                <input type="number" name="amount" id="amount" class="form-control" step="0.01" max="500" value="0.13" required>
+                            </div>
+                        </div>
+                        <div class="processing_time" style="text-align: center; font-size: 14px; color: #6c757d; margin-top: 10px;">
+                            <p>Average payment processing time: <strong>2-3 minutes</strong></p>
+                        </div>
+                        <div class="col" style="text-align: center; max-width: 300px; margin: 0 auto; margin-bottom: 10px">
+                            <button type="submit" id="button-steam" class="btn btn-outline-success" disabled>BUY</button>
+                        </div>
+                    </div>
+    
+                    {% set discount_levels = [
+                        (0, 0), (1000, 2), (2500, 5), (5000, 7), 
+                        (10000, 10), (15000, 15), (20000, 20), 
+                        (25000, 25), (30000, 30)
+                    ] %}
                     
-                    <tr>
-                        <td><div class="a" id="product-id-387">411</div></td>
-                        <td><div class="a">Steam Gift Account | RU | 1500 RUB</div></td>
-                        <td><div class="a" id="product-price-383">15.00</div></td>
-                        <td><div class="a" id="in_stock-383">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-383', 383)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-383" value="0" oninput="validateInput(this, 383)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-383', 383)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-383"></div>
-                                <button type="button" id="success-383" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-383" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-383" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-388">412</div></td>
-                        <td><div class="a">Steam Gift Account | RU | 3500 RUB</div></td>
-                        <td><div class="a" id="product-price-388">32.00</div></td>
-                        <td><div class="a" id="in_stock-388">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-388', 388)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-388" value="0" oninput="validateInput(this, 388)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-388', 388)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-388"></div>
-                                <button type="button" id="success-388" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-388" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-388" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-389">413</div></td>
-                        <td><div class="a">Steam Gift Account | RU | 5000 RUB</div></td>
-                        <td><div class="a" id="product-price-389">47.00</div></td>
-                        <td><div class="a" id="in_stock-389">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-389', 389)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-389" value="0" oninput="validateInput(this, 389)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-389', 389)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-389"></div>
-                                <button type="button" id="success-389" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-389" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-389" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-390">414</div></td>
-                        <td><div class="a">Steam Gift Account | RU | 10000 RUB</div></td>
-                        <td><div class="a" id="product-price-390">96.00</div></td>
-                        <td><div class="a" id="in_stock-390">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-390', 390)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-390" value="0" oninput="validateInput(this, 390)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-390', 390)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-390"></div>
-                                <button type="button" id="success-390" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-390" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-390" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-391">415</div></td>
-                        <td><div class="a">Steam Gift Account | UA | 650 UAH</div></td>
-                        <td><div class="a" id="product-price-391">15.00</div></td>
-                        <td><div class="a" id="in_stock-391">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-391', 391)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-391" value="0" oninput="validateInput(this, 391)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-391', 391)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-391"></div>
-                                <button type="button" id="success-391" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-391" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-391" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-392">416</div></td>
-                        <td><div class="a">Steam Gift Account | UA | 1550 UAH</div></td>
-                        <td><div class="a" id="product-price-392">32.00</div></td>
-                        <td><div class="a" id="in_stock-392">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-392', 392)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-392" value="0" oninput="validateInput(this, 392)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-392', 392)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-392"></div>
-                                <button type="button" id="success-392" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-392" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-392" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-393">417</div></td>
-                        <td><div class="a">Steam Gift Account | UA | 2100 UAH</div></td>
-                        <td><div class="a" id="product-price-393">47.00</div></td>
-                        <td><div class="a" id="in_stock-393">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-393', 393)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-393" value="0" oninput="validateInput(this, 393)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-393', 393)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-393"></div>
-                                <button type="button" id="success-393" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-393" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-393" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-394">418</div></td>
-                        <td><div class="a">Steam Gift Account | UA | 4200 UAH</div></td>
-                        <td><div class="a" id="product-price-394">94.00</div></td>
-                        <td><div class="a" id="in_stock-394">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-394', 394)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-394" value="0" oninput="validateInput(this, 394)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-394', 394)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-394"></div>
-                                <button type="button" id="success-394" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-394" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-394" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-395">419</div></td>
-                        <td><div class="a">Steam Gift Account | KZ | 8000 KZT</div></td>
-                        <td><div class="a" id="product-price-395">15.00</div></td>
-                        <td><div class="a" id="in_stock-395">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-395', 395)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-395" value="0" oninput="validateInput(this, 395)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-395', 395)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-395"></div>
-                                <button type="button" id="success-395" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-395" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-395" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-396">420</div></td>
-                        <td><div class="a">Steam Gift Account | KZ | 18500 KZT</div></td>
-                        <td><div class="a" id="product-price-396">32.00</div></td>
-                        <td><div class="a" id="in_stock-396">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-396', 396)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-396" value="0" oninput="validateInput(this, 396)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-396', 396)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-396"></div>
-                                <button type="button" id="success-396" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-396" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-396" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-397">421</div></td>
-                        <td><div class="a">Steam Gift Account | KZ | 26300 KZT</div></td>
-                        <td><div class="a" id="product-price-397">47.00</div></td>
-                        <td><div class="a" id="in_stock-397">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-397', 397)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-397" value="0" oninput="validateInput(this, 397)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-397', 397)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-397"></div>
-                                <button type="button" id="success-397" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-397" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-397" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-398">422</div></td>
-                        <td><div class="a">Steam Gift Account | KZ | 52600 KZT</div></td>
-                        <td><div class="a" id="product-price-398">94.00</div></td>
-                        <td><div class="a" id="in_stock-398">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-398', 398)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-398" value="0" oninput="validateInput(this, 398)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-398', 398)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-398"></div>
-                                <button type="button" id="success-398" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-398" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-398" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-399">423</div></td>
-                        <td><div class="a">Steam Gift Account | CIS | 15 USD</div></td>
-                        <td><div class="a" id="product-price-399">15.00</div></td>
-                        <td><div class="a" id="in_stock-399">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-399', 399)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-399" value="0" oninput="validateInput(this, 399)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-399', 399)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-399"></div>
-                                <button type="button" id="success-399" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-399" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-399" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-400">424</div></td>
-                        <td><div class="a">Steam Gift Account | CIS | 35 USD</div></td>
-                        <td><div class="a" id="product-price-400">32.00</div></td>
-                        <td><div class="a" id="in_stock-400">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-400', 400)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-400" value="0" oninput="validateInput(this, 400)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-400', 400)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-400"></div>
-                                <button type="button" id="success-400" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-400" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-400" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-401">425</div></td>
-                        <td><div class="a">Steam Gift Account | CIS | 50 USD</div></td>
-                        <td><div class="a" id="product-price-401">47.00</div></td>
-                        <td><div class="a" id="in_stock-401">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-401', 401)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-401" value="0" oninput="validateInput(this, 401)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-401', 401)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-401"></div>
-                                <button type="button" id="success-401" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-401" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-401" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-402">426</div></td>
-                        <td><div class="a">Steam Gift Account | CIS | 100 USD</div></td>
-                        <td><div class="a" id="product-price-402">94.00</div></td>
-                        <td><div class="a" id="in_stock-402">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-402', 402)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-402" value="0" oninput="validateInput(this, 402)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-402', 402)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-402"></div>
-                                <button type="button" id="success-402" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-402" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-402" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-403">427</div></td>
-                        <td><div class="a">Steam Gift Account | BR | 100 BRL</div></td>
-                        <td><div class="a" id="product-price-403">15.004</div></td>
-                        <td><div class="a" id="in_stock-403">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-403', 403)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-403" value="0" oninput="validateInput(this, 403)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-403', 403)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-403"></div>
-                                <button type="button" id="success-403" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-403" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-403" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-404">428</div></td>
-                        <td><div class="a">Steam Gift Account | BR | 210 BRL</div></td>
-                        <td><div class="a" id="product-price-404">32.00</div></td>
-                        <td><div class="a" id="in_stock-404">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-404', 404)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-404" value="0" oninput="validateInput(this, 404)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-404', 404)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-404"></div>
-                                <button type="button" id="success-404" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-404" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-404" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-405">429</div></td>
-                        <td><div class="a">Steam Gift Account | BR | 300 BRL</div></td>
-                        <td><div class="a" id="product-price-405">47.00</div></td>
-                        <td><div class="a" id="in_stock-405">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-405', 405)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-405" value="0" oninput="validateInput(this, 405)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-405', 405)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-405"></div>
-                                <button type="button" id="success-405" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-405" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-405" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-406">430</div></td>
-                        <td><div class="a">Steam Gift Account | BR | 600 BRL</div></td>
-                        <td><div class="a" id="product-price-406">94.00</div></td>
-                        <td><div class="a" id="in_stock-406">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-406', 406)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-406" value="0" oninput="validateInput(this, 406)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-406', 406)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-406"></div>
-                                <button type="button" id="success-406" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-406" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-406" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-407">431</div></td>
-                        <td><div class="a">Steam Gift Account | CN | 110 CNY</div></td>
-                        <td><div class="a" id="product-price-407">15.00</div></td>
-                        <td><div class="a" id="in_stock-407">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-407', 407)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-407" value="0" oninput="validateInput(this, 407)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-407', 407)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-407"></div>
-                                <button type="button" id="success-407" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-407" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-407" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-408">432</div></td>
-                        <td><div class="a">Steam Gift Account | CN | 260 CNY</div></td>
-                        <td><div class="a" id="product-price-408">32.00</div></td>
-                        <td><div class="a" id="in_stock-408">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-408', 408)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-408" value="0" oninput="validateInput(this, 408)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-408', 408)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-408"></div>
-                                <button type="button" id="success-408" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-408" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-408" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-409">433</div></td>
-                        <td><div class="a">Steam Gift Account | CN | 370 CNY</div></td>
-                        <td><div class="a" id="product-price-409">47.00</div></td>
-                        <td><div class="a" id="in_stock-409">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-409', 409)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-409" value="0" oninput="validateInput(this, 409)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-409', 409)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-409"></div>
-                                <button type="button" id="success-409" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-409" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-409" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-410">434</div></td>
-                        <td><div class="a">Steam Gift Account | CN | 740 CNY</div></td>
-                        <td><div class="a" id="product-price-410">94.00</div></td>
-                        <td><div class="a" id="in_stock-410">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-410', 410)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-410" value="0" oninput="validateInput(this, 410)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-410', 410)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-410"></div>
-                                <button type="button" id="success-410" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-410" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-410" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
+                    <!-- Определяем ближайший уровень скидки -->
+                    {% set nearest = discount_levels | selectattr(0, 'le', expenses) | list | last | default(None) %}
+                    
+                    <!-- Таблица скидок -->
+                    <div class="discount-info" style="text-align: center; font-size: 14px; color: #007bff; margin-top: 15px;">
+                        <p><strong>Discount Levels:</strong></p>
+                        <table class="table table-bordered" style="width: 60%; margin: 0 auto; font-size: 14px;">
+                            <thead>
+                                <tr>
+                                    <th>Expenses ($)</th>
+                                    <th>Discount (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for level, discount in discount_levels %}
+                                    <tr {% if nearest and level == nearest[0] %} style="background-color: #d4edda; font-weight: bold;" {% endif %}>
+                                        <td>{{ "{:,}".format(level) }}</td>
+                                        <td>{{ discount }}%</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     
 
-                    
-            </tbody>
-            </table>
+                </form>
             </div>
+        </div>
+    </div>
     
+    
+    <!-- Модальное окно ошибки -->
+    <div id="errorModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Insufficient funds on your balance.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
-
+    
+    {% if error %}
+    <script>
+        $(document).ready(function(){
+            $("#errorModal").modal('show');
+        });
+    </script>
+    {% endif %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginInput = document.getElementById('steamLogin');
+            const amountInput = document.getElementById('amount');
+            const buyButton = document.getElementById('button-steam');
+    
+            function updateButtonState() {
+                const loginValue = loginInput.value.trim();
+                const amountValue = amountInput.value.trim();
+                
+                if (loginValue !== '' && amountValue !== '' && parseFloat(amountValue) > 0) {
+                    buyButton.style.backgroundColor = '#31cf80';
+                    buyButton.style.color = '#ffffff';
+                    buyButton.style.cursor = 'pointer';
+                    buyButton.removeAttribute('disabled');
+                    buyButton.textContent = `${amountValue} USD`;
+                } else {
+                    buyButton.style.backgroundColor = '';
+                    buyButton.style.color = '';
+                    buyButton.style.cursor = 'default';
+                    buyButton.setAttribute('disabled', 'true');
+                    buyButton.textContent = 'BUY';
+                }
+            }
+    
+            loginInput.addEventListener('input', updateButtonState);
+            amountInput.addEventListener('input', updateButtonState);
+        });
+    </script>
+    
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/counter.js"></script>
 <script src="{{ url_for('static', filename='counter.js') }}"></script>
 
+    
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        restrictDecimalPlaces();
+    });
+</script>
 
     <div>
         
     </div>
-</div></main>
+</div>
+</main>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

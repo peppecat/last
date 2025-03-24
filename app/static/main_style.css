@@ -315,10 +315,11 @@ hr{
     border-radius: 5px;
     color: #000;
     font-size: 12px;
-    max-width: 206px;
+    max-width: 333px;
+    min-width: 333px;
     padding: 10px 12px 12px;
     text-align: left;
-    min-width: 230px;
+
 }
 .wallet-name{
     display: flex;

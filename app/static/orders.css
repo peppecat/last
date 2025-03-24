@@ -211,3 +211,6 @@ html {
 .logout{
     margin-top: 0px !important;
 }
+body{
+    min-height: 100vh;
+}

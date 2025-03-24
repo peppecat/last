@@ -178,7 +178,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -351,7 +351,7 @@
                     <tr>
                         <td><div class="a" id="product-id-175">198</div></td>
                         <td><div class="a">Steam CD-Key |  Age of Mythology: Retold</div></td>
-                        <td><div class="a" id="product-price-175">23.44</div></td>
+                        <td><div class="a" id="product-price-175">16.64</div></td>
                         <td><div class="a" id="in_stock-175">✅</div></td>
                         <td>
                             <div class="counter">
@@ -375,7 +375,7 @@
                     <tr>
                         <td><div class="a" id="product-id-176">199</div></td>
                         <td><div class="a">Steam CD-Key |  Age of Mythology: Retold Premium Edition</div></td>
-                        <td><div class="a" id="product-price-176">29.18</div></td>
+                        <td><div class="a" id="product-price-176">27.84</div></td>
                         <td><div class="a" id="in_stock-176">✅</div></td>
                         <td>
                             <div class="counter">
@@ -423,8 +423,8 @@
                     <tr>
                         <td><div class="a" id="product-id-178">201</div></td>
                         <td><div class="a">Steam CD-Key |  Arma 3</div></td>
-                        <td><div class="a" id="product-price-178">9.89</div></td>
-                        <td><div class="a" id="in_stock-178">❌</div></td>
+                        <td><div class="a" id="product-price-178">7.00</div></td>
+                        <td><div class="a" id="in_stock-178">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-178', 178)">-</button>
@@ -447,7 +447,7 @@
                     <tr>
                         <td><div class="a" id="product-id-179">202</div></td>
                         <td><div class="a">Steam CD-Key |  Assetto Corsa</div></td>
-                        <td><div class="a" id="product-price-179">4.17</div></td>
+                        <td><div class="a" id="product-price-179">2.74</div></td>
                         <td><div class="a" id="in_stock-179">✅</div></td>
                         <td>
                             <div class="counter">
@@ -662,8 +662,8 @@
 
                     <tr>
                         <td><div class="a" id="product-id-188">211</div></td>
-                        <td><div class="a">Steam CD-Key |  Borderlands 3 Deluxe</div></td>
-                        <td><div class="a" id="product-price-188">12.61</div></td>
+                        <td><div class="a">Steam CD-Key |  Borderlands 3 Super Deluxe</div></td>
+                        <td><div class="a" id="product-price-188">9.61</div></td>
                         <td><div class="a" id="in_stock-188">✅</div></td>
                         <td>
                             <div class="counter">
@@ -711,7 +711,7 @@
                     <tr>
                         <td><div class="a" id="product-id-190">213</div></td>
                         <td><div class="a">Steam CD-Key |  Company of Heroes 3</div></td>
-                        <td><div class="a" id="product-price-190">20.14</div></td>
+                        <td><div class="a" id="product-price-190">25.14</div></td>
                         <td><div class="a" id="in_stock-190">✅</div></td>
                         <td>
                             <div class="counter">
@@ -783,7 +783,7 @@
                     <tr>
                         <td><div class="a" id="product-id-193">216</div></td>
                         <td><div class="a">Steam CD-Key |  Dead Island 2</div></td>
-                        <td><div class="a" id="product-price-193">22.84</div></td>
+                        <td><div class="a" id="product-price-193">19.84</div></td>
                         <td><div class="a" id="in_stock-193">✅</div></td>
                         <td>
                             <div class="counter">
@@ -807,7 +807,7 @@
                     <tr>
                         <td><div class="a" id="product-id-194">217</div></td>
                         <td><div class="a">Steam CD-Key |  Dead Island 2 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-194">32.67</div></td>
+                        <td><div class="a" id="product-price-194">26.67</div></td>
                         <td><div class="a" id="in_stock-194">✅</div></td>
                         <td>
                             <div class="counter">
@@ -855,7 +855,7 @@
                     <tr>
                         <td><div class="a" id="product-id-196">219</div></td>
                         <td><div class="a">Steam CD-Key |  Dead by Daylight Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-196">73.12</div></td>
+                        <td><div class="a" id="product-price-196">69.12</div></td>
                         <td><div class="a" id="in_stock-196">✅</div></td>
                         <td>
                             <div class="counter">
@@ -927,7 +927,7 @@
                     <tr>
                         <td><div class="a" id="product-id-199">222</div></td>
                         <td><div class="a">Steam CD-Key |  Destiny 2 Lightfall</div></td>
-                        <td><div class="a" id="product-price-199">3.48</div></td>
+                        <td><div class="a" id="product-price-199">2.48</div></td>
                         <td><div class="a" id="in_stock-199">✅</div></td>
                         <td>
                             <div class="counter">
@@ -948,29 +948,7 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td><div class="a" id="product-id-200">223</div></td>
-                        <td><div class="a">Steam CD-Key |  Destiny 2 Lightfall + Annual Pass</div></td>
-                        <td><div class="a" id="product-price-200">12.99</div></td>
-                        <td><div class="a" id="in_stock-200">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-200', 200)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-200" value="0" oninput="validateInput(this, 200)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-199', 200)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-200"></div>
-                                <button type="button" id="success-200" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-200" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-200" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
+
 
                     <tr>
                         <td><div class="a" id="product-id-201">224</div></td>
@@ -999,7 +977,7 @@
                     <tr>
                         <td><div class="a" id="product-id-202">225</div></td>
                         <td><div class="a">Steam CD-Key |  Destiny 2 Legacy Collection</div></td>
-                        <td><div class="a" id="product-price-202">8.41</div></td>
+                        <td><div class="a" id="product-price-202">5.41</div></td>
                         <td><div class="a" id="in_stock-202">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1095,7 +1073,7 @@
                     <tr>
                         <td><div class="a" id="product-id-206">229</div></td>
                         <td><div class="a">Steam CD-Key |  Dragon's Dogma 2 Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-206">32.10</div></td>
+                        <td><div class="a" id="product-price-206">22.10</div></td>
                         <td><div class="a" id="in_stock-206">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1239,7 +1217,7 @@
                     <tr>
                         <td><div class="a" id="product-id-212">235</div></td>
                         <td><div class="a">Steam CD-Key |  Dying Light 2 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-212">72.44</div></td>
+                        <td><div class="a" id="product-price-212">58.44</div></td>
                         <td><div class="a" id="in_stock-212">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1288,7 +1266,7 @@
                         <td><div class="a" id="product-id-214">237</div></td>
                         <td><div class="a">Steam CD-Key |  Elden Ring Deluxe Edition</div></td>
                         <td><div class="a" id="product-price-214">0</div></td>
-                        <td><div class="a" id="in_stock-214">❌</div></td>
+                        <td><div class="a" id="in_stock-214">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-214', 214)">-</button>
@@ -1359,7 +1337,7 @@
                     <tr>
                         <td><div class="a" id="product-id-217">240</div></td>
                         <td><div class="a">Steam CD-Key |  Elite Dangerous Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-217">19.64</div></td>
+                        <td><div class="a" id="product-price-217">12.64</div></td>
                         <td><div class="a" id="in_stock-217">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1383,7 +1361,7 @@
                     <tr>
                         <td><div class="a" id="product-id-218">241</div></td>
                         <td><div class="a">Steam CD-Key |  Elite Dangerous Odyssey</div></td>
-                        <td><div class="a" id="product-price-218">6.14</div></td>
+                        <td><div class="a" id="product-price-218">5.14</div></td>
                         <td><div class="a" id="in_stock-218">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1501,33 +1479,9 @@
                     </tr>
 
                     <tr>
-                        <td><div class="a" id="product-id-222">245</div></td>
+                        <td><div class="a" id="product-id-223">245</div></td>
                         <td><div class="a">Steam CD-Key |  Europa Universalis IV Conquest Collection</div></td>
-                        <td><div class="a" id="product-price-222">21.57</div></td>
-                        <td><div class="a" id="in_stock-222">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-222', 222)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-222" value="0" oninput="validateInput(this, 222)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-222', 222)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-222"></div>
-                                <button type="button" id="success-222" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-222" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-222" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-223">246</div></td>
-                        <td><div class="a">Steam CD-Key |  Exoprimal</div></td>
-                        <td><div class="a" id="product-price-223">9.41</div></td>
+                        <td><div class="a" id="product-price-223">21.57</div></td>
                         <td><div class="a" id="in_stock-223">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1547,11 +1501,11 @@
                             </div>
                         </td>
                     </tr>
-                    
+
                     <tr>
-                        <td><div class="a" id="product-id-224">247</div></td>
-                        <td><div class="a">Steam CD-Key |  Expeditions: A MudRunner Game</div></td>
-                        <td><div class="a" id="product-price-224">21.97</div></td>
+                        <td><div class="a" id="product-id-224">246</div></td>
+                        <td><div class="a">Steam CD-Key |  Exoprimal</div></td>
+                        <td><div class="a" id="product-price-224">9.41</div></td>
                         <td><div class="a" id="in_stock-224">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1571,11 +1525,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-225">248</div></td>
-                        <td><div class="a">Steam CD-Key |  F1 Manager 2024 </div></td>
-                        <td><div class="a" id="product-price-225">15.67</div></td>
+                        <td><div class="a" id="product-id-225">247</div></td>
+                        <td><div class="a">Steam CD-Key |  Expeditions: A MudRunner Game</div></td>
+                        <td><div class="a" id="product-price-225">21.97</div></td>
                         <td><div class="a" id="in_stock-225">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1597,9 +1551,9 @@
                     </tr>
 
                     <tr>
-                        <td><div class="a" id="product-id-226">249</div></td>
-                        <td><div class="a">Steam CD-Key |  Fallout 76</div></td>
-                        <td><div class="a" id="product-price-226">10.14</div></td>
+                        <td><div class="a" id="product-id-226">248</div></td>
+                        <td><div class="a">Steam CD-Key |  F1 Manager 2024 </div></td>
+                        <td><div class="a" id="product-price-226">15.67</div></td>
                         <td><div class="a" id="in_stock-226">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1618,13 +1572,13 @@
                                 <button value="Submit" id="button-226" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-227">250</div></td>
-                        <td><div class="a">Steam CD-Key |  Forza Horizon 4</div></td>
-                        <td><div class="a" id="product-price-227">23.16</div></td>
-                        <td><div class="a" id="in_stock-227">❌</div></td>
+                        <td><div class="a" id="product-id-227">249</div></td>
+                        <td><div class="a">Steam CD-Key |  Fallout 76</div></td>
+                        <td><div class="a" id="product-price-227">10.14</div></td>
+                        <td><div class="a" id="in_stock-227">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-227', 227)">-</button>
@@ -1642,13 +1596,13 @@
                                 <button value="Submit" id="button-227" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-228">251</div></td>
-                        <td><div class="a">Steam CD-Key |  Forza Horizon 4 Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-228">27.19</div></td>
-                        <td><div class="a" id="in_stock-228">❌</div></td>
+                        <td><div class="a" id="product-id-228">253</div></td>
+                        <td><div class="a">Steam CD-Key |  Football Manager 2024</div></td>
+                        <td><div class="a" id="product-price-228">17.67</div></td>
+                        <td><div class="a" id="in_stock-228">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-228', 228)">-</button>
@@ -1666,13 +1620,13 @@
                                 <button value="Submit" id="button-228" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-229">252</div></td>
-                        <td><div class="a">Steam CD-Key |  Forza Horizon 4 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-229">36.31</div></td>
-                        <td><div class="a" id="in_stock-229">❌</div></td>
+                        <td><div class="a" id="product-id-229">254</div></td>
+                        <td><div class="a">Steam CD-Key |  Foxhole</div></td>
+                        <td><div class="a" id="product-price-229">20.41</div></td>
+                        <td><div class="a" id="in_stock-229">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-229', 229)">-</button>
@@ -1690,12 +1644,12 @@
                                 <button value="Submit" id="button-229" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-230">253</div></td>
-                        <td><div class="a">Steam CD-Key |  Football Manager 2024</div></td>
-                        <td><div class="a" id="product-price-230">17.67</div></td>
+                        <td><div class="a" id="product-id-230">255</div></td>
+                        <td><div class="a">Steam CD-Key |  Frostpunk 2</div></td>
+                        <td><div class="a" id="product-price-230">17.51</div></td>
                         <td><div class="a" id="in_stock-230">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1714,12 +1668,12 @@
                                 <button value="Submit" id="button-230" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-231">254</div></td>
-                        <td><div class="a">Steam CD-Key |  Foxhole</div></td>
-                        <td><div class="a" id="product-price-231">20.41</div></td>
+                        <td><div class="a" id="product-id-231">256</div></td>
+                        <td><div class="a">Steam CD-Key |  Generation Zero</div></td>
+                        <td><div class="a" id="product-price-231">2.84</div></td>
                         <td><div class="a" id="in_stock-231">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1738,12 +1692,12 @@
                                 <button value="Submit" id="button-231" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-232">255</div></td>
-                        <td><div class="a">Steam CD-Key |  Frostpunk 2</div></td>
-                        <td><div class="a" id="product-price-232">23.51</div></td>
+                        <td><div class="a" id="product-id-232">257</div></td>
+                        <td><div class="a">Steam CD-Key |  Ghost of Tsushima DIRECTOR'S CUT</div></td>
+                        <td><div class="a" id="product-price-232">26.18</div></td>
                         <td><div class="a" id="in_stock-232">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1762,12 +1716,12 @@
                                 <button value="Submit" id="button-232" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-233">256</div></td>
-                        <td><div class="a">Steam CD-Key |  Generation Zero</div></td>
-                        <td><div class="a" id="product-price-233">2.84</div></td>
+                        <td><div class="a" id="product-id-233">258</div></td>
+                        <td><div class="a">Steam CD-Key |  Gloomhaven</div></td>
+                        <td><div class="a" id="product-price-233">6.70</div></td>
                         <td><div class="a" id="in_stock-233">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1787,11 +1741,12 @@
                             </div>
                         </td>
                     </tr>
+                    
 
                     <tr>
-                        <td><div class="a" id="product-id-234">257</div></td>
-                        <td><div class="a">Steam CD-Key |  Ghost of Tsushima DIRECTOR'S CUT</div></td>
-                        <td><div class="a" id="product-price-234">34.18</div></td>
+                        <td><div class="a" id="product-id-234">259</div></td>
+                        <td><div class="a">Steam CD-Key |  God of War</div></td>
+                        <td><div class="a" id="product-price-234">12.81</div></td>
                         <td><div class="a" id="in_stock-234">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1811,11 +1766,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-235">258</div></td>
-                        <td><div class="a">Steam CD-Key |  Gloomhaven</div></td>
-                        <td><div class="a" id="product-price-235">6.70</div></td>
+                        <td><div class="a" id="product-id-235">260</div></td>
+                        <td><div class="a">Steam CD-Key |  God of War Ragnarök</div></td>
+                        <td><div class="a" id="product-price-235">36.11</div></td>
                         <td><div class="a" id="in_stock-235">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1835,11 +1790,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-236">259</div></td>
-                        <td><div class="a">Steam CD-Key |  God of War</div></td>
-                        <td><div class="a" id="product-price-236">12.81</div></td>
+                        <td><div class="a" id="product-id-236">261</div></td>
+                        <td><div class="a">Steam CD-Key |  Going Medieval</div></td>
+                        <td><div class="a" id="product-price-236">8.41</div></td>
                         <td><div class="a" id="in_stock-236">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1858,12 +1813,12 @@
                                 <button value="Submit" id="button-236" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-237">260</div></td>
-                        <td><div class="a">Steam CD-Key |  God of War Ragnarök</div></td>
-                        <td><div class="a" id="product-price-237">36.11</div></td>
+                        <td><div class="a" id="product-id-237">237</div></td>
+                        <td><div class="a">Steam CD-Key |  Hearts of Iron IV</div></td>
+                        <td><div class="a" id="product-price-237">7.47</div></td>
                         <td><div class="a" id="in_stock-237">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1883,11 +1838,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-238">261</div></td>
-                        <td><div class="a">Steam CD-Key |  Going Medieval</div></td>
-                        <td><div class="a" id="product-price-238">8.41</div></td>
+                        <td><div class="a" id="product-id-238">238</div></td>
+                        <td><div class="a">Steam CD-Key |  Hearts of Iron IV Cadet Edition</div></td>
+                        <td><div class="a" id="product-price-238">7.47</div></td>
                         <td><div class="a" id="in_stock-238">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1907,11 +1862,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-239">262</div></td>
-                        <td><div class="a">Steam CD-Key |  Hearts of Iron IV</div></td>
-                        <td><div class="a" id="product-price-239">7.47</div></td>
+                        <td><div class="a" id="product-id-239">239</div></td>
+                        <td><div class="a">Steam CD-Key |  Hell Let Loose</div></td>
+                        <td><div class="a" id="product-price-239">19.46</div></td>
                         <td><div class="a" id="in_stock-239">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1930,12 +1885,12 @@
                                 <button value="Submit" id="button-239" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-240">263</div></td>
-                        <td><div class="a">Steam CD-Key |  Hearts of Iron IV Cadet Edition</div></td>
-                        <td><div class="a" id="product-price-240">7.47</div></td>
+                        <td><div class="a" id="product-id-240">265</div></td>
+                        <td><div class="a">Steam CD-Key |  HELLDIVERS 2</div></td>
+                        <td><div class="a" id="product-price-240">18.62</div></td>
                         <td><div class="a" id="in_stock-240">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1955,11 +1910,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-241">264</div></td>
-                        <td><div class="a">Steam CD-Key |  Hell Let Loose</div></td>
-                        <td><div class="a" id="product-price-241">20.46</div></td>
+                        <td><div class="a" id="product-id-241">266</div></td>
+                        <td><div class="a">Steam CD-Key |  HELLDIVERS 2 Super Citizen</div></td>
+                        <td><div class="a" id="product-price-241">33.18</div></td>
                         <td><div class="a" id="in_stock-241">✅</div></td>
                         <td>
                             <div class="counter">
@@ -1979,11 +1934,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-242">265</div></td>
-                        <td><div class="a">Steam CD-Key |  HELLDIVERS 2</div></td>
-                        <td><div class="a" id="product-price-242">18.62</div></td>
+                        <td><div class="a" id="product-id-242">267</div></td>
+                        <td><div class="a">Steam CD-Key |  HITMAN World of Assassination</div></td>
+                        <td><div class="a" id="product-price-242">20.40</div></td>
                         <td><div class="a" id="in_stock-242">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2002,12 +1957,12 @@
                                 <button value="Submit" id="button-242" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-243">266</div></td>
-                        <td><div class="a">Steam CD-Key |  HELLDIVERS 2 Super Citizen</div></td>
-                        <td><div class="a" id="product-price-243">34.18</div></td>
+                        <td><div class="a" id="product-id-243">243</div></td>
+                        <td><div class="a">Steam CD-Key |  Hogwarts Legacy</div></td>
+                        <td><div class="a" id="product-price-243">9.18</div></td>
                         <td><div class="a" id="in_stock-243">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2027,11 +1982,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-244">267</div></td>
-                        <td><div class="a">Steam CD-Key |  HITMAN World of Assassination</div></td>
-                        <td><div class="a" id="product-price-244">20.40</div></td>
+                        <td><div class="a" id="product-id-244">244</div></td>
+                        <td><div class="a">Steam CD-Key |  Hogwarts Legacy Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-244">12.79</div></td>
                         <td><div class="a" id="in_stock-244">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2051,11 +2006,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-245">268</div></td>
-                        <td><div class="a">Steam CD-Key |  Hogwarts Legacy</div></td>
-                        <td><div class="a" id="product-price-245">9.18</div></td>
+                        <td><div class="a" id="product-id-245">245</div></td>
+                        <td><div class="a">Steam CD-Key |  Hollow Knight</div></td>
+                        <td><div class="a" id="product-price-245">9.14</div></td>
                         <td><div class="a" id="in_stock-245">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2074,12 +2029,12 @@
                                 <button value="Submit" id="button-245" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-246">269</div></td>
-                        <td><div class="a">Steam CD-Key |  Hogwarts Legacy Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-246">12.79</div></td>
+                        <td><div class="a" id="product-id-246">271</div></td>
+                        <td><div class="a">Steam CD-Key | HomeWorld 3</div></td>
+                        <td><div class="a" id="product-price-246">2.48</div></td>
                         <td><div class="a" id="in_stock-246">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2099,11 +2054,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-247">270</div></td>
-                        <td><div class="a">Steam CD-Key |  Hollow Knight</div></td>
-                        <td><div class="a" id="product-price-247">9.14</div></td>
+                        <td><div class="a" id="product-id-247">272</div></td>
+                        <td><div class="a">Steam CD-Key | Horizon Forbidden West Complete Edition</div></td>
+                        <td><div class="a" id="product-price-247">27.62</div></td>
                         <td><div class="a" id="in_stock-247">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2123,11 +2078,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-248">271</div></td>
-                        <td><div class="a">Steam CD-Key |  HomeWorld 3</div></td>
-                        <td><div class="a" id="product-price-248">12.48</div></td>
+                        <td><div class="a" id="product-id-248">274</div></td>
+                        <td><div class="a">Steam CD-Key | Indiana Jones and the Great Circle</div></td>
+                        <td><div class="a" id="product-price-248">44.18</div></td>
                         <td><div class="a" id="in_stock-248">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2146,12 +2101,12 @@
                                 <button value="Submit" id="button-248" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-249">272</div></td>
-                        <td><div class="a">Steam CD-Key |  Horizon Forbidden West Complete Edition</div></td>
-                        <td><div class="a" id="product-price-249">27.62</div></td>
+                        <td><div class="a" id="product-id-249">249</div></td>
+                        <td><div class="a">Steam CD-Key | Insurgency: Sandstorm</div></td>
+                        <td><div class="a" id="product-price-249">7.69</div></td>
                         <td><div class="a" id="in_stock-249">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2171,11 +2126,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-250">273</div></td>
-                        <td><div class="a">Steam CD-Key |  House Flipper 2</div></td>
-                        <td><div class="a" id="product-price-250">27.80</div></td>
+                        <td><div class="a" id="product-id-250">250</div></td>
+                        <td><div class="a">Steam CD-Key | Jurassic World Evolution 2</div></td>
+                        <td><div class="a" id="product-price-250">9.18</div></td>
                         <td><div class="a" id="in_stock-250">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2195,11 +2150,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-251">274</div></td>
-                        <td><div class="a">Steam CD-Key |  Indiana Jones and the Great Circle</div></td>
-                        <td><div class="a" id="product-price-251">47.18</div></td>
+                        <td><div class="a" id="product-id-251">251</div></td>
+                        <td><div class="a">Steam CD-Key | Kingdom Come: Deliverance II</div></td>
+                        <td><div class="a" id="product-price-251">46.81</div></td>
                         <td><div class="a" id="in_stock-251">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2218,12 +2173,12 @@
                                 <button value="Submit" id="button-251" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-252">275</div></td>
-                        <td><div class="a">Steam CD-Key |  Insurgency: Sandstorm</div></td>
-                        <td><div class="a" id="product-price-252">9.69</div></td>
+                        <td><div class="a" id="product-id-252">278</div></td>
+                        <td><div class="a">Steam CD-Key |  Kingdom Come: Deliverance II Gold Edition</div></td>
+                        <td><div class="a" id="product-price-252">59.10</div></td>
                         <td><div class="a" id="in_stock-252">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2243,11 +2198,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-253">276</div></td>
-                        <td><div class="a">Steam CD-Key |  Jurassic World Evolution 2</div></td>
-                        <td><div class="a" id="product-price-253">9.18</div></td>
+                        <td><div class="a" id="product-id-253">279</div></td>
+                        <td><div class="a">Steam CD-Key |  Last Epoch</div></td>
+                        <td><div class="a" id="product-price-253">31.61</div></td>
                         <td><div class="a" id="in_stock-253">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2267,11 +2222,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-254">277</div></td>
-                        <td><div class="a">Steam CD-Key |  Kingdom Come: Deliverance II</div></td>
-                        <td><div class="a" id="product-price-254">46.81</div></td>
+                        <td><div class="a" id="product-id-254">281</div></td>
+                        <td><div class="a">Steam CD-Key |  Lies of P</div></td>
+                        <td><div class="a" id="product-price-254">17.94</div></td>
                         <td><div class="a" id="in_stock-254">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2290,12 +2245,12 @@
                                 <button value="Submit" id="button-254" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-255">278</div></td>
-                        <td><div class="a">Steam CD-Key |  Kingdom Come: Deliverance II Gold Edition</div></td>
-                        <td><div class="a" id="product-price-255">59.10</div></td>
+                        <td><div class="a" id="product-id-255">282</div></td>
+                        <td><div class="a">Steam CD-Key |  Lies of P Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-255">26.44</div></td>
                         <td><div class="a" id="in_stock-255">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2315,12 +2270,12 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-256">279</div></td>
-                        <td><div class="a">Steam CD-Key |  Last Epoch</div></td>
-                        <td><div class="a" id="product-price-256">35.61</div></td>
-                        <td><div class="a" id="in_stock-256">❌</div></td>
+                        <td><div class="a" id="product-id-256">283</div></td>
+                        <td><div class="a">Steam CD-Key |  Like a Dragon: Infinite Wealth</div></td>
+                        <td><div class="a" id="product-price-256">31.89</div></td>
+                        <td><div class="a" id="in_stock-256">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-256', 256)">-</button>
@@ -2339,11 +2294,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-257">280</div></td>
-                        <td><div class="a">Steam CD-Key |  Library Of Ruina</div></td>
-                        <td><div class="a" id="product-price-257">61.394</div></td>
+                        <td><div class="a" id="product-id-257">284</div></td>
+                        <td><div class="a">Steam CD-Key |  Like a Dragon: Infinite Wealth Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-257">52.81</div></td>
                         <td><div class="a" id="in_stock-257">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2363,11 +2318,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-258">281</div></td>
-                        <td><div class="a">Steam CD-Key |  Lies of P</div></td>
-                        <td><div class="a" id="product-price-258">17.94</div></td>
+                        <td><div class="a" id="product-id-258">285</div></td>
+                        <td><div class="a">Steam CD-Key |  Lords of the Fallen (2023)</div></td>
+                        <td><div class="a" id="product-price-258">15.23</div></td>
                         <td><div class="a" id="in_stock-258">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2387,11 +2342,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-259">282</div></td>
-                        <td><div class="a">Steam CD-Key |  Lies of P Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-259">28.44</div></td>
+                        <td><div class="a" id="product-id-259">286</div></td>
+                        <td><div class="a">Steam CD-Key |  Lords of the Fallen Deluxe Edition (2023)</div></td>
+                        <td><div class="a" id="product-price-259">15.36</div></td>
                         <td><div class="a" id="in_stock-259">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2410,12 +2365,12 @@
                                 <button value="Submit" id="button-259" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-260">283</div></td>
-                        <td><div class="a">Steam CD-Key |  Like a Dragon: Infinite Wealth</div></td>
-                        <td><div class="a" id="product-price-260">31.89</div></td>
+                        <td><div class="a" id="product-id-260">287</div></td>
+                        <td><div class="a">Steam CD-Key |  Mafia: Definitive Edition</div></td>
+                        <td><div class="a" id="product-price-260">6.71</div></td>
                         <td><div class="a" id="in_stock-260">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2435,11 +2390,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-261">284</div></td>
-                        <td><div class="a">Steam CD-Key |  Like a Dragon: Infinite Wealth Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-261">52.81</div></td>
+                        <td><div class="a" id="product-id-261">288</div></td>
+                        <td><div class="a">Steam CD-Key |  Magicraft</div></td>
+                        <td><div class="a" id="product-price-261">8.63</div></td>
                         <td><div class="a" id="in_stock-261">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2459,11 +2414,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-262">285</div></td>
-                        <td><div class="a">Steam CD-Key |  Lords of the Fallen (2023)</div></td>
-                        <td><div class="a" id="product-price-262">17.09</div></td>
+                        <td><div class="a" id="product-id-262">289</div></td>
+                        <td><div class="a">Steam CD-Key |  Manor Lords</div></td>
+                        <td><div class="a" id="product-price-262">18.87</div></td>
                         <td><div class="a" id="in_stock-262">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2482,12 +2437,12 @@
                                 <button value="Submit" id="button-262" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-263">286</div></td>
-                        <td><div class="a">Steam CD-Key |  Lords of the Fallen Deluxe Edition (2023)</div></td>
-                        <td><div class="a" id="product-price-263">21.36</div></td>
+                        <td><div class="a" id="product-id-263">290</div></td>
+                        <td><div class="a">Steam CD-Key |  Marvel’s Spider-Man Remastered</div></td>
+                        <td><div class="a" id="product-price-263">20.35</div></td>
                         <td><div class="a" id="in_stock-263">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2507,11 +2462,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-264">287</div></td>
-                        <td><div class="a">Steam CD-Key |  Mafia: Definitive Edition</div></td>
-                        <td><div class="a" id="product-price-264">6.71</div></td>
+                        <td><div class="a" id="product-id-264">295</div></td>
+                        <td><div class="a">Steam CD-Key |  Metro Exodus</div></td>
+                        <td><div class="a" id="product-price-264">2.58</div></td>
                         <td><div class="a" id="in_stock-264">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2531,11 +2486,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-265">288</div></td>
-                        <td><div class="a">Steam CD-Key |  Magicraft</div></td>
-                        <td><div class="a" id="product-price-265">9.63</div></td>
+                        <td><div class="a" id="product-id-265">296</div></td>
+                        <td><div class="a">Steam CD-Key |  MONSTER HUNTER RISE</div></td>
+                        <td><div class="a" id="product-price-265">7.89</div></td>
                         <td><div class="a" id="in_stock-265">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2554,12 +2509,12 @@
                                 <button value="Submit" id="button-265" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-266">289</div></td>
-                        <td><div class="a">Steam CD-Key |  Manor Lords</div></td>
-                        <td><div class="a" id="product-price-266">18.87</div></td>
+                        <td><div class="a" id="product-id-266">297</div></td>
+                        <td><div class="a">Steam CD-Key |  MONSTER HUNTER RISE Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-266">10.27</div></td>
                         <td><div class="a" id="in_stock-266">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2579,11 +2534,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-267">290</div></td>
-                        <td><div class="a">Steam CD-Key |  Marvel’s Spider-Man Remastered</div></td>
-                        <td><div class="a" id="product-price-267">22.35</div></td>
+                        <td><div class="a" id="product-id-267">298</div></td>
+                        <td><div class="a">Steam CD-Key |  Monster Hunter: World</div></td>
+                        <td><div class="a" id="product-price-267">6.96</div></td>
                         <td><div class="a" id="in_stock-267">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2603,11 +2558,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-268">292</div></td>
-                        <td><div class="a">Steam CD-Key |  Medieval Dynasty</div></td>
-                        <td><div class="a" id="product-price-268">17.17</div></td>
+                        <td><div class="a" id="product-id-268">299</div></td>
+                        <td><div class="a">Steam CD-Key |  Monster Hunter: World Iceborne Master Edition</div></td>
+                        <td><div class="a" id="product-price-268">12.03</div></td>
                         <td><div class="a" id="in_stock-268">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2626,12 +2581,12 @@
                                 <button value="Submit" id="button-268" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-269">293</div></td>
-                        <td><div class="a">Steam CD-Key |  Medieval Dynasty Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-269">24.75</div></td>
+                        <td><div class="a" id="product-id-269">300</div></td>
+                        <td><div class="a">Steam CD-Key | Mortal Kombat 1</div></td>
+                        <td><div class="a" id="product-price-269">12.36</div></td>
                         <td><div class="a" id="in_stock-269">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2651,11 +2606,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-270">294</div></td>
-                        <td><div class="a">Steam CD-Key |  Metaphor: ReFantazio</div></td>
-                        <td><div class="a" id="product-price-270">37.68</div></td>
+                        <td><div class="a" id="product-id-270">301</div></td>
+                        <td><div class="a">Steam CD-Key | Mortal Kombat 1 Premium Edition</div></td>
+                        <td><div class="a" id="product-price-270">29.84</div></td>
                         <td><div class="a" id="in_stock-270">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2675,11 +2630,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-271">295</div></td>
-                        <td><div class="a">Steam CD-Key |  Metro Exodus</div></td>
-                        <td><div class="a" id="product-price-271">2.58</div></td>
+                        <td><div class="a" id="product-id-271">302</div></td>
+                        <td><div class="a">Steam CD-Key | Mortal Kombat 11</div></td>
+                        <td><div class="a" id="product-price-271">2.614</div></td>
                         <td><div class="a" id="in_stock-271">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2698,12 +2653,12 @@
                                 <button value="Submit" id="button-271" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-272">296</div></td>
-                        <td><div class="a">Steam CD-Key |  MONSTER HUNTER RISE</div></td>
-                        <td><div class="a" id="product-price-272">7.89</div></td>
+                        <td><div class="a" id="product-id-272">303</div></td>
+                        <td><div class="a">Steam CD-Key | Mortal Kombat 11 Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-272">3.85</div></td>
                         <td><div class="a" id="in_stock-272">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2723,11 +2678,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-273">297</div></td>
-                        <td><div class="a">Steam CD-Key |  MONSTER HUNTER RISE Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-273">10.27</div></td>
+                        <td><div class="a" id="product-id-273">304</div></td>
+                        <td><div class="a">Steam CD-Key | Mount & Blade II: Bannerlord</div></td>
+                        <td><div class="a" id="product-price-273">17.55</div></td>
                         <td><div class="a" id="in_stock-273">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2747,11 +2702,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-274">298</div></td>
-                        <td><div class="a">Steam CD-Key |  Monster Hunter: World</div></td>
-                        <td><div class="a" id="product-price-274">6.96</div></td>
+                        <td><div class="a" id="product-id-274">305</div></td>
+                        <td><div class="a">Steam CD-Key | Mount & Blade: Warband</div></td>
+                        <td><div class="a" id="product-price-274">4.09</div></td>
                         <td><div class="a" id="in_stock-274">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2770,12 +2725,12 @@
                                 <button value="Submit" id="button-274" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-275">299</div></td>
-                        <td><div class="a">Steam CD-Key |  Monster Hunter: World Iceborne Master Edition</div></td>
-                        <td><div class="a" id="product-price-275">12.03</div></td>
+                        <td><div class="a" id="product-id-275">306</div></td>
+                        <td><div class="a">Steam CD-Key | Myth of Empires</div></td>
+                        <td><div class="a" id="product-price-275">10.49</div></td>
                         <td><div class="a" id="in_stock-275">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2795,11 +2750,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-276">300</div></td>
-                        <td><div class="a">Steam CD-Key |  Mortal Kombat 1</div></td>
-                        <td><div class="a" id="product-price-276">12.36</div></td>
+                        <td><div class="a" id="product-id-276">307</div></td>
+                        <td><div class="a">Steam CD-Key | NBA 2K24 Kobe Bryant Edition</div></td>
+                        <td><div class="a" id="product-price-276">8.89</div></td>
                         <td><div class="a" id="in_stock-276">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2819,11 +2774,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-277">301</div></td>
-                        <td><div class="a">Steam CD-Key |  Mortal Kombat 1 Premium Edition</div></td>
-                        <td><div class="a" id="product-price-277">29.84</div></td>
+                        <td><div class="a" id="product-id-277">308</div></td>
+                        <td><div class="a">Steam CD-Key | NBA 2K24 Black Mamba Edition</div></td>
+                        <td><div class="a" id="product-price-277">20.84</div></td>
                         <td><div class="a" id="in_stock-277">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2842,12 +2797,12 @@
                                 <button value="Submit" id="button-277" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-278">302</div></td>
-                        <td><div class="a">Steam CD-Key |  Mortal Kombat 11</div></td>
-                        <td><div class="a" id="product-price-278">2.614</div></td>
+                        <td><div class="a" id="product-id-278">309</div></td>
+                        <td><div class="a">Steam CD-Key |  NBA 2K25</div></td>
+                        <td><div class="a" id="product-price-278">16.00</div></td>
                         <td><div class="a" id="in_stock-278">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2867,11 +2822,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-279">303</div></td>
-                        <td><div class="a">Steam CD-Key |  Mortal Kombat 11 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-279">3.85</div></td>
+                        <td><div class="a" id="product-id-279">310</div></td>
+                        <td><div class="a">Steam CD-Key |  NBA 2K25 All-Star Edition</div></td>
+                        <td><div class="a" id="product-price-279">28.74</div></td>
                         <td><div class="a" id="in_stock-279">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2891,11 +2846,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-280">304</div></td>
-                        <td><div class="a">Steam CD-Key |  Mount & Blade II: Bannerlord</div></td>
-                        <td><div class="a" id="product-price-280">17.55</div></td>
+                        <td><div class="a" id="product-id-280">311</div></td>
+                        <td><div class="a">Steam CD-Key |  New World: Aeternum</div></td>
+                        <td><div class="a" id="product-price-280">34.18</div></td>
                         <td><div class="a" id="in_stock-280">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2914,12 +2869,12 @@
                                 <button value="Submit" id="button-280" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-281">305</div></td>
-                        <td><div class="a">Steam CD-Key |  Mount & Blade: Warband</div></td>
-                        <td><div class="a" id="product-price-281">4.09</div></td>
+                        <td><div class="a" id="product-id-281">312</div></td>
+                        <td><div class="a">Steam CD-Key |  New World: Aeternum Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-281">42.26</div></td>
                         <td><div class="a" id="in_stock-281">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2939,11 +2894,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-282">306</div></td>
-                        <td><div class="a">Steam CD-Key |  Myth of Empires</div></td>
-                        <td><div class="a" id="product-price-282">10.49</div></td>
+                        <td><div class="a" id="product-id-282">313</div></td>
+                        <td><div class="a">Steam CD-Key |  New World: Aeternum Azoth Edition</div></td>
+                        <td><div class="a" id="product-price-282">50.62</div></td>
                         <td><div class="a" id="in_stock-282">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2963,11 +2918,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-283">307</div></td>
-                        <td><div class="a">Steam CD-Key |  NBA 2K24 Kobe Bryant Edition</div></td>
-                        <td><div class="a" id="product-price-283">8.89</div></td>
+                        <td><div class="a" id="product-id-283">314</div></td>
+                        <td><div class="a">Steam CD-Key |  NieR:Automata</div></td>
+                        <td><div class="a" id="product-price-283">12.98</div></td>
                         <td><div class="a" id="in_stock-283">✅</div></td>
                         <td>
                             <div class="counter">
@@ -2986,12 +2941,12 @@
                                 <button value="Submit" id="button-283" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-284">308</div></td>
-                        <td><div class="a">Steam CD-Key |  NBA 2K24 Black Mamba Edition</div></td>
-                        <td><div class="a" id="product-price-284">20.84</div></td>
+                        <td><div class="a" id="product-id-284">316</div></td>
+                        <td><div class="a">Steam CD-Key |  No Man's Sky</div></td>
+                        <td><div class="a" id="product-price-284">12.43</div></td>
                         <td><div class="a" id="in_stock-284">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3011,11 +2966,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-285">309</div></td>
-                        <td><div class="a">Steam CD-Key |  NBA 2K25</div></td>
-                        <td><div class="a" id="product-price-285">23.00</div></td>
+                        <td><div class="a" id="product-id-285">318</div></td>
+                        <td><div class="a">Steam CD-Key |  No Rest for the Wicked</div></td>
+                        <td><div class="a" id="product-price-285">20.81</div></td>
                         <td><div class="a" id="in_stock-285">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3035,11 +2990,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-286">310</div></td>
-                        <td><div class="a">Steam CD-Key |  NBA 2K25 All-Star Edition</div></td>
-                        <td><div class="a" id="product-price-286">28.74</div></td>
+                        <td><div class="a" id="product-id-286">319</div></td>
+                        <td><div class="a">Steam CD-Key |  Northgard</div></td>
+                        <td><div class="a" id="product-price-286">6.45</div></td>
                         <td><div class="a" id="in_stock-286">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3058,12 +3013,12 @@
                                 <button value="Submit" id="button-286" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-287">311</div></td>
-                        <td><div class="a">Steam CD-Key |  New World: Aeternum</div></td>
-                        <td><div class="a" id="product-price-287">34.18</div></td>
+                        <td><div class="a" id="product-id-287">322</div></td>
+                        <td><div class="a">Steam CD-Key |  Payday 3</div></td>
+                        <td><div class="a" id="product-price-287">8.12</div></td>
                         <td><div class="a" id="in_stock-287">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3083,11 +3038,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-288">312</div></td>
-                        <td><div class="a">Steam CD-Key |  New World: Aeternum Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-288">42.26</div></td>
+                        <td><div class="a" id="product-id-288">323</div></td>
+                        <td><div class="a">Steam CD-Key |  Persona 3 Reloaded</div></td>
+                        <td><div class="a" id="product-price-288">32.91</div></td>
                         <td><div class="a" id="in_stock-288">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3107,11 +3062,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-289">313</div></td>
-                        <td><div class="a">Steam CD-Key |  New World: Aeternum Azoth Edition</div></td>
-                        <td><div class="a" id="product-price-289">50.62</div></td>
+                        <td><div class="a" id="product-id-289">324</div></td>
+                        <td><div class="a">Steam CD-Key |  Persona 3 Reload Digital Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-289">29.66</div></td>
                         <td><div class="a" id="in_stock-289">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3130,12 +3085,12 @@
                                 <button value="Submit" id="button-289" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-290">314</div></td>
-                        <td><div class="a">Steam CD-Key |  NieR:Automata</div></td>
-                        <td><div class="a" id="product-price-290">14.98</div></td>
+                        <td><div class="a" id="product-id-290">325</div></td>
+                        <td><div class="a">Steam CD-Key |  Persona 4 Golden</div></td>
+                        <td><div class="a" id="product-price-290">4.81</div></td>
                         <td><div class="a" id="in_stock-290">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3155,12 +3110,12 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-291">315</div></td>
-                        <td><div class="a">Steam CD-Key |  Nioh 2 - The Complete Edition</div></td>
-                        <td><div class="a" id="product-price-291">12.47</div></td>
-                        <td><div class="a" id="in_stock-291">❌</div></td>
+                        <td><div class="a" id="product-id-291">326</div></td>
+                        <td><div class="a">Steam CD-Key |  Persona 4 Golden Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-291">11.49</div></td>
+                        <td><div class="a" id="in_stock-291">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-291', 291)">-</button>
@@ -3179,11 +3134,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-292">316</div></td>
-                        <td><div class="a">Steam CD-Key |  No Man's Sky</div></td>
-                        <td><div class="a" id="product-price-292">12.43</div></td>
+                        <td><div class="a" id="product-id-292">327</div></td>
+                        <td><div class="a">Steam CD-Key |  Persona 5 Royal</div></td>
+                        <td><div class="a" id="product-price-292">14.31</div></td>
                         <td><div class="a" id="in_stock-292">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3202,12 +3157,12 @@
                                 <button value="Submit" id="button-292" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-293">317</div></td>
-                        <td><div class="a">Steam CD-Key |  Noita</div></td>
-                        <td><div class="a" id="product-price-293">7.99</div></td>
+                        <td><div class="a" id="product-id-293">329</div></td>
+                        <td><div class="a">Steam CD-Key | Ready or Not</div></td>
+                        <td><div class="a" id="product-price-293">16.54</div></td>
                         <td><div class="a" id="in_stock-293">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3227,11 +3182,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-294">318</div></td>
-                        <td><div class="a">Steam CD-Key |  No Rest for the Wicked</div></td>
-                        <td><div class="a" id="product-price-294">20.81</div></td>
+                        <td><div class="a" id="product-id-294">330</div></td>
+                        <td><div class="a">Steam CD-Key | REMNANT II</div></td>
+                        <td><div class="a" id="product-price-294">5.93</div></td>
                         <td><div class="a" id="in_stock-294">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3251,11 +3206,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-295">319</div></td>
-                        <td><div class="a">Steam CD-Key |  Northgard</div></td>
-                        <td><div class="a" id="product-price-295">6.45</div></td>
+                        <td><div class="a" id="product-id-295">331</div></td>
+                        <td><div class="a">Steam CD-Key | REMNANT II Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-295">15.20</div></td>
                         <td><div class="a" id="in_stock-295">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3274,12 +3229,12 @@
                                 <button value="Submit" id="button-295" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-296">320</div></td>
-                        <td><div class="a">Steam CD-Key |  Party Animals</div></td>
-                        <td><div class="a" id="product-price-296">9.29</div></td>
+                        <td><div class="a" id="product-id-296">332</div></td>
+                        <td><div class="a">Steam CD-Key |  REMNANT II Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-296">20.50</div></td>
                         <td><div class="a" id="in_stock-296">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3299,12 +3254,12 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-297">321</div></td>
-                        <td><div class="a">Steam CD-Key |  Pax Dei</div></td>
-                        <td><div class="a" id="product-price-297">30.36</div></td>
-                        <td><div class="a" id="in_stock-297">❌</div></td>
+                        <td><div class="a" id="product-id-297">333</div></td>
+                        <td><div class="a">Steam CD-Key |  Resident Evil 4</div></td>
+                        <td><div class="a" id="product-price-297">11.28</div></td>
+                        <td><div class="a" id="in_stock-297">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-297', 297)">-</button>
@@ -3323,11 +3278,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-298">322</div></td>
-                        <td><div class="a">Steam CD-Key |  Payday 3</div></td>
-                        <td><div class="a" id="product-price-298">10.12</div></td>
+                        <td><div class="a" id="product-id-298">334</div></td>
+                        <td><div class="a">Steam CD-Key |  Resident Evil 4 Gold Edition</div></td>
+                        <td><div class="a" id="product-price-298">17.36</div></td>
                         <td><div class="a" id="in_stock-298">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3347,11 +3302,12 @@
                             </div>
                         </td>
                     </tr>
+                    
 
                     <tr>
-                        <td><div class="a" id="product-id-299">323</div></td>
-                        <td><div class="a">Steam CD-Key |  Persona 3 Reloaded</div></td>
-                        <td><div class="a" id="product-price-299">32.91</div></td>
+                        <td><div class="a" id="product-id-299">335</div></td>
+                        <td><div class="a">Steam CD-Key |  Resident Evil Village</div></td>
+                        <td><div class="a" id="product-price-299">9.00</div></td>
                         <td><div class="a" id="in_stock-299">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3371,11 +3327,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-300">324</div></td>
-                        <td><div class="a">Steam CD-Key |  Persona 3 Reload Digital Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-300">40.83</div></td>
+                        <td><div class="a" id="product-id-300">336</div></td>
+                        <td><div class="a">Steam CD-Key |  Resident Evil Village Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-300">18.46</div></td>
                         <td><div class="a" id="in_stock-300">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3394,12 +3350,12 @@
                                 <button value="Submit" id="button-300" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-301">325</div></td>
-                        <td><div class="a">Steam CD-Key |  Persona 4 Golden</div></td>
-                        <td><div class="a" id="product-price-301">4.81</div></td>
+                        <td><div class="a" id="product-id-301">337</div></td>
+                        <td><div class="a">Steam CD-Key |  Resident Evil Village Gold Edition</div></td>
+                        <td><div class="a" id="product-price-301">13.78</div></td>
                         <td><div class="a" id="in_stock-301">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3419,11 +3375,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-302">326</div></td>
-                        <td><div class="a">Steam CD-Key |  Persona 4 Golden Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-302">13.49</div></td>
+                        <td><div class="a" id="product-id-302">338</div></td>
+                        <td><div class="a">Steam CD-Key |  RimWorld</div></td>
+                        <td><div class="a" id="product-price-302">23.40</div></td>
                         <td><div class="a" id="in_stock-302">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3443,11 +3399,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-303">327</div></td>
-                        <td><div class="a">Steam CD-Key |  Persona 5 Royal</div></td>
-                        <td><div class="a" id="product-price-303">17.31</div></td>
+                        <td><div class="a" id="product-id-303">339</div></td>
+                        <td><div class="a">Steam CD-Key |  Risk of Rain 2</div></td>
+                        <td><div class="a" id="product-price-303">3.81</div></td>
                         <td><div class="a" id="in_stock-303">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3466,12 +3422,12 @@
                                 <button value="Submit" id="button-303" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-304">328</div></td>
-                        <td><div class="a">Steam CD-Key |  Planet Zoo</div></td>
-                        <td><div class="a" id="product-price-304">6.14</div></td>
+                        <td><div class="a" id="product-id-304">340</div></td>
+                        <td><div class="a">Steam CD-Key |  S.T.A.L.K.E.R. 2: Heart of Chornobyl</div></td>
+                        <td><div class="a" id="product-price-304">32.49</div></td>
                         <td><div class="a" id="in_stock-304">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3491,11 +3447,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-305">329</div></td>
-                        <td><div class="a">Steam CD-Key |  Ready or Not</div></td>
-                        <td><div class="a" id="product-price-305">16.54</div></td>
+                        <td><div class="a" id="product-id-305">341</div></td>
+                        <td><div class="a">Steam CD-Key |  S.T.A.L.K.E.R. 2: Heart of Chornobyl Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-305">59.34</div></td>
                         <td><div class="a" id="in_stock-305">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3515,11 +3471,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-306">330</div></td>
-                        <td><div class="a">Steam CD-Key |  REMNANT II</div></td>
-                        <td><div class="a" id="product-price-306">5.93</div></td>
+                        <td><div class="a" id="product-id-306">342</div></td>
+                        <td><div class="a">Steam CD-Key |  Scum</div></td>
+                        <td><div class="a" id="product-price-306">9.49</div></td>
                         <td><div class="a" id="in_stock-306">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3538,12 +3494,12 @@
                                 <button value="Submit" id="button-306" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-307">331</div></td>
-                        <td><div class="a">Steam CD-Key |  REMNANT II Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-307">18.20</div></td>
+                        <td><div class="a" id="product-id-307">343</div></td>
+                        <td><div class="a">Steam CD-Key | Shadow of the Tomb Raider Definitive Edition</div></td>
+                        <td><div class="a" id="product-price-307">3.27</div></td>
                         <td><div class="a" id="in_stock-307">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3563,11 +3519,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-308">332</div></td>
-                        <td><div class="a">Steam CD-Key |  REMNANT II Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-308">22.50</div></td>
+                        <td><div class="a" id="product-id-308">344</div></td>
+                        <td><div class="a">Steam CD-Key | Shin Megami Tensei V: Vengeance</div></td>
+                        <td><div class="a" id="product-price-308">35.19</div></td>
                         <td><div class="a" id="in_stock-308">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3587,11 +3543,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-309">333</div></td>
-                        <td><div class="a">Steam CD-Key |  Resident Evil 4</div></td>
-                        <td><div class="a" id="product-price-309">14.28</div></td>
+                        <td><div class="a" id="product-id-309">345</div></td>
+                        <td><div class="a">Steam CD-Key | Shin Megami Tensei V: Vengeance Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-309">44.28</div></td>
                         <td><div class="a" id="in_stock-309">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3610,12 +3566,12 @@
                                 <button value="Submit" id="button-309" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-310">334</div></td>
-                        <td><div class="a">Steam CD-Key |  Resident Evil 4 Gold Edition</div></td>
-                        <td><div class="a" id="product-price-310">19.36</div></td>
+                        <td><div class="a" id="product-id-310">347</div></td>
+                        <td><div class="a">Steam CD-Key |  Sid Meier's Civilization VI</div></td>
+                        <td><div class="a" id="product-price-310">2.40</div></td>
                         <td><div class="a" id="in_stock-310">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3635,11 +3591,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-311">335</div></td>
-                        <td><div class="a">Steam CD-Key |  Resident Evil Village</div></td>
-                        <td><div class="a" id="product-price-311">11.00</div></td>
+                        <td><div class="a" id="product-id-311">348</div></td>
+                        <td><div class="a">Steam CD-Key |  Sifu</div></td>
+                        <td><div class="a" id="product-price-311">6.41</div></td>
                         <td><div class="a" id="in_stock-311">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3659,11 +3615,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-312">336</div></td>
-                        <td><div class="a">Steam CD-Key |  Resident Evil Village Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-312">18.46</div></td>
+                        <td><div class="a" id="product-id-312">349</div></td>
+                        <td><div class="a">Steam CD-Key |  SILENT HILL 2</div></td>
+                        <td><div class="a" id="product-price-312">31.25</div></td>
                         <td><div class="a" id="in_stock-312">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3682,12 +3638,12 @@
                                 <button value="Submit" id="button-312" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-313">337</div></td>
-                        <td><div class="a">Steam CD-Key |  Resident Evil Village Gold Edition</div></td>
-                        <td><div class="a" id="product-price-313">13.78</div></td>
+                        <td><div class="a" id="product-id-313">350</div></td>
+                        <td><div class="a">Steam CD-Key | SILENT HILL 2 Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-313">29.84</div></td>
                         <td><div class="a" id="in_stock-313">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3707,11 +3663,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-314">338</div></td>
-                        <td><div class="a">Steam CD-Key |  RimWorld</div></td>
-                        <td><div class="a" id="product-price-314">23.40</div></td>
+                        <td><div class="a" id="product-id-314">351</div></td>
+                        <td><div class="a">Steam CD-Key | Sker Ritual</div></td>
+                        <td><div class="a" id="product-price-314">15.82</div></td>
                         <td><div class="a" id="in_stock-314">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3731,11 +3687,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-315">339</div></td>
-                        <td><div class="a">Steam CD-Key |  Risk of Rain 2</div></td>
-                        <td><div class="a" id="product-price-315">6.81</div></td>
+                        <td><div class="a" id="product-id-315">354</div></td>
+                        <td><div class="a">Steam CD-Key | Sniper Elite 5</div></td>
+                        <td><div class="a" id="product-price-315">8.79</div></td>
                         <td><div class="a" id="in_stock-315">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3754,12 +3710,12 @@
                                 <button value="Submit" id="button-315" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-316">340</div></td>
-                        <td><div class="a">Steam CD-Key |  S.T.A.L.K.E.R. 2: Heart of Chornobyl</div></td>
-                        <td><div class="a" id="product-price-316">37.49</div></td>
+                        <td><div class="a" id="product-id-316">358</div></td>
+                        <td><div class="a">Steam CD-Key |  Spider-Man Remastered</div></td>
+                        <td><div class="a" id="product-price-316">19.29</div></td>
                         <td><div class="a" id="in_stock-316">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3779,11 +3735,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-317">341</div></td>
-                        <td><div class="a">Steam CD-Key |  S.T.A.L.K.E.R. 2: Heart of Chornobyl Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-317">68.34</div></td>
+                        <td><div class="a" id="product-id-317">359</div></td>
+                        <td><div class="a">Steam CD-Key |  Spider-Man: Miles Morales</div></td>
+                        <td><div class="a" id="product-price-317">16.79</div></td>
                         <td><div class="a" id="in_stock-317">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3803,11 +3759,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-318">342</div></td>
-                        <td><div class="a">Steam CD-Key |  Scum</div></td>
-                        <td><div class="a" id="product-price-318">9.49</div></td>
+                        <td><div class="a" id="product-id-318">360</div></td>
+                        <td><div class="a">Steam CD-Key |  Squad</div></td>
+                        <td><div class="a" id="product-price-318">8.54</div></td>
                         <td><div class="a" id="in_stock-318">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3826,12 +3782,12 @@
                                 <button value="Submit" id="button-318" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-319">343</div></td>
-                        <td><div class="a">Steam CD-Key |  Shadow of the Tomb Raider Definitive Edition</div></td>
-                        <td><div class="a" id="product-price-319">5.27</div></td>
+                        <td><div class="a" id="product-id-319">361</div></td>
+                        <td><div class="a">Steam CD-Key | Squad 44</div></td>
+                        <td><div class="a" id="product-price-319">3.99</div></td>
                         <td><div class="a" id="in_stock-319">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3851,11 +3807,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-320">344</div></td>
-                        <td><div class="a">Steam CD-Key |  Shin Megami Tensei V: Vengeance</div></td>
-                        <td><div class="a" id="product-price-320">35.19</div></td>
+                        <td><div class="a" id="product-id-320">365</div></td>
+                        <td><div class="a">Steam CD-Key | Street Fighter 6</div></td>
+                        <td><div class="a" id="product-price-320">17.13</div></td>
                         <td><div class="a" id="in_stock-320">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3875,11 +3831,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-321">345</div></td>
-                        <td><div class="a">Steam CD-Key |  Shin Megami Tensei V: Vengeance Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-321">44.28</div></td>
+                        <td><div class="a" id="product-id-321">366</div></td>
+                        <td><div class="a">Steam CD-Key | Street Fighter 6 Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-321">26.51</div></td>
                         <td><div class="a" id="in_stock-321">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3898,12 +3854,12 @@
                                 <button value="Submit" id="button-321" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-322">346</div></td>
-                        <td><div class="a">Steam CD-Key |  Ship of Fools</div></td>
-                        <td><div class="a" id="product-price-322">3.78</div></td>
+                        <td><div class="a" id="product-id-322">367</div></td>
+                        <td><div class="a">Steam CD-Key |  Street Fighter 6 Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-322">41.79</div></td>
                         <td><div class="a" id="in_stock-322">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3923,11 +3879,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-323">347</div></td>
-                        <td><div class="a">Steam CD-Key |  Sid Meier's Civilization VI</div></td>
-                        <td><div class="a" id="product-price-323">2.40</div></td>
+                        <td><div class="a" id="product-id-323">368</div></td>
+                        <td><div class="a">Steam CD-Key |  Subnautica</div></td>
+                        <td><div class="a" id="product-price-323">7.61</div></td>
                         <td><div class="a" id="in_stock-323">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3947,11 +3903,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-324">348</div></td>
-                        <td><div class="a">Steam CD-Key |  Sifu</div></td>
-                        <td><div class="a" id="product-price-324">8.41</div></td>
+                        <td><div class="a" id="product-id-324">369</div></td>
+                        <td><div class="a">Steam CD-Key |  Subnautica: Below Zero</div></td>
+                        <td><div class="a" id="product-price-324">7.99</div></td>
                         <td><div class="a" id="in_stock-324">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3970,12 +3926,12 @@
                                 <button value="Submit" id="button-324" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-325">349</div></td>
-                        <td><div class="a">Steam CD-Key |  SILENT HILL 2</div></td>
-                        <td><div class="a" id="product-price-325">38.25</div></td>
+                        <td><div class="a" id="product-id-325">370</div></td>
+                        <td><div class="a">Steam CD-Key |  Teardown</div></td>
+                        <td><div class="a" id="product-price-325">8.28</div></td>
                         <td><div class="a" id="in_stock-325">✅</div></td>
                         <td>
                             <div class="counter">
@@ -3995,11 +3951,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-326">350</div></td>
-                        <td><div class="a">Steam CD-Key |  SILENT HILL 2 Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-326">40.84</div></td>
+                        <td><div class="a" id="product-id-326">371</div></td>
+                        <td><div class="a">Steam CD-Key |  Tekken 8</div></td>
+                        <td><div class="a" id="product-price-326">21.81</div></td>
                         <td><div class="a" id="in_stock-326">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4019,11 +3975,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-327">351</div></td>
-                        <td><div class="a">Steam CD-Key |  Sker Ritual</div></td>
-                        <td><div class="a" id="product-price-327">15.82</div></td>
+                        <td><div class="a" id="product-id-327">372</div></td>
+                        <td><div class="a">Steam CD-Key |  Tekken 8 Deluxe Edition</div></td>
+                        <td><div class="a" id="product-price-327">39.98</div></td>
                         <td><div class="a" id="in_stock-327">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4042,12 +3998,12 @@
                                 <button value="Submit" id="button-327" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-328">352</div></td>
-                        <td><div class="a">Steam CD-Key |  Slay the Spire</div></td>
-                        <td><div class="a" id="product-price-328">6.24</div></td>
+                        <td><div class="a" id="product-id-328">373</div></td>
+                        <td><div class="a">Steam CD-Key |  Tekken 8 Ultimate Edition</div></td>
+                        <td><div class="a" id="product-price-328">44.57</div></td>
                         <td><div class="a" id="in_stock-328">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4067,11 +4023,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-329">353</div></td>
-                        <td><div class="a">Steam CD-Key |  Slime Rancher</div></td>
-                        <td><div class="a" id="product-price-329">3.19</div></td>
+                        <td><div class="a" id="product-id-329">374</div></td>
+                        <td><div class="a">Steam CD-Key |  The Last of Us Part I</div></td>
+                        <td><div class="a" id="product-price-329">19.64</div></td>
                         <td><div class="a" id="in_stock-329">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4091,11 +4047,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-330">354</div></td>
-                        <td><div class="a">Steam CD-Key |  Sniper Elite 5</div></td>
-                        <td><div class="a" id="product-price-330">8.79</div></td>
+                        <td><div class="a" id="product-id-330">375</div></td>
+                        <td><div class="a">Steam CD-Key |  The Long Dark</div></td>
+                        <td><div class="a" id="product-price-330">6.98</div></td>
                         <td><div class="a" id="in_stock-330">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4114,12 +4070,12 @@
                                 <button value="Submit" id="button-330" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-331">355</div></td>
-                        <td><div class="a">Steam CD-Key |  SnowRunner</div></td>
-                        <td><div class="a" id="product-price-331">12.67</div></td>
+                        <td><div class="a" id="product-id-331">377</div></td>
+                        <td><div class="a">Steam CD-Key |  Timberborn</div></td>
+                        <td><div class="a" id="product-price-331">16.96</div></td>
                         <td><div class="a" id="in_stock-331">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4139,11 +4095,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-332">356</div></td>
-                        <td><div class="a">Steam CD-Key |  SnowRunner 1-Year Anniversary Edition</div></td>
-                        <td><div class="a" id="product-price-332">19.99</div></td>
+                        <td><div class="a" id="product-id-332">378</div></td>
+                        <td><div class="a">Steam CD-Key |  Total War: WARHAMMER</div></td>
+                        <td><div class="a" id="product-price-332">6.38</div></td>
                         <td><div class="a" id="in_stock-332">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4163,11 +4119,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-333">357</div></td>
-                        <td><div class="a">Steam CD-Key |  Soulmask</div></td>
-                        <td><div class="a" id="product-price-333">14.38</div></td>
+                        <td><div class="a" id="product-id-333">379</div></td>
+                        <td><div class="a">Steam CD-Key |  Total War: WARHAMMER II</div></td>
+                        <td><div class="a" id="product-price-333">7.45</div></td>
                         <td><div class="a" id="in_stock-333">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4186,12 +4142,12 @@
                                 <button value="Submit" id="button-333" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-334">358</div></td>
-                        <td><div class="a">Steam CD-Key |  Spider-Man Remastered</div></td>
-                        <td><div class="a" id="product-price-334">19.29</div></td>
+                        <td><div class="a" id="product-id-334">380</div></td>
+                        <td><div class="a">Steam CD-Key | Total War: WARHAMMER III</div></td>
+                        <td><div class="a" id="product-price-334">13.32</div></td>
                         <td><div class="a" id="in_stock-334">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4211,11 +4167,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-335">359</div></td>
-                        <td><div class="a">Steam CD-Key |  Spider-Man: Miles Morales</div></td>
-                        <td><div class="a" id="product-price-335">18.79</div></td>
+                        <td><div class="a" id="product-id-335">381</div></td>
+                        <td><div class="a">Steam CD-Key | V Rising</div></td>
+                        <td><div class="a" id="product-price-335">8.86</div></td>
                         <td><div class="a" id="in_stock-335">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4235,11 +4191,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-336">360</div></td>
-                        <td><div class="a">Steam CD-Key |  Squad</div></td>
-                        <td><div class="a" id="product-price-336">5.54</div></td>
+                        <td><div class="a" id="product-id-336">382</div></td>
+                        <td><div class="a">Steam CD-Key | Valheim</div></td>
+                        <td><div class="a" id="product-price-336">7.49</div></td>
                         <td><div class="a" id="in_stock-336">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4258,13 +4214,13 @@
                                 <button value="Submit" id="button-336" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-337">361</div></td>
-                        <td><div class="a">Steam CD-Key |  Squad 44</div></td>
-                        <td><div class="a" id="product-price-337">11.99</div></td>
-                        <td><div class="a" id="in_stock-337">❌</div></td>
+                        <td><div class="a" id="product-id-337">384</div></td>
+                        <td><div class="a">Steam CD-Key |  Wallpaper Engine</div></td>
+                        <td><div class="a" id="product-price-337">3.85</div></td>
+                        <td><div class="a" id="in_stock-337">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-337', 337)">-</button>
@@ -4283,11 +4239,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-338">362</div></td>
-                        <td><div class="a">Steam CD-Key |  Starfield</div></td>
-                        <td><div class="a" id="product-price-338">35.24</div></td>
+                        <td><div class="a" id="product-id-338">385</div></td>
+                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Darktide</div></td>
+                        <td><div class="a" id="product-price-338">7.10</div></td>
                         <td><div class="a" id="in_stock-338">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4307,12 +4263,12 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-339">363</div></td>
-                        <td><div class="a">Steam CD-Key |  Stellaris</div></td>
-                        <td><div class="a" id="product-price-339">5.18</div></td>
-                        <td><div class="a" id="in_stock-339">❌</div></td>
+                        <td><div class="a" id="product-id-339">386</div></td>
+                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Rogue Trader</div></td>
+                        <td><div class="a" id="product-price-339">12.71</div></td>
+                        <td><div class="a" id="in_stock-339">✅</div></td>
                         <td>
                             <div class="counter">
                                 <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-339', 339)">-</button>
@@ -4330,12 +4286,12 @@
                                 <button value="Submit" id="button-339" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
+                    </tr>                    
 
                     <tr>
-                        <td><div class="a" id="product-id-340">364</div></td>
-                        <td><div class="a">Steam CD-Key |  Still Wakes the Deep</div></td>
-                        <td><div class="a" id="product-price-340">13.67</div></td>
+                        <td><div class="a" id="product-id-340">387</div></td>
+                        <td><div class="a">Steam CD-Key | Warhammer 40,000: Space Marine 2</div></td>
+                        <td><div class="a" id="product-price-340">29.49</div></td>
                         <td><div class="a" id="in_stock-340">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4355,11 +4311,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-341">365</div></td>
-                        <td><div class="a">Steam CD-Key |  Street Fighter 6</div></td>
-                        <td><div class="a" id="product-price-341">18.13</div></td>
+                        <td><div class="a" id="product-id-341">388</div></td>
+                        <td><div class="a">Steam CD-Key | Warhammer 40,000: Space Marine 2 Gold Edition</div></td>
+                        <td><div class="a" id="product-price-341">45.52</div></td>
                         <td><div class="a" id="in_stock-341">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4379,11 +4335,11 @@
                             </div>
                         </td>
                     </tr>
-
+                    
                     <tr>
-                        <td><div class="a" id="product-id-342">366</div></td>
-                        <td><div class="a">Steam CD-Key |  Street Fighter 6 Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-342">33.51</div></td>
+                        <td><div class="a" id="product-id-342">389</div></td>
+                        <td><div class="a">Steam CD-Key | Wartales</div></td>
+                        <td><div class="a" id="product-price-342">16.35</div></td>
                         <td><div class="a" id="in_stock-342">✅</div></td>
                         <td>
                             <div class="counter">
@@ -4402,562 +4358,7 @@
                                 <button value="Submit" id="button-342" type="button" class="btn btn-outline-success" disabled="">BUY</button>
                             </div>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-343">367</div></td>
-                        <td><div class="a">Steam CD-Key |  Street Fighter 6 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-343">44.79</div></td>
-                        <td><div class="a" id="in_stock-343">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-343', 343)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-343" value="0" oninput="validateInput(this, 343)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-343', 343)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-343"></div>
-                                <button type="button" id="success-343" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-343" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-343" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-344">368</div></td>
-                        <td><div class="a">Steam CD-Key |  Subnautica</div></td>
-                        <td><div class="a" id="product-price-344">7.61</div></td>
-                        <td><div class="a" id="in_stock-344">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-344', 344)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-344" value="0" oninput="validateInput(this, 344)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-344', 344)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-344"></div>
-                                <button type="button" id="success-344" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-344" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-344" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-345">369</div></td>
-                        <td><div class="a">Steam CD-Key |  Subnautica: Below Zero</div></td>
-                        <td><div class="a" id="product-price-345">14.99</div></td>
-                        <td><div class="a" id="in_stock-345">❌</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-345', 345)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-345" value="0" oninput="validateInput(this, 345)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-345', 345)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-345"></div>
-                                <button type="button" id="success-345" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-345" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-345" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-346">370</div></td>
-                        <td><div class="a">Steam CD-Key |  Teardown</div></td>
-                        <td><div class="a" id="product-price-346">14.28</div></td>
-                        <td><div class="a" id="in_stock-346">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-346', 346)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-346" value="0" oninput="validateInput(this, 346)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-346', 346)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-346"></div>
-                                <button type="button" id="success-346" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-346" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-346" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-347">371</div></td>
-                        <td><div class="a">Steam CD-Key |  Tekken 8</div></td>
-                        <td><div class="a" id="product-price-347">21.81</div></td>
-                        <td><div class="a" id="in_stock-347">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-347', 347)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-347" value="0" oninput="validateInput(this, 347)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-347', 347)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-347"></div>
-                                <button type="button" id="success-347" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-347" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-347" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-348">372</div></td>
-                        <td><div class="a">Steam CD-Key |  Tekken 8 Deluxe Edition</div></td>
-                        <td><div class="a" id="product-price-348">39.98</div></td>
-                        <td><div class="a" id="in_stock-348">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-348', 348)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-348" value="0" oninput="validateInput(this, 348)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-348', 348)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-348"></div>
-                                <button type="button" id="success-348" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-348" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-348" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-349">373</div></td>
-                        <td><div class="a">Steam CD-Key |  Tekken 8 Ultimate Edition</div></td>
-                        <td><div class="a" id="product-price-349">44.57</div></td>
-                        <td><div class="a" id="in_stock-349">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-349', 349)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-349" value="0" oninput="validateInput(this, 349)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-349', 349)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-349"></div>
-                                <button type="button" id="success-349" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-349" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-349" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-350">374</div></td>
-                        <td><div class="a">Steam CD-Key |  The Last of Us Part I</div></td>
-                        <td><div class="a" id="product-price-350">19.64</div></td>
-                        <td><div class="a" id="in_stock-350">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-350', 350)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-350" value="0" oninput="validateInput(this, 350)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-350', 350)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-350"></div>
-                                <button type="button" id="success-350" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-350" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-350" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-351">375</div></td>
-                        <td><div class="a">Steam CD-Key |  The Long Dark</div></td>
-                        <td><div class="a" id="product-price-351">9.98</div></td>
-                        <td><div class="a" id="in_stock-351">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-351', 351)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-351" value="0" oninput="validateInput(this, 351)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-351', 351)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-351"></div>
-                                <button type="button" id="success-351" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-351" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-351" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-352">376</div></td>
-                        <td><div class="a">Steam CD-Key |  The Long Drive</div></td>
-                        <td><div class="a" id="product-price-352">3.99</div></td>
-                        <td><div class="a" id="in_stock-352">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-352', 352)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-352" value="0" oninput="validateInput(this, 352)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-352', 352)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-352"></div>
-                                <button type="button" id="success-352" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-352" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-352" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-353">377</div></td>
-                        <td><div class="a">Steam CD-Key |  Timberborn</div></td>
-                        <td><div class="a" id="product-price-353">18.96</div></td>
-                        <td><div class="a" id="in_stock-353">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-353', 353)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-353" value="0" oninput="validateInput(this, 353)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-353', 353)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-353"></div>
-                                <button type="button" id="success-353" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-353" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-353" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-354">378</div></td>
-                        <td><div class="a">Steam CD-Key |  Total War: WARHAMMER</div></td>
-                        <td><div class="a" id="product-price-354">6.38</div></td>
-                        <td><div class="a" id="in_stock-354">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-354', 354)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-354" value="0" oninput="validateInput(this, 354)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-354', 354)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-354"></div>
-                                <button type="button" id="success-354" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-354" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-354" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-355">379</div></td>
-                        <td><div class="a">Steam CD-Key |  Total War: WARHAMMER II</div></td>
-                        <td><div class="a" id="product-price-355">7.45</div></td>
-                        <td><div class="a" id="in_stock-355">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-355', 355)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-355" value="0" oninput="validateInput(this, 355)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-355', 355)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-355"></div>
-                                <button type="button" id="success-355" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-355" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-355" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-356">380</div></td>
-                        <td><div class="a">Steam CD-Key |  Total War: WARHAMMER III</div></td>
-                        <td><div class="a" id="product-price-356">14.324</div></td>
-                        <td><div class="a" id="in_stock-356">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-356', 356)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-356" value="0" oninput="validateInput(this, 356)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-356', 356)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-356"></div>
-                                <button type="button" id="success-356" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-356" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-356" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-357">381</div></td>
-                        <td><div class="a">Steam CD-Key |  V Rising</div></td>
-                        <td><div class="a" id="product-price-357">10.86</div></td>
-                        <td><div class="a" id="in_stock-357">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-357', 357)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-357" value="0" oninput="validateInput(this, 357)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-357', 357)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-357"></div>
-                                <button type="button" id="success-357" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-357" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-357" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-358">382</div></td>
-                        <td><div class="a">Steam CD-Key |  Valheim</div></td>
-                        <td><div class="a" id="product-price-358">9.49</div></td>
-                        <td><div class="a" id="in_stock-358">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-358', 358)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-358" value="0" oninput="validateInput(this, 358)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-358', 358)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-358"></div>
-                                <button type="button" id="success-358" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-358" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-358" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-359">383</div></td>
-                        <td><div class="a">Steam CD-Key |  Victoria 3</div></td>
-                        <td><div class="a" id="product-price-359">10.13</div></td>
-                        <td><div class="a" id="in_stock-359">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-359', 359)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-359" value="0" oninput="validateInput(this, 359)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-359', 359)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-359"></div>
-                                <button type="button" id="success-359" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-359" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-359" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-360">384</div></td>
-                        <td><div class="a">Steam CD-Key |  Wallpaper Engine</div></td>
-                        <td><div class="a" id="product-price-360">3.85</div></td>
-                        <td><div class="a" id="in_stock-360">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-360', 360)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-360" value="0" oninput="validateInput(this, 360)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-360', 360)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-360"></div>
-                                <button type="button" id="success-360" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-360" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-360" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-361">385</div></td>
-                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Darktide</div></td>
-                        <td><div class="a" id="product-price-361">7.10</div></td>
-                        <td><div class="a" id="in_stock-361">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-361', 361)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-361" value="0" oninput="validateInput(this, 361)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-361', 361)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-361"></div>
-                                <button type="button" id="success-361" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-361" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-361" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-362">386</div></td>
-                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Rogue Trader</div></td>
-                        <td><div class="a" id="product-price-362">12.71</div></td>
-                        <td><div class="a" id="in_stock-362">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-362', 362)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-362" value="0" oninput="validateInput(this, 362)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-362', 362)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-362"></div>
-                                <button type="button" id="success-362" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-362" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-362" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-363">387</div></td>
-                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Space Marine 2</div></td>
-                        <td><div class="a" id="product-price-363">34.49</div></td>
-                        <td><div class="a" id="in_stock-363">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-363', 363)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-363" value="0" oninput="validateInput(this, 363)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-363', 363)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-363"></div>
-                                <button type="button" id="success-363" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-363" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-363" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-364">388</div></td>
-                        <td><div class="a">Steam CD-Key |  Warhammer 40,000: Space Marine 2 Gold Edition</div></td>
-                        <td><div class="a" id="product-price-364">56.52</div></td>
-                        <td><div class="a" id="in_stock-364">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-364', 364)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-364" value="0" oninput="validateInput(this, 364)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-364', 364)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-364"></div>
-                                <button type="button" id="success-364" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-364" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-364" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><div class="a" id="product-id-365">389</div></td>
-                        <td><div class="a">Steam CD-Key |  Wartales</div></td>
-                        <td><div class="a" id="product-price-365">17.35</div></td>
-                        <td><div class="a" id="in_stock-365">✅</div></td>
-                        <td>
-                            <div class="counter">
-                                <button class="btn btn-primary btn-sm" onclick="decrease('counter-value-365', 365)">-</button>
-                                <span class="space"></span>
-                                <input type="text" id="counter-value-365" value="0" oninput="validateInput(this, 365)">
-                                <span class="space"></span>
-                                <button class="btn btn-primary btn-sm" onclick="increase('counter-value-365', 365)">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="b">
-                                <div class="loader" id="loader-365"></div>
-                                <button type="button" id="success-365" class="btn btn-success" disabled="" hidden="">Success</button>
-                                <button type="button" id="fail-365" class="btn btn-danger" disabled="" hidden="">FAIL</button>
-                                <button value="Submit" id="button-365" type="button" class="btn btn-outline-success" disabled="">BUY</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    
+                    </tr>                    
             </tbody>
             </table>
             </div>
@@ -4966,7 +4367,32 @@
     </div>
 </div>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='button-']").forEach(button => {
+            button.addEventListener("click", function() {
+                let productId = this.id.split("-")[1];
+                let amount = document.getElementById(`counter-value-${productId}`).value;
+                let price = document.getElementById(`product-price-${productId}`).textContent;
+                
+                fetch("/product/32", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        product_id: productId,
+                        amount: amount,
+                        price: price
+                    })
+                }).then(response => response.text())
+                  .then(data => {
+                      location.reload();
+                  }).catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/counter.js"></script>
 <script src="{{ url_for('static', filename='counter.js') }}"></script>

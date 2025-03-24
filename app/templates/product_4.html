@@ -140,7 +140,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -433,7 +433,7 @@
                     <tr>
                         <td><div class="a" id="product-id-26">45</div></td>
                         <td><div class="a">Apple Gift Card | RU | 2000 RUB</div></td>
-                        <td><div class="a" id="product-price-26">19.36</div></td>
+                        <td><div class="a" id="product-price-26">17.36</div></td>
                         <td><div class="a" id="in_stock-26">✅</div></td>
                         <td>
                             <div class="counter">
@@ -481,7 +481,7 @@
                     <tr>
                         <td><div class="a" id="product-id-28">47</div></td>
                         <td><div class="a">Apple Gift Card | RU | 5000 RUB</div></td>
-                        <td><div class="a" id="product-price-28">50.68</div></td>
+                        <td><div class="a" id="product-price-28">44.68</div></td>
                         <td><div class="a" id="in_stock-28">✅</div></td>
                         <td>
                             <div class="counter">
@@ -512,7 +512,32 @@
     </div>
 </div>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='button-']").forEach(button => {
+            button.addEventListener("click", function() {
+                let productId = this.id.split("-")[1];
+                let amount = document.getElementById(`counter-value-${productId}`).value;
+                let price = document.getElementById(`product-price-${productId}`).textContent;
+                
+                fetch("/product/4", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        product_id: productId,
+                        amount: amount,
+                        price: price
+                    })
+                }).then(response => response.text())
+                  .then(data => {
+                      location.reload();
+                  }).catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/counter.js"></script>
 <script src="{{ url_for('static', filename='counter.js') }}"></script>

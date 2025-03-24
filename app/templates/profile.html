@@ -158,8 +158,10 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
+        
+        
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
 
@@ -313,18 +315,35 @@
                         <button class="addFunds">Refill Balance</button>
                     </div>
                    <div class="wallets-block">
+                    <div id="card" class="wallet-cont grid-cont">
+                        <div class="wallet-name">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png" alt="">
+                            Bank Card (Visa & Mastercard)
+                        </div>
+                        <div class="wallet-balance">
+                            <div class="inflex-cont wallet-balance-sum">
+                                <span class="crypto_amount">{{ balances['card'] | round(2) }}</span> USD
+                            </div>
+                            <div class="wallet-balance-converted">
+                                <div class="wallet-balance-usd">
+                                    <span class="crypto_amount">{{ balances['card'] | round(2) }} USD</span>
+                                    <span class="small-txt">Estimated in USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                       
                     <div id="bep20" class="wallet-cont grid-cont">
                         <div class="wallet-name">
-                            <img src="https://www.buysellvouchers.com/assets/185a1a27/images/currency-icons/usdtbep20.png" alt="">
+                            <img src="https://www.svgrepo.com/show/367256/usdt.svg" alt="">
                             USDT (BEP20)
                         </div>
                         <div class="wallet-balance">
                             <div class="inflex-cont wallet-balance-sum">
-                                <span class="crypto_amount">{{ balances['bep20'] }}</span> USD
+                                <span class="crypto_amount">{{ balances['bep20'] | round(2) }}</span> USD
                             </div>
                             <div class="wallet-balance-converted">
                                 <div class="wallet-balance-usd">
-                                    <span class="crypto_amount">{{ balances['bep20'] }} USD</span>
+                                    <span class="crypto_amount">{{ balances['bep20'] | round(2) }} USD</span>
                                     <span class="small-txt">Estimated in USD</span>
                                 </div>
                             </div>
@@ -332,16 +351,16 @@
                     </div>
                     <div id="erc20" class="wallet-cont grid-cont">
                         <div class="wallet-name">
-                            <img src="https://www.buysellvouchers.com/assets/185a1a27/images/currency-icons/erc20.png" alt="">
+                            <img src="https://www.svgrepo.com/show/367256/usdt.svg" alt="">
                             USDT (ERC20)
                         </div>
                         <div class="wallet-balance">
                             <div class="inflex-cont wallet-balance-sum">
-                                <span class="crypto_amount">{{ balances['erc20'] }}</span> USD
+                                <span class="crypto_amount">{{ balances['erc20'] | round(2) }}</span> USD
                             </div>
                             <div class="wallet-balance-converted">
                                 <div class="wallet-balance-usd">
-                                    <span class="crypto_amount">{{ balances['erc20'] }} USD</span>
+                                    <span class="crypto_amount">{{ balances['erc20'] | round(2) }} USD</span>
                                     <span class="small-txt">Estimated in USD</span>
                                 </div>
                             </div>
@@ -349,7 +368,7 @@
                     </div>
                     <div id="trc20" class="wallet-cont grid-cont">
                         <div class="wallet-name">
-                            <img src="https://www.buysellvouchers.com/assets/185a1a27/images/currency-icons/trc20.png" alt="">
+                            <img src="https://www.svgrepo.com/show/367256/usdt.svg" alt="">
                             USDT (TRC20)
                         </div>
                         <div class="wallet-balance">
@@ -364,40 +383,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="sol" class="wallet-cont grid-cont">
-                        <div class="wallet-name">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png" alt="">
-                            USDC (SOL)
-                        </div>
-                        <div class="wallet-balance">
-                            <div class="inflex-cont wallet-balance-sum">
-                                <span class="crypto_amount">0</span> USD
-                            </div>
-                            <div class="wallet-balance-converted">
-                                <div class="wallet-balance-usd">
-                                    <span class="crypto_amount">0 USD</span>
-                                    <span class="small-txt">Estimated in USD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="near" class="wallet-cont grid-cont">
-                        <div class="wallet-name">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png" alt="">
-                            USDC (NEAR)
-                        </div>
-                        <div class="wallet-balance">
-                            <div class="inflex-cont wallet-balance-sum">
-                                <span class="crypto_amount">0</span> USD
-                            </div>
-                            <div class="wallet-balance-converted">
-                                <div class="wallet-balance-usd">
-                                    <span class="crypto_amount">0 USD</span>
-                                    <span class="small-txt">Estimated in USD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                    </div>
                 </div>
             </div>
@@ -415,12 +401,12 @@
                     <div class="wallet-cont wallet-cont-1">
                         <div class="wallet-name">Total expenses</div>
                         <div class="wallet-balance">
-                            <div class="inflex-cont-1"><span class="total-expenses">{{ expenses }}</span>USD</div>
+                            <div class="inflex-cont-1"><span class="total-expenses">{{ expenses | round(2) }}</span>USD</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
         <div class="row row-mb">
             <div class="account-area account-area-1">
                 <div class="account-content account-content-1">
@@ -437,7 +423,7 @@
                         <tbody>
                             {% for topup in topups %}
                             <tr>
-                                <td>{{ topup['date'] }}</td>
+                                <td>{{ topup['date'] | replace('T', ' ') }}</td>
                                 <td>{{ topup['network'] }}</td>
                                 <td>${{ topup['amount'] }}</td>
                                 <td>{{ topup['status'] }}</td>
@@ -465,37 +451,15 @@
             <div class="form-refilTitle"><span>Refill Balance</span></div>
             <div class="form-netSelector">
                 <span>Choose crypto network</span>
-                <select name="" id="">
-                    <option value="bep20"  selected>USDT (BEP20)</option>
+                <select name="" id="networkSelect">
+                    <option value="bankcard" selected>Bank Card (Visa & Mastercard)</option>
+                    <option value="bep20">USDT (BEP20)</option>
                     <option value="erc20">USDT (ERC20)</option>
                     <option value="trc20">USDT (TRC20)</option>
-                    <option value="sol">USDC (SOL)</option>
-                    <option value="near">USDC (NEAR)</option>
                 </select>
             </div>
             <div class="amount">
-                <input required type="number" min="50" step="1" placeholder="Enter amount (min. 50$)" id="amountInput">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</div>
-<div id="overlay-2">
-    <div id="popup-2">
-        <form class="choose-crypto">
-            <div class="form-refilTitle"><span>Withdraw </span></div>
-            <div class="form-netSelector">
-                <span>Withdraw funds to USDT (BEP20)</span>
-            </div>
-            <div class="wd-adress amount">
-                <input required type="" placeholder="Your BEP20 address">
-            </div>
-            <div class="amount">
-                <input required type="number" placeholder="Enter amount (min. 40$)">
-            </div>
-            <div class="wdFunds-done">
-                <span>Enter your address and click submitt</span>
-                <span>It usually takes about 15 minutes...</span>
+                <input required type="number" min="1" step="1" placeholder="Enter amount" id="amountInput">
             </div>
             <button type="submit">Submit</button>
         </form>
@@ -503,7 +467,74 @@
 </div>
 
 
+<script>
+    // Select elements
+    const networkSelect = document.getElementById('networkSelect');
+    const amountInput = document.getElementById('amountInput');
 
+    // Update input field based on the selected network
+    networkSelect.addEventListener('change', function() {
+        const selectedNetwork = networkSelect.value;
+        
+        // Check if the selected network is "bankcard"
+        if (selectedNetwork === 'bankcard') {
+            amountInput.setAttribute('min', '1');
+            amountInput.setAttribute('placeholder', 'Enter amount');
+        } else {
+            amountInput.setAttribute('min', '100');
+            amountInput.setAttribute('placeholder', 'Enter amount (min. 100$)');
+        }
+    });
+
+    // Выбор крипто-сети
+    const form = document.querySelector('.choose-crypto');
+    if (form) {
+        const select = form.querySelector('select');
+        const amountInput = form.querySelector('#amountInput');
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedOption = select.value;
+            const amount = amountInput.value;
+            let url;
+
+            // Если выбрана "Bank Card", редирект на /checkout/payment с уникальным ID
+        if (selectedOption === 'bankcard') {
+            const uniqueId = Date.now() + '-' + Math.floor(Math.random() * 1000); // Генерация уникального ID
+            url = '/checkout/payment?amount=' + amount + '&id=' + uniqueId;
+            window.location.href = url;
+            return; // Прерываем дальнейшую обработку
+        }
+
+            // Для других сетей URL на оплату
+            switch(selectedOption) {
+                case 'bep20':
+                    url = '/bep20/pay/qN7679-3c7cef-47929b-5de3d5-711wet';
+                    break;
+                case 'erc20':
+                    url = '/erc20/pay/zQ5678-3g4hij-9123kl-5mnop6-789rst';
+                    break;
+                case 'trc20':
+                    url = '/trc20/pay/rT8901-3c9def-4567ab-8ijkl4-567nop';
+                    break;
+                case 'sol':
+                    url = '/sol/pay/pQ9012-3r7stx-4568kl-9mnop5-123uvw';
+                    break;
+                case 'near':
+                    url = '/near/pay/mN1234-3p5qrs-7890tu-4vwxyz-rut';
+                    break;
+                default:
+                    console.log('We are faced with a problem');
+                    return;
+            }
+
+            // Добавляем сумму в URL
+            url += `?amount=${amount}`;
+
+            window.location.href = url;
+        });
+    }
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 <script src="{{ url_for('static', filename='wdfunds.js') }}"></script>

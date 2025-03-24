@@ -46,6 +46,84 @@
         });
     </script>
     <style>
+        /* Стили для модального окна */
+        #revealKeyModal.modal {
+            display: block !important;  /* Окно будет отображаться */
+            opacity: 0;  /* Начальная прозрачность для анимации */
+            visibility: hidden;  /* Модальное окно будет скрыто по умолчанию */
+            transition: opacity 0.3s ease, visibility 0.3s ease !important;
+        }
+
+        #revealKeyModal.show {
+            opacity: 1 !important;  /* Окно становится видимым */
+            visibility: visible !important;  /* Модальное окно становится видимым */
+        }
+
+        /* Центрируем модальное окно */
+        #revealKeyModal .modal-dialog {
+            max-width: 600px !important;
+            margin: 30vh auto !important;  /* Центрируем окно по вертикали */
+        }
+
+        #revealKeyModal .modal-content {
+            border-radius: 10px !important;  /* Скругляем углы окна */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;  /* Добавляем тень для глубины */
+            background-color: #ffffff !important;  /* Белый фон */
+            padding: 20px !important;  /* Отступы вокруг содержимого */
+        }
+
+        /* Стили для заголовка модального окна */
+        #revealKeyModal .modal-header {
+            border-bottom: 1px solid #ddd !important;  /* Легкая граница */
+            padding-bottom: 15px !important;
+            color: #333 !important;
+        }
+
+        #revealKeyModal .modal-title {
+            font-size: 1.5rem !important;  /* Увеличиваем размер заголовка */
+            font-weight: 600 !important;  /* Полужирный шрифт */
+        }
+
+        /* Стили для кнопки закрытия */
+        #revealKeyModal .close {
+            font-size: 1.5rem !important;  /* Увеличиваем размер крестика */
+            color: #aaa !important;  /* Цвет крестика */
+        }
+
+        #revealKeyModal .close:hover {
+            color: #333 !important;  /* Цвет крестика при наведении */
+        }
+
+        /* Стили для текста в теле модального окна */
+        #revealKeyModal .modal-body p {
+            font-size: 1.2rem !important;
+            color: #444 !important;
+            font-weight: 500 !important;  /* Полужирный текст */
+            text-align: center !important;  /* Центрируем текст */
+            padding: 20px 0 !important;  /* Отступы вокруг текста */
+        }
+
+        /* Стили для кнопки закрытия внизу */
+        #revealKeyModal .modal-footer {
+            border-top: 1px solid #ddd !important;
+            padding-top: 15px !important;
+            text-align: center !important;
+        }
+
+        #revealKeyModal .btn-secondary {
+            background-color: #007bff !important;
+            color: #fff !important;
+            border-radius: 5px !important;  /* Скругляем углы кнопки */
+            padding: 10px 20px !important;  /* Увеличиваем размеры кнопки */
+            font-size: 1rem !important;
+        }
+
+        #revealKeyModal .btn-secondary:hover {
+            background-color: #0056b3 !important;  /* Цвет при наведении */
+            border-color: #004085 !important;  /* Цвет границы при наведении */
+        }
+    </style>
+    <style>
         @media (max-width: 768px) {
         .navbar-toggler {
             display: block;
@@ -131,7 +209,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -301,18 +379,65 @@
                         <td>{{ userorder.price }}</td>
                         <td>{{ userorder.amount }}</td>
                         <td>{{ userorder.date }}</td>
-                        <td> <button class="reveal_key_btn">Reveal Key</button></td>
+                        <td>
+                            {% if userorder.steamLogin %}
+                                {{ userorder.steamLogin }}
+                            {% elif userorder.steamLink %}
+                                <a href="{{ userorder.steamLink }}" target="_blank">{{ userorder.steamLink }}</a>
+                            {% else %}
+                                <!-- Кнопка для показа ключа -->
+                                <button class="reveal_key_btn" data-key="{{ userorder.key }}">Reveal Key</button>
+                            {% endif %}
+                        </td>                                               
                     </tr>
                     {% endfor %}
                 </tbody>
             </table> 
         </div>
     </div>
-    
+</div>
+
+<!-- Модальное окно для отображения ключа -->
+<div id="revealKeyModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Your Key</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="orderKey"></p> <!-- Место для отображения ключа -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 </main>
 
+<!-- Подключаем необходимые скрипты для работы модальных окон -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        // Обработчик нажатия на кнопку Reveal Key
+        $('.reveal_key_btn').click(function() {
+            var key = $(this).data('key'); // Получаем ключ из data-атрибута
+            if (key) {
+                // Отображаем ключ в модальном окне
+                $('#orderKey').text(key);
+                // Показываем модальное окно
+                $('#revealKeyModal').modal('show');
+            } else {
+                alert("Key not available for this order.");
+            }
+        });
+    });
+</script>
 
 
 <div class="flatpickr-calendar rangeMode animate" tabindex="-1"><div class="flatpickr-months"><span class="flatpickr-prev-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z"></path></svg></span><div class="flatpickr-month"><div class="flatpickr-current-month"><select class="flatpickr-monthDropdown-months" aria-label="Month" tabindex="-1"><option class="flatpickr-monthDropdown-month" value="0" tabindex="-1">January</option><option class="flatpickr-monthDropdown-month" value="1" tabindex="-1">February</option><option class="flatpickr-monthDropdown-month" value="2" tabindex="-1">March</option><option class="flatpickr-monthDropdown-month" value="3" tabindex="-1">April</option><option class="flatpickr-monthDropdown-month" value="4" tabindex="-1">May</option><option class="flatpickr-monthDropdown-month" value="5" tabindex="-1">June</option><option class="flatpickr-monthDropdown-month" value="6" tabindex="-1">July</option><option class="flatpickr-monthDropdown-month" value="7" tabindex="-1">August</option><option class="flatpickr-monthDropdown-month" value="8" tabindex="-1">September</option><option class="flatpickr-monthDropdown-month" value="9" tabindex="-1">October</option><option class="flatpickr-monthDropdown-month" value="10" tabindex="-1">November</option><option class="flatpickr-monthDropdown-month" value="11" tabindex="-1">December</option></select><div class="numInputWrapper"><input class="numInput cur-year" type="number" tabindex="-1" aria-label="Year"><span class="arrowUp"></span><span class="arrowDown"></span></div></div></div><span class="flatpickr-next-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17"><g></g><path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z"></path></svg></span></div><div class="flatpickr-innerContainer"><div class="flatpickr-rContainer"><div class="flatpickr-weekdays"><div class="flatpickr-weekdaycontainer">

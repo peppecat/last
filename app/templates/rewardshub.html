@@ -145,7 +145,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -313,8 +313,12 @@
                                 <span class="blurred_key" id="key_{{ loop.rewardshub }}">AN2D-84***-****-XPZ9</span>
                                 <button class="reveal_key" onclick="revealKey(this, '{{ bonus['key'] }}', {{ 'true' if bonus['hidden'] else 'false' }})">Show Key</button>
                             </div>
+                            <!-- Кнопка Удалить -->
+                            <form action="{{ url_for('delete_bonus', username=username, bonus_id=bonus['id']) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </form>
                         </div>
-                    </div>
+                    </div>                    
                     {% endfor %}
                 </div>
             </div>

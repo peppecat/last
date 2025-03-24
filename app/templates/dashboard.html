@@ -129,7 +129,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+          {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -298,6 +298,15 @@
                 </div>
 
                 <div class="card" style="width: 18rem; margin-left: 30px; margin-top: 10px">
+                    <a href="{{ url_for('menu18') }}">
+                        <img class="card-img-top" src="{{ url_for('static', filename='images/xbox_gift.png') }}" alt="Card image cap" style="margin-top: 10px">
+                      <div class="card-body">
+                        <p class="card-text" style="text-align: center; font-size: 16px; margin: 0 auto">Xbox CD-Keys</p>
+                      </div>
+                    </a>
+              </div>
+
+                <div class="card" style="width: 18rem; margin-left: 30px; margin-top: 10px">
                     <a href="{{ url_for('menu16') }}">
                         <img class="card-img-top" src="{{ url_for('static', filename='images/xbox_gamepass.png') }}" alt="Card image cap" style="margin-top: 10px">
                   <div class="card-body">
@@ -313,7 +322,7 @@
                         <p class="card-text" style="text-align: center; font-size: 16px; margin: 0 auto">UPLAY</p>
                       </div>
                     </a>
-                    </div>
+                </div>
         </div>
     </div>
 </div>

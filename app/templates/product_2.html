@@ -45,6 +45,85 @@
         });
         </script>
         <style>
+            /* Стили для модального окна */
+        #errorModal.modal {
+            display: block !important;  /* Окно будет отображаться */
+            opacity: 0;  /* Начальная прозрачность для анимации */
+            visibility: hidden;  /* Модальное окно будет скрыто по умолчанию */
+            transition: opacity 0.3s ease, visibility 0.3s ease !important;  /* Плавное изменение прозрачности и видимости */
+        }
+
+        #errorModal.show {
+            opacity: 1 !important;  /* Окно становится видимым */
+            visibility: visible !important;  /* Модальное окно становится видимым */
+        }
+
+        /* Центрируем модальное окно */
+        #errorModal .modal-dialog {
+            max-width: 600px !important;  /* Устанавливаем максимальную ширину окна */
+            margin: 30vh auto !important;  /* Центрируем окно по вертикали */
+        }
+
+        /* Стиль для содержания модального окна */
+        #errorModal .modal-content {
+            border-radius: 10px !important;  /* Скругляем углы окна */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;  /* Легкая тень для глубины */
+            background-color: #ffffff !important;  /* Белый фон */
+            padding: 20px !important;  /* Отступы вокруг содержимого */
+        }
+
+        /* Стиль для заголовка модального окна */
+        #errorModal .modal-header {
+            border-bottom: 1px solid #ddd !important;  /* Легкая граница снизу */
+            padding-bottom: 15px !important;  /* Отступ снизу */
+            color: #333 !important;  /* Цвет текста */
+        }
+
+        /* Стиль для заголовка */
+        #errorModal .modal-title {
+            font-size: 1.5rem !important;  /* Увеличиваем размер шрифта заголовка */
+            font-weight: 600 !important;  /* Полужирный шрифт */
+        }
+
+        /* Стили для кнопки закрытия */
+        #errorModal .close {
+            font-size: 1.5rem !important;  /* Увеличиваем размер крестика */
+            color: #aaa !important;  /* Цвет крестика */
+        }
+
+        #errorModal .close:hover {
+            color: #333 !important;  /* Цвет крестика при наведении */
+        }
+
+        /* Стили для текста в теле модального окна */
+        #errorModal .modal-body p {
+            font-size: 1.2rem !important;  /* Размер шрифта */
+            color: #444 !important;  /* Цвет текста */
+            font-weight: 500 !important;  /* Полужирный текст */
+            text-align: center !important;  /* Центрируем текст */
+            padding: 20px 0 !important;  /* Отступы вокруг текста */
+        }
+
+        /* Стили для футера модального окна */
+        #errorModal .modal-footer {
+            border-top: 1px solid #ddd !important;  /* Легкая граница сверху */
+            padding-top: 15px !important;  /* Отступ сверху */
+            text-align: center !important;  /* Центрируем элементы в футере */
+        }
+
+        /* Стили для кнопки в футере */
+        #errorModal .btn-secondary {
+            background-color: #007bff !important;  /* Цвет фона кнопки */
+            color: #fff !important;  /* Цвет текста кнопки */
+            border-radius: 5px !important;  /* Скругляем углы кнопки */
+            padding: 10px 20px !important;  /* Увеличиваем размеры кнопки */
+            font-size: 1rem !important;  /* Размер шрифта */
+        }
+
+        #errorModal .btn-secondary:hover {
+            background-color: #0056b3 !important;  /* Цвет при наведении */
+            border-color: #004085 !important;  /* Цвет границы при наведении */
+        }
             @media (max-width: 768px) {
             .navbar-toggler {
                 display: block;
@@ -126,7 +205,7 @@
 
         <!-- Dropdown -->
         <span class="btn btn-primary">
-            {{ balances['bep20'] }} USD
+            {{ (balances['bep20'] + balances['card']) | round(2) }} USD
         </span>
                 <!-- Separator -->
         <div class="vr bg-gray-700 mx-2 mx-lg-3"></div>
@@ -299,7 +378,7 @@
                         <tr>
                             <td><div class="a" id="product-id-1">20</div></td>
                             <td><div class="a">Apple Gift Card | USA | 2 USD</div></td>
-                            <td><div class="a" id="product-price-1">1.74</div></td>
+                            <td><div class="a" id="product-price-1">1.72</div></td>
                             <td><div class="a" id="in_stock-1">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -323,7 +402,7 @@
                         <tr>
                             <td><div class="a" id="product-id-2">21</div></td>
                             <td><div class="a">Apple Gift Card | USA | 3 USD</div></td>
-                            <td><div class="a" id="product-price-2">2.80</div></td>
+                            <td><div class="a" id="product-price-2">2.50</div></td>
                             <td><div class="a" id="in_stock-2">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -347,7 +426,7 @@
                         <tr>
                             <td><div class="a" id="product-id-3">22</div></td>
                             <td><div class="a">Apple Gift Card | USA | 4 USD</div></td>
-                            <td><div class="a" id="product-price-3">3.67</div></td>
+                            <td><div class="a" id="product-price-3">3.35</div></td>
                             <td><div class="a" id="in_stock-3">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -371,7 +450,7 @@
                         <tr>
                             <td><div class="a" id="product-id-4">23</div></td>
                             <td><div class="a">Apple Gift Card  | USA | 5 USD</div></td>
-                            <td><div class="a" id="product-price-4">4.34</div></td>
+                            <td><div class="a" id="product-price-4">4.14</div></td>
                             <td><div class="a" id="in_stock-4">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -395,7 +474,7 @@
                         <tr>
                             <td><div class="a" id="product-id-5">24</div></td>
                             <td><div class="a">Apple Gift Card | USA | 6 USD</div></td>
-                            <td><div class="a" id="product-price-5">6.21</div></td>
+                            <td><div class="a" id="product-price-5">5.28</div></td>
                             <td><div class="a" id="in_stock-5">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -419,7 +498,7 @@
                         <tr>
                             <td><div class="a" id="product-id-6">25</div></td>
                             <td><div class="a">Apple Gift Card | USA | 7 USD</div></td>
-                            <td><div class="a" id="product-price-6">6.7774</div></td>
+                            <td><div class="a" id="product-price-6">6.47</div></td>
                             <td><div class="a" id="in_stock-6">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -443,7 +522,7 @@
                         <tr>
                             <td><div class="a" id="product-id-7">26</div></td>
                             <td><div class="a">Apple Gift Card | USA | 8 USD</div></td>
-                            <td><div class="a" id="product-price-7">7.7456</div></td>
+                            <td><div class="a" id="product-price-7">7.74</div></td>
                             <td><div class="a" id="in_stock-7">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -467,7 +546,7 @@
                         <tr>
                             <td><div class="a" id="product-id-8">27</div></td>
                             <td><div class="a">Apple Gift Card | USA | 9 USD</div></td>
-                            <td><div class="a" id="product-price-8">8.7138</div></td>
+                            <td><div class="a" id="product-price-8">8.31</div></td>
                             <td><div class="a" id="in_stock-8">✅</div></td>
                             <td>
                                 <div class="counter">
@@ -617,6 +696,56 @@
 </div>
 
 
+    <!-- Модальное окно ошибки -->
+    <div id="errorModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Insufficient funds on your balance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if error %}
+    <script>
+        $(document).ready(function(){
+            $("#errorModal").modal('show');
+        });
+    </script>
+    {% endif %}
+    
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='button-']").forEach(button => {
+            button.addEventListener("click", function() {
+                let productId = this.id.split("-")[1];
+                let amount = document.getElementById(`counter-value-${productId}`).value;
+                let price = document.getElementById(`product-price-${productId}`).textContent;
+                
+                fetch("/product/2", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        product_id: productId,
+                        amount: amount,
+                        price: price
+                    })
+                }).then(response => response.text())
+                  .then(data => {
+                      location.reload();
+                  }).catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/counter.js"></script>
 <script src="{{ url_for('static', filename='counter.js') }}"></script>

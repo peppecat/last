@@ -101,18 +101,18 @@
                     <th>Действие</th>
                 </tr>
                 {% if users %}
-                    {% for user in users|reverse %}
+                    {% for user in users[::-1] %}
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ user.name }}</td>
-                            <td><input type="text" name="deposit_{{ loop.index }}" class="editable deposit" value="{{ user.deposit }}"></td>
+                            <td><input type="text" name="deposit_{{ user.name }}" class="editable deposit" value="{{ user.deposit }}"></td>
                             <td>
-                                <select name="status_{{ loop.index }}" class="status">
+                                <select name="status_{{ user.name }}" class="status">
                                     <option value="pending" {% if user.status == 'pending' %}selected{% endif %}>Pending..</option>
                                     <option value="approved" {% if user.status == 'approved' %}selected{% endif %}>Approved</option>
                                 </select>
                             </td>
-                            <td><input type="text" name="payout_{{ loop.index }}" class="editable payout" value="{{ user.payout }}"></td>
+                            <td><input type="text" name="payout_{{ user.name }}" class="editable payout" value="{{ user.payout }}"></td>
                             <td>
                                 <button type="submit" class="action-btn approve">✅ Сохранить</button>
                             </td>
@@ -126,6 +126,7 @@
             </table>
         </form>
     </div>
+    
 
 </body>
 </html>
