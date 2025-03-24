@@ -114,6 +114,7 @@ def save_data():
 # Главная страница регистрации
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    load_data()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password1']
@@ -192,6 +193,7 @@ load_data()
 # Страница для отображения наград
 @app.route('/rewards_hub')
 def rewardshub():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -261,6 +263,7 @@ def activate():
 # Страница Admin
 @app.route('/admin/users', methods=['GET', 'POST'])
 def admin():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -399,6 +402,7 @@ def admin():
 
 @app.route('/admin/create_code', methods=['POST'])
 def create_code():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -433,6 +437,7 @@ def create_code():
 
 @app.route('/admin/delete_code', methods=['POST'])
 def delete_code():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -462,6 +467,7 @@ def delete_code():
 
 @app.route('/admin/orders', methods=['GET', 'POST'])
 def admin2():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -518,6 +524,7 @@ def admin2():
 
 @app.route('/admin/delete_order/<user>/<int:index>', methods=['POST'])
 def delete_order(user, index):
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -534,6 +541,7 @@ def delete_order(user, index):
 
 @app.route('/admin/save_key/<user>/<int:index>', methods=['POST'])
 def save_key(user, index):
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -559,6 +567,7 @@ def save_key(user, index):
 
 @app.route('/admin/payments', methods=['GET', 'POST'])
 def admin3():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -600,6 +609,7 @@ def admin3():
 
 @app.route('/admin/rewards', methods=['GET', 'POST'])
 def adminrewards():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -631,6 +641,7 @@ def adminrewards():
 
 @app.route('/admin/delete_reward/<int:index>', methods=['GET'])
 def delete_reward(index):
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -650,6 +661,7 @@ def delete_reward(index):
 # Переход на страницу входа партнера
 @app.route('/aff_login', methods=['GET', 'POST'])
 def aff_login():
+    load_data()
     if request.method == 'POST':
         partner_id = request.form.get('partner_id')
 
@@ -666,11 +678,13 @@ def aff_login():
 
 @app.route('/aff_logout')
 def aff_logout():
+    load_data()
     session.pop('partner_id', None)  # Удаляем ID из сессии
     return redirect(url_for('aff_login'))
 
 @app.route('/aff_home')
 def aff_home():
+    load_data()
     if 'partner_id' not in session:  # Проверяем, вошел ли пользователь
         return redirect(url_for('aff_login'))  # Если нет — отправляем на страницу входа
     
@@ -693,6 +707,7 @@ def aff_home():
 
 @app.route('/aff_profile')
 def aff_profile():
+    load_data()
     if 'partner_id' not in session:
         return redirect(url_for('aff_login'))
 
@@ -713,6 +728,7 @@ def aff_profile():
 
 @app.route('/aff/users', methods=['GET', 'POST'])
 def aff_users():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -758,6 +774,7 @@ def aff_users():
 
 @app.route('/aff/newpartners', methods=['GET', 'POST'])
 def aff_partners():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -775,6 +792,7 @@ def aff_partners():
 
 @app.route('/aff/delete_partner/<email>', methods=['POST'])
 def delete_partner(email):
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -790,6 +808,7 @@ def delete_partner(email):
 
 @app.route('/aff/finance', methods=['GET', 'POST'])
 def aff_finance():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -819,6 +838,7 @@ def aff_finance():
 
 @app.route('/aff/finance/delete_payments_without_id', methods=['POST'])
 def delete_payments_without_id():
+    load_data()
     global affiliate_payments
 
     # Фильтруем платежи, у которых нет ID
@@ -833,6 +853,7 @@ def delete_payments_without_id():
 
 @app.route('/update_payment_status', methods=['POST'])
 def update_payment_status():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -862,6 +883,7 @@ def update_payment_status():
 
 @app.route('/delete_payment', methods=['POST'])
 def delete_payment():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -903,6 +925,7 @@ def delete_payment():
 
 @app.route('/aff/ref', methods=['GET', 'POST'])
 def aff_ref():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     if session['username'] != 'Dim4ikgoo$e101$':
@@ -921,6 +944,7 @@ def aff_ref():
 
 @app.route("/aff/stats/<ref_code>", methods=["GET", "POST"])
 def stats(ref_code):
+    load_data()
     if ref_code not in referrals:
         return "Реферальная ссылка не найдена", 404
 
@@ -950,12 +974,6 @@ def stats(ref_code):
 
 
 
-# Загрузка данных при старте приложения
-load_data()
-
-
-
-
 
 
 
@@ -964,6 +982,7 @@ load_data()
 # Страница главная
 @app.route('/dashboard')
 def dashboard():
+    load_data()
     if 'username' not in session:
         flash('Please login to access the dashboard', 'error')
         return redirect(url_for('login'))
@@ -976,6 +995,7 @@ def dashboard():
 # Обработчик для страницы join_us
 @app.route('/join_us', methods=['GET', 'POST'])
 def join_us():
+    load_data()
     if request.method == 'POST':
         email = request.form.get('email')
         traffic_source = request.form.get('traffic-source')
@@ -1016,6 +1036,7 @@ def join_us():
 # Страница заказов
 @app.route('/orders')
 def orders():
+    load_data()
     if 'username' not in session:
         flash('Please login to access the dashboard', 'error')
         return redirect(url_for('login'))
@@ -1035,6 +1056,7 @@ def orders():
 # Страница профиля
 @app.route('/profile')
 def profile():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1064,6 +1086,7 @@ def profile():
 
 @app.route('/admin/whitelist', methods=['GET', 'POST'])
 def whitelist():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -1093,6 +1116,7 @@ def get_real_ip():
     return request.remote_addr  # Если заголовка нет, берем стандартный IP
 @app.route('/checkout/payment', methods=['GET', 'POST'])
 def checkout_payment():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1149,6 +1173,7 @@ def checkout_payment():
 
 @app.route('/payment/processing')
 def payment_processing():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -1168,6 +1193,7 @@ def payment_processing():
 
 @app.route('/payment/success', methods=['GET', 'POST'])
 def payment_success():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -1214,12 +1240,14 @@ def payment_success():
 
 @app.route('/payment/failed')
 def payment_failed():
+    load_data()
     return render_template('payment_failed.html')
 
 
 
 @app.route('/bep20/pay/qN7679-3c7cef-47929b-5de3d5-711wet')
 def bep20():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1233,6 +1261,7 @@ def bep20():
 
 @app.route('/bep20/processing/aB1cD2-3eF4gH-5iJ6kL-7mN8oP-9qR0sT')
 def bep20done():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1244,6 +1273,7 @@ def bep20done():
 
 @app.route('/erc20/pay/zQ5678-3g4hij-9123kl-5mnop6-789rst')
 def erc20():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1257,6 +1287,7 @@ def erc20():
 
 @app.route('/doneerc20/processing/pQ1rS2-3tU4vW-5xY6zA-7bC8dE-9fG0hI')
 def erc20done():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1268,6 +1299,7 @@ def erc20done():
 
 @app.route('/trc20/pay/rT8901-3c9def-4567ab-8ijkl4-567nop')
 def trc20():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1281,6 +1313,7 @@ def trc20():
 
 @app.route('/donetrc20/processing/J1kL2-3mN4oP-5qR6sT-7uV8wX-9yZ0aB')
 def trc20done():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1292,6 +1325,7 @@ def trc20done():
 
 @app.route('/sol/pay/pQ9012-3r7stx-4568kl-9mnop5-123uvw')
 def sol():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1305,6 +1339,7 @@ def sol():
 
 @app.route('/donesol/processing/yZ6789-3t4uvw-1234xy-5zabc6-789def')
 def soldone():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1316,6 +1351,7 @@ def soldone():
 
 @app.route('/near/pay/mN1234-3p5qrs-7890tu-4vwxyz-rut')
 def near():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1329,6 +1365,7 @@ def near():
 
 @app.route('/donenear/processing/tU9012-3l4opq-5678mn-9vwxyz-123rst')
 def neardone():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1351,6 +1388,7 @@ def neardone():
 
 @app.route('/menu/1')
 def menu1():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1358,6 +1396,7 @@ def menu1():
     return render_template('menu_1.html', username=username, balances=balances)
 @app.route('/product/1')
 def product1():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1367,6 +1406,7 @@ def product1():
 
 @app.route('/menu/2')
 def menu2():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1374,6 +1414,7 @@ def menu2():
     return render_template('menu_2.html', username=username, balances=balances)
 @app.route('/product/2', methods=['GET', 'POST'])
 def product2():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1448,6 +1489,7 @@ def product2():
 
 @app.route('/product/3', methods=['GET', 'POST'])
 def product3():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1515,6 +1557,7 @@ def product3():
     return render_template('product_3.html', username=username, balances=balances, error=error)
 @app.route('/product/4', methods=['GET', 'POST'])
 def product4():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1583,6 +1626,7 @@ def product4():
     return render_template('product_4.html', username=username, balances=balances, error=error)
 @app.route('/product/5', methods=['GET', 'POST'])
 def product5():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1649,6 +1693,7 @@ def product5():
     return render_template('product_5.html', username=username, balances=balances, error=error)
 @app.route('/product/6')
 def product6():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1656,6 +1701,7 @@ def product6():
     return render_template('product_6.html', username=username, balances=balances)
 @app.route('/product/7')
 def product7():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1665,6 +1711,7 @@ def product7():
 
 @app.route('/menu/3')
 def menu3():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1672,6 +1719,7 @@ def menu3():
     return render_template('menu_3.html', username=username, balances=balances)
 @app.route('/product/8')
 def product8():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1679,6 +1727,7 @@ def product8():
     return render_template('product_8.html', username=username, balances=balances)
 @app.route('/product/9')
 def product9():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1686,6 +1735,7 @@ def product9():
     return render_template('product_9.html', username=username, balances=balances)
 @app.route('/product/10')
 def product10():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1695,6 +1745,7 @@ def product10():
 
 @app.route('/menu/4')
 def menu4():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1702,6 +1753,7 @@ def menu4():
     return render_template('menu_4.html', username=username, balances=balances)
 @app.route('/product/11')
 def product11():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1709,6 +1761,7 @@ def product11():
     return render_template('product_11.html', username=username, balances=balances)
 @app.route('/product/12')
 def product12():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1716,6 +1769,7 @@ def product12():
     return render_template('product_12.html', username=username, balances=balances)
 @app.route('/product/13')
 def product13():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1724,6 +1778,7 @@ def product13():
 
 @app.route('/menu/5')
 def menu5():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1731,6 +1786,7 @@ def menu5():
     return render_template('menu_5.html', username=username, balances=balances)
 @app.route('/product/14')
 def product14():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1738,6 +1794,7 @@ def product14():
     return render_template('product_14.html', username=username, balances=balances)
 @app.route('/product/15')
 def product15():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1745,6 +1802,7 @@ def product15():
     return render_template('product_15.html', username=username, balances=balances)
 @app.route('/product/16')
 def product16():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1753,6 +1811,7 @@ def product16():
 
 @app.route('/menu/6')
 def menu6():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1760,6 +1819,7 @@ def menu6():
     return render_template('menu_6.html', username=username, balances=balances)
 @app.route('/product/17')
 def product17():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1767,6 +1827,7 @@ def product17():
     return render_template('product_17.html', username=username, balances=balances)
 @app.route('/product/18')
 def product18():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1774,6 +1835,7 @@ def product18():
     return render_template('product_18.html', username=username, balances=balances)
 @app.route('/product/19')
 def product19():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1782,6 +1844,7 @@ def product19():
 
 @app.route('/menu/7')
 def menu7():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1789,6 +1852,7 @@ def menu7():
     return render_template('menu_7.html', username=username, balances=balances)
 @app.route('/product/20')
 def product20():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1796,6 +1860,7 @@ def product20():
     return render_template('product_20.html', username=username, balances=balances)
 @app.route('/product/21')
 def product21():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1803,6 +1868,7 @@ def product21():
     return render_template('product_21.html', username=username, balances=balances)
 @app.route('/product/22')
 def product22():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1810,6 +1876,7 @@ def product22():
     return render_template('product_22.html', username=username, balances=balances)
 @app.route('/product/23')
 def product23():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1818,6 +1885,7 @@ def product23():
 
 @app.route('/menu/8')
 def menu8():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1825,6 +1893,7 @@ def menu8():
     return render_template('menu_8.html', username=username, balances=balances)
 @app.route('/product/24')
 def product24():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1832,6 +1901,7 @@ def product24():
     return render_template('product_24.html', username=username, balances=balances)
 @app.route('/product/25')
 def product25():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1840,6 +1910,7 @@ def product25():
 
 @app.route('/menu/9')
 def menu9():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1847,6 +1918,7 @@ def menu9():
     return render_template('menu_9.html', username=username, balances=balances)
 @app.route('/product/26')
 def product26():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1854,6 +1926,7 @@ def product26():
     return render_template('product_26.html', username=username, balances=balances)
 @app.route('/product/27')
 def product27():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1862,6 +1935,7 @@ def product27():
 
 @app.route('/menu/10')
 def menu10():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1869,6 +1943,7 @@ def menu10():
     return render_template('menu_10.html', username=username, balances=balances)
 @app.route('/product/28', methods=['GET', 'POST'])
 def product28():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -1946,6 +2021,7 @@ def product28():
 
 @app.route('/menu/11')
 def menu11():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1953,6 +2029,7 @@ def menu11():
     return render_template('menu_11.html', username=username, balances=balances)
 @app.route('/product/29')
 def product29():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1960,6 +2037,7 @@ def product29():
     return render_template('product_29.html', username=username, balances=balances)
 @app.route('/product/30')
 def product30():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1968,6 +2046,7 @@ def product30():
 
 @app.route('/menu/12')
 def menu12():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -1975,6 +2054,7 @@ def menu12():
     return render_template('menu_12.html', username=username, balances=balances)
 @app.route('/product/31', methods=['GET', 'POST'])
 def product31():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -2018,6 +2098,7 @@ def product31():
 
 @app.route('/product/32', methods=['GET', 'POST'])
 def product32():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -2234,6 +2315,7 @@ def product32():
     return render_template('product_32.html', username=username, balances=balances, error=error)
 @app.route('/product/33', methods=['GET', 'POST'])
 def product33():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -2290,6 +2372,7 @@ def product33():
     return render_template('product_33.html', username=username, balances=balances, error=error)
 @app.route('/product/34')
 def product34():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2297,6 +2380,7 @@ def product34():
     return render_template('product_34.html', username=username, balances=balances)
 @app.route('/product/35')
 def product35():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2304,6 +2388,7 @@ def product35():
     return render_template('product_35.html', username=username, balances=balances)
 @app.route('/product/36')
 def product36():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2312,6 +2397,7 @@ def product36():
 
 @app.route('/menu/13')
 def menu13():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2319,6 +2405,7 @@ def menu13():
     return render_template('menu_13.html', username=username, balances=balances)
 @app.route('/product/37')
 def product37():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2326,6 +2413,7 @@ def product37():
     return render_template('product_37.html', username=username, balances=balances)
 @app.route('/product/38')
 def product38():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2334,6 +2422,7 @@ def product38():
 
 @app.route('/menu/14')
 def menu14():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2341,6 +2430,7 @@ def menu14():
     return render_template('menu_14.html', username=username, balances=balances)
 @app.route('/product/39')
 def product39():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2348,6 +2438,7 @@ def product39():
     return render_template('product_39.html', username=username, balances=balances)
 @app.route('/product/40')
 def product40():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2356,6 +2447,7 @@ def product40():
 
 @app.route('/menu/15')
 def menu15():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2363,6 +2455,7 @@ def menu15():
     return render_template('menu_15.html', username=username, balances=balances)
 @app.route('/product/41')
 def product41():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2370,6 +2463,7 @@ def product41():
     return render_template('product_41.html', username=username, balances=balances)
 @app.route('/product/42')
 def product42():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2377,6 +2471,7 @@ def product42():
     return render_template('product_42.html', username=username, balances=balances)
 @app.route('/product/43')
 def product43():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2384,6 +2479,7 @@ def product43():
     return render_template('product_43.html', username=username, balances=balances)
 @app.route('/product/44')
 def product44():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2391,6 +2487,7 @@ def product44():
     return render_template('product_44.html', username=username, balances=balances)
 @app.route('/product/45')
 def product45():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2398,6 +2495,7 @@ def product45():
     return render_template('product_45.html', username=username, balances=balances)
 @app.route('/product/46')
 def product46():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2406,6 +2504,7 @@ def product46():
 
 @app.route('/menu/16')
 def menu16():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2413,6 +2512,7 @@ def menu16():
     return render_template('menu_16.html', username=username, balances=balances)
 @app.route('/product/47')
 def product47():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2421,6 +2521,7 @@ def product47():
 
 @app.route('/menu/17')
 def menu17():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2428,6 +2529,7 @@ def menu17():
     return render_template('menu_17.html', username=username, balances=balances)
 @app.route('/product/48')
 def product48():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2436,6 +2538,7 @@ def product48():
 
 @app.route('/menu/18')
 def menu18():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
@@ -2444,6 +2547,7 @@ def menu18():
 
 @app.route('/product/49', methods=['GET', 'POST'])
 def product49():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -2532,6 +2636,7 @@ def product49():
 
 @app.route('/product/50', methods=['GET', 'POST'])
 def product50():
+    load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
 
@@ -2617,14 +2722,17 @@ def product50():
 
 @app.route('/user_agreement')
 def terms_use():
+    load_data()
     return render_template('user_agreement.html')
 
 @app.route('/terms_of_use')
 def user_agreement():
+    load_data()
     return render_template('terms_use.html')
 
 @app.route('/')
 def main():
+    load_data()
     return render_template('index.html')
 
 
