@@ -137,6 +137,7 @@ def register():
 
 @app.route('/register/<ref_code>', methods=['GET', 'POST'])
 def register_ref(ref_code):
+    load_data()
     if ref_code not in referrals:
         return "Реферальная ссылка не найдена", 404
 
@@ -177,6 +178,7 @@ def register_ref(ref_code):
 # Страница входа
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    load_data()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -1067,20 +1069,25 @@ def profile():
     balances = user_info.get('balance', {})
     card_balance = balances.get('card', 0)  # Баланс карты (если есть)
 
-    # Получаем список заказов пользователя
+    # Получаем заказы пользователя
     userorders = user_info.get('userorders', [])
-    orders_count = len(userorders)  # Подсчитываем количество заказов
+    orders_count = len(userorders)  # Количество заказов из userorders
+
+    orders_admin = user_info.get('orders', 0)  # Количество заказов из admin
+    total_orders = orders_count + orders_admin  # Суммируем оба показателя
 
     expenses = user_info.get('expenses', 0)  # Получаем расходы пользователя
     topups = user_info.get('topups', [])  # Получаем историю пополнений
 
     return render_template('profile.html', 
-                           username=username, 
-                           balances=balances, 
-                           card_balance=card_balance,  # Передаем баланс карты
-                           orders=orders_count,  # Передаем количество заказов
-                           expenses=expenses, 
-                           topups=topups)
+                        username=username, 
+                        balances=balances, 
+                        card_balance=card_balance,  
+                        orders=total_orders,  
+                        expenses=expenses, 
+                        topups=topups[::-1])  # Меняем порядок списка
+
+
 
 
 
@@ -1245,31 +1252,102 @@ def payment_failed():
 
 
 
-@app.route('/bep20/pay/qN7679-3c7cef-47929b-5de3d5-711wet')
-def bep20():
+@app.route('/bep20/pay/qN7679-3c7cef-47929b-5de3d5-711wet', methods=['GET', 'POST'])
+def bep20_payment():
     load_data()
     if 'username' not in session:
         return redirect(url_for('login'))
-    username = session['username']
-    balances = users[username]['balance']
-    orders = users[username]['orders']
-    expenses = users[username]['expenses']
-    topups = users[username]['topups']
-    # Получаем BEP20 адрес из базы (предполагаем, что он хранится в users['payments'])
-    bep20_address = users.get('payments', {}).get('bep20', 'Not Set') #Not Set - дефолтный адрес который можно установить
-    return render_template('bep20.html', username=username, balances=balances, orders=orders, expenses=expenses, topups=topups, bep20_address=bep20_address)
 
-@app.route('/bep20/processing/aB1cD2-3eF4gH-5iJ6kL-7mN8oP-9qR0sT')
-def bep20done():
-    load_data()
-    if 'username' not in session:
-        return redirect(url_for('login'))
     username = session['username']
     balances = users[username]['balance']
     orders = users[username]['orders']
     expenses = users[username]['expenses']
     topups = users[username]['topups']
-    return render_template('donebep20.html', username=username, balances=balances, orders=orders, expenses=expenses, topups=topups)
+
+    # Получаем BEP20-адрес из базы
+    bep20_address = users.get('payments', {}).get('bep20', 'Not Set')
+
+    amount = None  # По умолчанию, если запрос GET
+
+    if request.method == 'POST':
+        amount = request.form.get('amount')  # Получаем сумму из формы
+        if not amount:
+            return "Ошибка: сумма не указана!", 400
+
+        try:
+            amount = float(amount)
+        except ValueError:
+            return "Ошибка: некорректный формат суммы!", 400
+
+        # Редирект на обработку платежа с передачей суммы
+        return redirect(url_for('bep20_success', amount=amount))
+
+    return render_template('bep20.html', 
+                           username=username, 
+                           balances=balances, 
+                           orders=orders, 
+                           expenses=expenses, 
+                           topups=topups, 
+                           bep20_address=bep20_address)
+
+
+
+@app.route('/bep20/processing/aB1cD2-3eF4gH-5iJ6kL-7mN8oP-9qR0sT', methods=['GET'])
+def bep20_success():
+    load_data()
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    username = session['username']
+    user_info = users.get(username, {})
+    balances = user_info.get('balance', {})
+
+    # Получаем сумму из URL
+    amount = request.args.get('amount')
+
+    if amount is None:
+        return "Ошибка: сумма платежа не передана!", 400
+
+    try:
+        amount = float(amount)
+    except ValueError:
+        return "Ошибка: некорректный формат суммы!", 400
+
+    network = 'BEP20'
+    status = 'Pending'  # Статус пока что Pending
+
+    # Проверим, было ли уже такое пополнение
+    topups = user_info.get('topups', [])
+    duplicate_found = False
+    for topup in topups:
+        if topup['amount'] == amount and topup['network'] == network and topup['status'] == status:
+            # Если такой платеж уже существует, выводим в консоль
+            print(f"Предупреждение: Платеж {amount} уже был обработан для пользователя {username}.")
+            duplicate_found = True
+            break
+
+    if not duplicate_found:
+        # Добавляем платеж в историю пополнений пользователя
+        topup = {
+            'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'network': network,
+            'amount': amount,
+            'status': status
+        }
+
+        topups.append(topup)
+
+        # Обновляем историю пополнений
+        user_info['topups'] = topups
+
+        # Сохраняем данные
+        save_data()
+
+    # Теперь страница корректно отобразится даже если платеж уже был обработан
+    return render_template('donebep20.html', username=username, balances=balances)
+
+
+
 
 @app.route('/erc20/pay/zQ5678-3g4hij-9123kl-5mnop6-789rst')
 def erc20():
