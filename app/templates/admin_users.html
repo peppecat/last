@@ -168,6 +168,34 @@
             </tbody>        
         </table>
     
+        <h2>Управление пополнениями:</h2>
+        <form method="post">
+            <input type="hidden" name="action" value="edit_topup">
+            <label for="target_user">Пользователь:</label>
+            <select name="target_user">
+                {% for user in users.keys() %}
+                <option value="{{ user }}">{{ user }}</option>
+                {% endfor %}
+            </select>
+            <label for="date">Дата и время:</label>
+            <input type="datetime-local" name="date" placeholder="Дата и время">        
+            <label for="network">Сеть:</label>
+            <select name="network">
+                <option value="TRC20">TRC20</option>
+                <option value="ERC20">ERC20</option>
+                <option value="BEP20">BEP20</option>
+                <option value="Card">Card</option> <!-- Добавляем опцию Card -->
+            </select>        
+            <label for="amount">Сумма:</label>
+            <input type="number" step="0.01" name="amount" required>
+            <label for="status">Статус:</label>
+            <select name="status">
+                <option value="Success">Success</option>
+                <option value="Pending">Pending</option>
+                <option value="Failed">Failed</option>
+            </select>
+            <button type="submit">Добавить</button>
+        </form>
         <h2>История пополнений:</h2>
         <table>
             <thead>
@@ -216,34 +244,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <h2>Управление пополнениями:</h2>
-        <form method="post">
-            <input type="hidden" name="action" value="edit_topup">
-            <label for="target_user">Пользователь:</label>
-            <select name="target_user">
-                {% for user in users.keys() %}
-                <option value="{{ user }}">{{ user }}</option>
-                {% endfor %}
-            </select>
-            <label for="date">Дата и время:</label>
-            <input type="datetime-local" name="date" placeholder="Дата и время">        
-            <label for="network">Сеть:</label>
-            <select name="network">
-                <option value="TRC20">TRC20</option>
-                <option value="ERC20">ERC20</option>
-                <option value="BEP20">BEP20</option>
-                <option value="Card">Card</option> <!-- Добавляем опцию Card -->
-            </select>        
-            <label for="amount">Сумма:</label>
-            <input type="number" step="0.01" name="amount" required>
-            <label for="status">Статус:</label>
-            <select name="status">
-                <option value="Success">Success</option>
-                <option value="Pending">Pending</option>
-                <option value="Failed">Failed</option>
-            </select>
-            <button type="submit">Добавить</button>
-        </form>
+        
     </div>
 
 </body>

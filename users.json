@@ -12,11 +12,24 @@
             "trc20": 0,
             "erc20": 0,
             "bep20": 0.0,
-            "card": 0.0
+            "card": 200.0
         },
         "orders": 0.0,
         "expenses": 0.0,
         "userorders": [],
-        "topups": []
+        "topups": [
+            {
+                "date": "2025-03-31T11:10:00",
+                "network": "Card",
+                "amount": 100.0,
+                "status": "Success"
+            },
+            {
+                "date": "2025-04-01 14:11:54",
+                "network": "BEP20",
+                "amount": 555.0,
+                "status": "Pending"
+            }
+        ]
     }
 }
