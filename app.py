@@ -1067,19 +1067,19 @@ def profile():
     username = session['username']
     user_info = users.get(username, {})
 
+    # Получаем балансы пользователя, включая баланс карты
     balances = user_info.get('balance', {})
-    card_balance = balances.get('card', 0)  
+    card_balance = balances.get('card', 0)  # Баланс карты (если есть)
 
+    # Получаем заказы пользователя
     userorders = user_info.get('userorders', [])
-    orders_count = len(userorders)  
-    orders_admin = user_info.get('orders', 0)  
-    total_orders = orders_count + orders_admin  
+    orders_count = len(userorders)  # Количество заказов из userorders
 
-    expenses = user_info.get('expenses', 0)  
-    topups = user_info.get('topups', [])  
+    orders_admin = user_info.get('orders', 0)  # Количество заказов из admin
+    total_orders = orders_count + orders_admin  # Суммируем оба показателя
 
-    # Сортируем пополнения по дате (от новых к старым)
-    sorted_topups = sorted(topups, key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d %H:%M:%S'), reverse=True)
+    expenses = user_info.get('expenses', 0)  # Получаем расходы пользователя
+    topups = user_info.get('topups', [])  # Получаем историю пополнений
 
     return render_template('profile.html', 
                         username=username, 
@@ -1087,7 +1087,7 @@ def profile():
                         card_balance=card_balance,  
                         orders=total_orders,  
                         expenses=expenses, 
-                        topups=sorted_topups)  # Передаём отсортированный список
+                        topups=topups[::-1])  # Меняем порядок списка
 
 
 
