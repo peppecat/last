@@ -1057,7 +1057,6 @@ def orders():
     return render_template('orders.html', username=username, balances=balances, userorders=userorders)
 
 
-# Страница профиля
 @app.route('/profile')
 def profile():
     load_data()
@@ -1069,17 +1068,23 @@ def profile():
 
     # Получаем балансы пользователя, включая баланс карты
     balances = user_info.get('balance', {})
-    card_balance = balances.get('card', 0)  # Баланс карты (если есть)
+    card_balance = balances.get('card', 0)
 
     # Получаем заказы пользователя
     userorders = user_info.get('userorders', [])
-    orders_count = len(userorders)  # Количество заказов из userorders
+    orders_count = len(userorders)
+    orders_admin = user_info.get('orders', 0)
+    total_orders = orders_count + orders_admin
 
-    orders_admin = user_info.get('orders', 0)  # Количество заказов из admin
-    total_orders = orders_count + orders_admin  # Суммируем оба показателя
+    expenses = user_info.get('expenses', 0)
+    topups = user_info.get('topups', [])
 
-    expenses = user_info.get('expenses', 0)  # Получаем расходы пользователя
-    topups = user_info.get('topups', [])  # Получаем историю пополнений
+    # Сортируем пополнения по дате, от новой к старой
+    topups_sorted = sorted(
+        topups, 
+        key=lambda x: x['date'] if x['date'] else "",  
+        reverse=True
+    )
 
     return render_template('profile.html', 
                         username=username, 
@@ -1087,7 +1092,8 @@ def profile():
                         card_balance=card_balance,  
                         orders=total_orders,  
                         expenses=expenses, 
-                        topups=topups[::-1])  # Меняем порядок списка
+                        topups=topups_sorted)  # Передаем отсортированные пополнения
+
 
 
 
