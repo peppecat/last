@@ -1308,12 +1308,14 @@ def bep20_success():
     amount = request.args.get('amount')
 
     if amount is None:
-        return "Ошибка: сумма платежа не передана!", 400
+        print("Ошибка: сумма платежа не передана!")
+        return render_template('donebep20.html', username=username, balances=balances)
 
     try:
         amount = float(amount)
     except ValueError:
-        return "Ошибка: некорректный формат суммы!", 400
+        print("Ошибка: некорректный формат суммы!")
+        return render_template('donebep20.html', username=username, balances=balances)
 
     network = 'BEP20'
     status = 'Pending'  # Статус пока что Pending
@@ -1323,30 +1325,23 @@ def bep20_success():
     duplicate_found = False
     for topup in topups:
         if topup['amount'] == amount and topup['network'] == network and topup['status'] == status:
-            # Если такой платеж уже существует, выводим в консоль
             print(f"Предупреждение: Платеж {amount} уже был обработан для пользователя {username}.")
             duplicate_found = True
             break
 
     if not duplicate_found:
-        # Добавляем платеж в историю пополнений пользователя
         topup = {
             'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'network': network,
             'amount': amount,
             'status': status
         }
-
         topups.append(topup)
-
-        # Обновляем историю пополнений
         user_info['topups'] = topups
-
-        # Сохраняем данные
         save_data()
 
-    # Теперь страница корректно отобразится даже если платеж уже был обработан
     return render_template('donebep20.html', username=username, balances=balances)
+
 
 
 
