@@ -1,5 +1,7 @@
 import json
 import uuid  # импортируем отдельно
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, abort
 from datetime import datetime
 
